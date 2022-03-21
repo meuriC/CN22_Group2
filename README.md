@@ -1,12 +1,8 @@
-# CN22_Group2
-
-# Heading level 1
-
-<h1>Steam Reviews</h1>
+# Steam Reviews
 
 <p>Development of a cloud native application that offers a set of services that provide relevant information extracted from a dataset.</p>
 
-## Heading level 2
+## Summary
 
 <p>For the project, we selected a subset of a dataset of around 21 million user reviews in multiple languages of around 300 different games on <br>
 Steam (video game digital distribution service). This dataset has 1,07 GB worth of user reviews, last updated on 25 January of 2021. <br>
