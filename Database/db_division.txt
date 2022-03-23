@@ -1,0 +1,24 @@
+ReviewDB:
+	app_id
+	review_id
+	review
+	recommended
+	timestamp_created
+	timestamp_updated
+	votes_helpful
+	author.steamid
+	language
+	
+GameDB:
+	app_id
+	app_name
+	recommended
+	game_reviews_number(count total lines with the app_id)
+
+UserDB:
+	author.steamid
+	author.num_games_owned
+	author.num_reviews
+	author.playtime_forever
+	author.playtime_at_review
+	author.last_played
