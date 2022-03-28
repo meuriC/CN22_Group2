@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+
+
+message UsernameRequest {
+    int32 userid = 1;
+}
+
+message User {
+    string username = 1;
+    string userid = 2;
+}
+
+service Users {
+    rpc GetUserByName  (UsernameRequest) returns (User);
+}

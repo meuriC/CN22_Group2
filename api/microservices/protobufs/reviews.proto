@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+/* At the moment is only being requested the review by ID and All the reviews of a game. The other services will implemented after checking if it works. */
+
+
+// ######################
+// ###### REQUESTS ###### 
+// ######################
+
+// Search a review by ID
+message ReviewByIdRequest {
+    int32 review_id = 1;
+}
+
+// Search for reviews by game
+message ReviewsByGameRequest {
+    int32 app_id = 1;
+	int32 max_results = 2;
+}
+
+
+// ######################
+// ##### RESPONSES ###### 
+// ######################
+
+message ReviewData {
+	int32 app_id = 1;
+	int32 review_id = 2;
+	repeated string language = 3;
+	string review = 4;
+	string timestamp_created = 5;
+	string timestamp_updated = 6;
+	repeated bool recommended = 7;
+	repeated int32 votes_helpful = 8;
+	int32 author_steam_id = 9;
+}
+
+message ReviewDataResponse {
+    repeated ReviewData reviews = 1;
+}
+
+
+// ######################
+// ##### Services ###### 
+// ######################
+
+// Services provided by the reviews microservice
+service Reviews {
+    rpc GetReview (ReviewByIdRequest) returns (ReviewDataResponse);
+	rpc GetGameReviews (ReviewsByGameRequest) returns (ReviewDataResponse);
+}
