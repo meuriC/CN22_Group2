@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+message GamesData {
+	int64 app_id = 1;
+	string app_name = 2;
+    int64 game_reviews_number = 3;
+	
+}
+
+message GetGamesRequest {
+    int32 page = 1;
+    int32 max_results = 2;
+}
+
+message GamesDataList {
+    repeated GamesData games = 1;
+}
+
+
+message GameByIdRequest {
+    string app_id = 1;
+}
+
+
+message GamesByNameRequest {
+    string app_name = 1;
+}
+
+
+service Games {
+    rpc GetGames (GetGamesRequest) returns (GamesDataList);
+    rpc SearchById (GameByIdRequest) returns (GamesData);
+	rpc SearchByName (GamesByNameRequest) returns (GamesData);
+
+}

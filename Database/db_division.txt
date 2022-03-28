@@ -12,7 +12,7 @@ ReviewDB:
 GameDB:
 	app_id
 	app_name
-	recommended
+	recommended //todo
 	game_reviews_number(count total lines with the app_id)
 
 UserDB:
