@@ -17,16 +17,16 @@ class GamesStub(object):
         self.GetGames = channel.unary_unary(
                 '/Games/GetGames',
                 request_serializer=games__pb2.GetGamesRequest.SerializeToString,
-                response_deserializer=games__pb2.GamesDataList.FromString,
+                response_deserializer=games__pb2.GamesDataResponse.FromString,
                 )
-        self.SearchById = channel.unary_unary(
-                '/Games/SearchById',
+        self.GameByID = channel.unary_unary(
+                '/Games/GameByID',
                 request_serializer=games__pb2.GameByIdRequest.SerializeToString,
                 response_deserializer=games__pb2.GamesData.FromString,
                 )
-        self.SearchByName = channel.unary_unary(
-                '/Games/SearchByName',
-                request_serializer=games__pb2.GamesByNameRequest.SerializeToString,
+        self.GameByName = channel.unary_unary(
+                '/Games/GameByName',
+                request_serializer=games__pb2.GameByNameRequest.SerializeToString,
                 response_deserializer=games__pb2.GamesData.FromString,
                 )
 
@@ -40,13 +40,13 @@ class GamesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SearchById(self, request, context):
+    def GameByID(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SearchByName(self, request, context):
+    def GameByName(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -58,16 +58,16 @@ def add_GamesServicer_to_server(servicer, server):
             'GetGames': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGames,
                     request_deserializer=games__pb2.GetGamesRequest.FromString,
-                    response_serializer=games__pb2.GamesDataList.SerializeToString,
+                    response_serializer=games__pb2.GamesDataResponse.SerializeToString,
             ),
-            'SearchById': grpc.unary_unary_rpc_method_handler(
-                    servicer.SearchById,
+            'GameByID': grpc.unary_unary_rpc_method_handler(
+                    servicer.GameByID,
                     request_deserializer=games__pb2.GameByIdRequest.FromString,
                     response_serializer=games__pb2.GamesData.SerializeToString,
             ),
-            'SearchByName': grpc.unary_unary_rpc_method_handler(
-                    servicer.SearchByName,
-                    request_deserializer=games__pb2.GamesByNameRequest.FromString,
+            'GameByName': grpc.unary_unary_rpc_method_handler(
+                    servicer.GameByName,
+                    request_deserializer=games__pb2.GameByNameRequest.FromString,
                     response_serializer=games__pb2.GamesData.SerializeToString,
             ),
     }
@@ -93,12 +93,12 @@ class Games(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Games/GetGames',
             games__pb2.GetGamesRequest.SerializeToString,
-            games__pb2.GamesDataList.FromString,
+            games__pb2.GamesDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SearchById(request,
+    def GameByID(request,
             target,
             options=(),
             channel_credentials=None,
@@ -108,14 +108,14 @@ class Games(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Games/SearchById',
+        return grpc.experimental.unary_unary(request, target, '/Games/GameByID',
             games__pb2.GameByIdRequest.SerializeToString,
             games__pb2.GamesData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SearchByName(request,
+    def GameByName(request,
             target,
             options=(),
             channel_credentials=None,
@@ -125,8 +125,8 @@ class Games(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Games/SearchByName',
-            games__pb2.GamesByNameRequest.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/Games/GameByName',
+            games__pb2.GameByNameRequest.SerializeToString,
             games__pb2.GamesData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -3,6 +3,7 @@ import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 # connect to MongoDB
 
@@ -12,50 +13,49 @@ db = db["games"]
 
 from games_pb2 import (
     GamesData,
-    GamesDataList,
+    GamesDataResponse,
     GameByIdRequest,
-    GamesByNameRequest
+    GameByNameRequest
 )
 import games_pb2_grpc
+
+def games_response(result):
+
+    game = GamesData (
+        app_id = result["app_id"],
+        app_name = result["app_name"],
+        games_reviews_number = result["games_reviews_number"]
+    )
+    return game
 
 class GamesService(games_pb2_grpc.GamesServicer):
 
     def GetGames(self, request, context):
         page = request.page * request.max_results
         results = list(db.find().skip(page).limit(request.max_results))
-        results = [ games_to_proto(games) for games in results ]
-        return GamesDataList( games = results )
+        results = [ games_response(games) for games in results ]
+        return GamesDataResponse( games = results )
 
-    def SearchById(self, request, context):
+    def GameByID(self, request, context):
         try:
-            results = list(db.find({ "app_id": request.app_id }).limit(1))
+            results = list(db.find({ "app_id": ObjectId(request.app_id)}).limit(1))
 
             if len(results) <= 0:
                 return GamesData()
-            return games_to_proto(results[0])
+            return games_response(results[0])
         except:
             return GamesData()
         
 
-    def SearchByName(self, request, context):
+    def GameByName(self, request, context):
         try:
             results = list(db.find({ "app_name": request.app_name }).limit(1))
 
             if len(results) <= 0:
                 return GamesData()
-            return games_to_proto(results[0])
+            return games_response(results[0])
         except:
             return GamesData()
-
-
-def games_to_proto(result):
-    game = GamesData (
-        app_id = str(result["app_id"]),
-        app_name = result["app_name"],
-        games_reviews_number = str(result["games_reviews_number"])
-    )
-    
-    return game
 
 
 def serve():
