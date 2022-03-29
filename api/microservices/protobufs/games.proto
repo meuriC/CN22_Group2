@@ -1,9 +1,9 @@
 syntax = "proto3";
 
 message GamesData {
-	int32 app_id = 1;
+	string app_id = 1;
 	string app_name = 2;
-    int32 game_reviews_number = 3;
+    string game_reviews_number = 3;
 	
 }
 
