@@ -7,7 +7,7 @@ printf "changing directory"
 cd ../api/microservices
 
 printf "\t Building Games" 
-{ sudo docker build . -f ../api/microservices/games/Dockerfile -t games
+{ sudo docker build . -f games/Dockerfile -t games
 } &> /dev/null 
 printf "Games Docker built\n" 
 
