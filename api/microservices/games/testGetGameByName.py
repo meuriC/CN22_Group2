@@ -10,5 +10,5 @@ print("Request - Find game by name: Rocket League")
 request = GameByNameRequest(name="Rocket League")
 response = client.GameByName(request)
 
-print(response)
+print("Response: \n ",response)
 
