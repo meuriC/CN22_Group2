@@ -2,9 +2,11 @@
 Main module of the server file
 """
 
+import os
+
 # 3rd party moudles
 from re import template
-from flask import render_template
+from flask import Flask, render_template
 import connexion
 from microservices.reviews.reviews import review_by_id
 
