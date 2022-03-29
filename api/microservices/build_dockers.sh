@@ -1,25 +1,18 @@
-printf "Building Docker Network first\n"
-
-{ sudo docker network create microservices
-} &> /dev/null
-
+#printf "Building Dockers\n" 
 #printf "\t Building Games" 
 ##{ sudo docker build . -f ../api/microservices/games/Dockerfile -t games
 #} &> /dev/null 
 #printf "Games Docker built\n" 
  
- printf "changing directory"
-cd ../api/microservices
- 
 printf "\t Building Reviews " 
 { sudo docker build . -f reviews/Dockerfile -t reviews
 } &> /dev/null 
 printf "Reviews Docker built\n" 
-
-printf "\t Building Users " 
-{ sudo docker build . -f reviews/Dockerfile -t user
-} &> /dev/null 
-printf "Users Docker built\n" 
+ 
+#printf "\t Building Users " 
+##{ sudo docker build . -f ../api/microservices/reviews/Dockerfile -t user
+##} &> /dev/null 
+#printf "Users Docker built\n" 
  
 
 
