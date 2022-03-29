@@ -18,7 +18,7 @@ printf "\t Building Reviews "
 printf "Reviews Docker built\n" 
 
 printf "\t Building Users " 
-{ sudo docker build . -f reviews/Dockerfile -t user
+{ sudo docker build . -f reviews/Dockerfile -t users
 } &> /dev/null 
 printf "Users Docker built\n" 
  

@@ -6,6 +6,14 @@
 
 ########################################################
 
-echo "Setting up the API"
+echo "Removing all unused networks"
+sudo docker network prune -y &
+
+echo "Stopping all dockers"
+docker stop $(docker ps -a -q) &
+
+echo"Removing all dockers"
+docker rm $(docker ps -a -q)
+
 #Chamar Docker Compose
 #O shell poe no docker desktop o docker file
