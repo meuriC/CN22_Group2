@@ -8,6 +8,10 @@ message UsernameRequest {
     string user_id = 1;
 }
 
+message CreateUserRequest{
+    string user_name = 1;
+}
+
 // ######################
 // ##### RESPONSES ###### 
 // ######################
@@ -17,6 +21,24 @@ message UserData {
     int32 num_games_owned = 3;
 }
 
+message CreateUserResponse{
+    string user_name = 1;
+    string user_id = 2;
+    int32 user_num_games_owned = 3;
+    int32 user_num_reviews = 4;
+    int32 user_playtime_forever = 5;
+    int32 user_playtime_last_two_weeks = 6;
+    int32 user_playtime_at_review = 7;
+    int32 author_last_played = 8;
+    string user_pwd = 9;
+}
+
+
+// ######################
+// ##### SERVICES #######
+// ######################
+
 service Users {
     rpc GetUser (UsernameRequest) returns (UserData);
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
 }
