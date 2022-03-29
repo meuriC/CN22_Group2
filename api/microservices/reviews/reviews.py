@@ -7,7 +7,7 @@ from grpc_interceptor.exceptions import NotFound
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-# Connect to MongoDB
+# Connect to MongoDB https://www.mongodb.com/languages/python
 user = "CN_Grupo11"
 password = "jcAUsQouhCddO0xW"
 credentials = user + ":" + password
