@@ -3,13 +3,14 @@ printf "Building Docker Network first\n"
 { sudo docker network create microservices
 } &> /dev/null
 
-#printf "\t Building Games" 
-##{ sudo docker build . -f ../api/microservices/games/Dockerfile -t games
-#} &> /dev/null 
-#printf "Games Docker built\n" 
- 
- printf "changing directory"
+printf "changing directory"
 cd ../api/microservices
+
+printf "\t Building Games" 
+{ sudo docker build . -f ../api/microservices/games/Dockerfile -t games
+} &> /dev/null 
+printf "Games Docker built\n" 
+
  
 printf "\t Building Reviews " 
 { sudo docker build . -f reviews/Dockerfile -t reviews
