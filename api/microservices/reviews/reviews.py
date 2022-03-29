@@ -1,20 +1,22 @@
 from concurrent import futures
 
-import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
 
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-# Connect to MongoDB https://www.mongodb.com/languages/python
-user = "CN_Grupo11"
-password = "jcAUsQouhCddO0xW"
-credentials = user + ":" + password
+import grpc
+import pymongo  
 
-db = MongoClient("mongodb+srv://" + credentials + "@reviews.kqme2.mongodb.net/test")
-db = db["database"]
-db = db["reviews"]
+# Connect to MongoDB
+# Provide the mongodb atlas url to connect python to mongodb using pymongo
+CONNECTION_STRING = "mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@reviews.kqme2.mongodb.net/test"
+
+# Create a connection using MongoClient. 
+client = MongoClient(CONNECTION_STRING)
+db = client["database"]  # Get database
+db = db["reviews"] # Get column
 
 from reviews_pb2 import (
     ReviewByIdRequest,
@@ -29,21 +31,21 @@ def review_by_id(result):
     review = ReviewData(
         app_id = result["app_id"],
         review_id = result["review_id"],
+        language = result["language"],
         review = result["review"],
         timestamp_created = result["timestamp_created"],
         timestamp_updated = result["timestamp_updated"],
+        recommended = result["recommended"],
+        votes_helpful = result["votes_helpful"],
         author_steam_id = result["author.steamid"]
     )
-    review.language.extend(result["language"])
-    review.recommended.extend(result["recommended"])
-    review.votes_helpful.extend(result["votes_helpful"])
     return review
 
 
 class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
     def GetReview(self, request, context):
         try:
-            results = list(db.find({"review_id": ObjectId(request.review_id)}).limit(1))
+            results = list(db.find({"review_id": request.review_id}).limit(1))
             if len(results) <= 0:
                 return ReviewData()
             return review_by_id(results[0])
@@ -51,7 +53,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             return ReviewData()
 
     def GetGameReviews(self, request, context):
-        results = list(db.find({ "app_id": {"$all": [request.app_id]} }).limit(request.max_results))
+        results = list(db.find({"app_id": {"$all": [request.app_id]} }).limit(request.max_results))
         results = [review_by_id(review) for review in results]
         return ReviewDataResponse(reviews = results)
 
