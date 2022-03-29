@@ -21,7 +21,7 @@ import users_pb2_grpc
 from users_pb2 import (
     UserData,
     CreateUserResponse,
-    GetUsersResponse
+    UsersDataList
 )
 
 def marshalUserdbToUserService(result):
@@ -76,7 +76,7 @@ class UserService(users_pb2_grpc.UsersServicer):
     def GetUsers(self, request, context):
         results = list(db.find().limit(request.max_results))
         results = [marshalUserdbToUserService(user) for user in results]
-        return GetUsersResponse(users = results)
+        return UsersDataList(users = results)
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
