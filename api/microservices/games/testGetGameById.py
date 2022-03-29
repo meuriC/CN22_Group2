@@ -7,7 +7,7 @@ client = GamesStub(channel)
 
 print("Request - Find game by ID: 883710")
 
-request = GameByIdRequest(app_id="883710")
+request = GameByIdRequest(id="883710")
 response = client.GameByID(request)
 
 print(response)

@@ -27,9 +27,9 @@ import games_pb2_grpc
 def games_response(result):
 
     game = GamesData (
-        app_id = result["id"],
-        app_name = result["name"],
-        games_reviews_number = result["reviews_number"]
+        id = result["id"],
+        name = result["name"],
+        reviews_number = result["reviews_number"]
     )
     return game
 
@@ -43,7 +43,7 @@ class GamesService(games_pb2_grpc.GamesServicer):
 
     def GameByID(self, request, context):
         try:
-            results = list(db.find({"id": request.app_id}).limit(1))
+            results = list(db.find({"id": request.id}).limit(1))
 
             if len(results) <= 0:
                 return GamesData()
@@ -54,7 +54,7 @@ class GamesService(games_pb2_grpc.GamesServicer):
 
     def GameByName(self, request, context):
         try:
-            results = list(db.find({"name": request.app_name }).limit(1))
+            results = list(db.find({"name": request.name }).limit(1))
 
             if len(results) <= 0:
                 return GamesData()
