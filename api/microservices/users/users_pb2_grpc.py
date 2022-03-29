@@ -14,17 +14,17 @@ class UsersStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetUserByName = channel.unary_unary(
-                '/Users/GetUserByName',
+        self.GetUser = channel.unary_unary(
+                '/Users/GetUser',
                 request_serializer=users__pb2.UsernameRequest.SerializeToString,
-                response_deserializer=users__pb2.User.FromString,
+                response_deserializer=users__pb2.UserData.FromString,
                 )
 
 
 class UsersServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def GetUserByName(self, request, context):
+    def GetUser(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,10 +33,10 @@ class UsersServicer(object):
 
 def add_UsersServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetUserByName': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetUserByName,
+            'GetUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUser,
                     request_deserializer=users__pb2.UsernameRequest.FromString,
-                    response_serializer=users__pb2.User.SerializeToString,
+                    response_serializer=users__pb2.UserData.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -49,7 +49,7 @@ class Users(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GetUserByName(request,
+    def GetUser(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,8 +59,8 @@ class Users(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Users/GetUserByName',
+        return grpc.experimental.unary_unary(request, target, '/Users/GetUser',
             users__pb2.UsernameRequest.SerializeToString,
-            users__pb2.User.FromString,
+            users__pb2.UserData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

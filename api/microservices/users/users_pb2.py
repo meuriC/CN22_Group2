@@ -14,12 +14,12 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0busers.proto\"!\n\x0fUsernameRequest\x12\x0e\n\x06userid\x18\x01 \x01(\x05\"(\n\x04User\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x0e\n\x06userid\x18\x02 \x01(\t21\n\x05Users\x12(\n\rGetUserByName\x12\x10.UsernameRequest\x1a\x05.Userb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0busers.proto\"\"\n\x0fUsernameRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"K\n\x08UserData\x12\x11\n\tnick_name\x18\x01 \x01(\t\x12\x13\n\x0bnum_reviews\x18\x02 \x01(\x05\x12\x17\n\x0fnum_games_owned\x18\x03 \x01(\x05\x32/\n\x05Users\x12&\n\x07GetUser\x12\x10.UsernameRequest\x1a\t.UserDatab\x06proto3')
 
 
 
 _USERNAMEREQUEST = DESCRIPTOR.message_types_by_name['UsernameRequest']
-_USER = DESCRIPTOR.message_types_by_name['User']
+_USERDATA = DESCRIPTOR.message_types_by_name['UserData']
 UsernameRequest = _reflection.GeneratedProtocolMessageType('UsernameRequest', (_message.Message,), {
   'DESCRIPTOR' : _USERNAMEREQUEST,
   '__module__' : 'users_pb2'
@@ -27,21 +27,21 @@ UsernameRequest = _reflection.GeneratedProtocolMessageType('UsernameRequest', (_
   })
 _sym_db.RegisterMessage(UsernameRequest)
 
-User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), {
-  'DESCRIPTOR' : _USER,
+UserData = _reflection.GeneratedProtocolMessageType('UserData', (_message.Message,), {
+  'DESCRIPTOR' : _USERDATA,
   '__module__' : 'users_pb2'
-  # @@protoc_insertion_point(class_scope:User)
+  # @@protoc_insertion_point(class_scope:UserData)
   })
-_sym_db.RegisterMessage(User)
+_sym_db.RegisterMessage(UserData)
 
 _USERS = DESCRIPTOR.services_by_name['Users']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _USERNAMEREQUEST._serialized_start=15
-  _USERNAMEREQUEST._serialized_end=48
-  _USER._serialized_start=50
-  _USER._serialized_end=90
-  _USERS._serialized_start=92
-  _USERS._serialized_end=141
+  _USERNAMEREQUEST._serialized_end=49
+  _USERDATA._serialized_start=51
+  _USERDATA._serialized_end=126
+  _USERS._serialized_start=128
+  _USERS._serialized_end=175
 # @@protoc_insertion_point(module_scope)
