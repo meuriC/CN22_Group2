@@ -66,10 +66,8 @@ class UserService(users_pb2_grpc.UsersServicer):
              "user_playtime_at_review": 0,
              "author_last_played": 0,
              "user_pwd": "clear"})
-
-            if len(results) <= 0:
-                return CreateUserResponse()
-            return create_user(results[0])
+            #results = db.find({"user_name":"usn76561198054155096"})
+            return create_user(results)
         except:
             return CreateUserResponse()
 
