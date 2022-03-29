@@ -10,7 +10,7 @@ printf "\t Building Reviews "
 printf "Reviews Docker built\n" 
  
 printf "\t Building Users " 
-{ sudo docker build . -f ../api/microservices/reviews/Dockerfile -t reviews
+{ sudo docker build . -f ../api/microservices/reviews/Dockerfile -t user
 } &> /dev/null 
 printf "Users Docker built\n" 
  
