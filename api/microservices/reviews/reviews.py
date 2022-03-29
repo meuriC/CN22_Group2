@@ -18,6 +18,14 @@ client = MongoClient(CONNECTION_STRING)
 db = client["database"]  # Get database
 db = db["reviews"] # Get column
 
+# Second connection to another cluster cause free stuff now a days = not enough resources (RIP NO MORE 2GB IN FREE ACCOUNT)
+secondClient = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@reviews2.qwqeh.mongodb.net/test")
+db2 = secondClient["database"]
+db2 = db2["reviews"]
+
+#print("ESTIMATED NUMBER OF ELEMENTS IN 1ST BD: ", db.estimated_document_count())
+#print("\nESTIMATED NUMBER OF ELEMENTS IN 2ND BD: ", db2.estimated_document_count())
+
 from reviews_pb2 import (
     ReviewByIdRequest,
     ReviewsByGameRequest,
@@ -47,16 +55,23 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
         try:
             results = list(db.find({"review_id": request.review_id}).limit(1))
             if len(results) <= 0:
+                results = list(db2.find({"review_id": request.review_id}).limit(1))
+
+            if len(results) <= 0:
+                print("Review not found ... Check if the id of the review is correct.")
                 return ReviewData()
             return review_by_id(results[0])
         except:
+            print("Review not found ... Check if the id of the review is correct.")
             return ReviewData()
 
     def GetGameReviews(self, request, context):
         results = list(db.find({"app_id": {"$all": [request.app_id]} }).limit(request.max_results))
+        if len(results) < request.max_results:
+            results += list(db2.find({"app_id": {"$all": [request.app_id] } }).limit((request.max_results - len(results))))
+			
         results = [review_by_id(review) for review in results]
         return ReviewDataResponse(reviews = results)
-
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
@@ -68,7 +83,7 @@ def serve():
         ReviewsService(), server
     )
 
-    server.add_insecure_port("[::]:50051")
+    server.add_insecure_port("[::]:50053")
     server.start()
     server.wait_for_termination()
 	
