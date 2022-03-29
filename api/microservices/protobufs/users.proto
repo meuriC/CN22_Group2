@@ -12,6 +12,10 @@ message CreateUserRequest{
     string user_name = 1;
 }
 
+message GetUsersRequest{
+    int32 maxr_result = 1;
+}
+
 // ######################
 // ##### RESPONSES ###### 
 // ######################
@@ -19,6 +23,10 @@ message UserData {
     string nick_name = 1;
     int32 num_reviews = 2;
     int32 num_games_owned = 3;
+}
+
+message UsersDataList {
+    repeated UserData users = 1;
 }
 
 message CreateUserResponse{
@@ -41,4 +49,5 @@ message CreateUserResponse{
 service Users {
     rpc GetUser (UsernameRequest) returns (UserData);
     rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUsers (GetUsersRequest) returns (UserData);
 }
