@@ -19,7 +19,8 @@ from games_pb2 import (
     GamesData,
     GamesDataResponse,
     GameByIdRequest,
-    GameByNameRequest
+    GameByNameRequest,
+    GetMostReviewedGamesRequest
 )
 import games_pb2_grpc
 
@@ -29,17 +30,16 @@ def games_response(result):
     game = GamesData (
         id = result["id"],
         name = result["name"],
-        reviews_number = result["reviews_number"]
+        reviews_number = int(result["reviews_number"])
     )
     return game
 
 class GamesService(games_pb2_grpc.GamesServicer):
 
     def GetGames(self, request, context):
-        page = request.page * request.max_results
-        results = list(db.find().skip(page).limit(request.max_results))
-        results = [ games_response(games) for games in results ]
-        return GamesDataResponse( games = results )
+        results = list(db.find().sort("reviews_number", -1).limit(request.max_results))
+        results = [ games_response(game) for game in results ]
+        return GamesDataResponse( game = results )
 
     def GameByID(self, request, context):
         try:
