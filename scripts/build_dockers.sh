@@ -1,3 +1,12 @@
+########################################################
+
+## Shell Script to Build Network and Docker Images 
+
+########################################################
+
+
+
+
 printf "Building Docker Network first\n"
 
 { sudo docker network create microservices
@@ -18,7 +27,7 @@ printf "\t Building Reviews "
 printf "Reviews Docker built\n" 
 
 printf "\t Building Users " 
-{ sudo docker build . -f reviews/Dockerfile -t users
+{ sudo docker build . -f users/Dockerfile -t users
 } &> /dev/null 
 printf "Users Docker built\n" 
  

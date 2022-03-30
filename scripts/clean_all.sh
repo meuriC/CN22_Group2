@@ -2,18 +2,22 @@
 
 ########################################################
 
-## Shell Script to Build Docker Image 
+## Shell Script to Clean Network
+## Stop Dockers and Remove Dockers
 
 ########################################################
 
-echo "Removing all unused networks"
-sudo docker network prune -y &
 
-echo "Stopping all dockers"
-docker stop $(docker ps -a -q) &
 
-echo"Removing all dockers"
+echo "Stopping all dockers, takes a bit be patient"
+docker stop $(docker ps -a -q)
+
+echo "Removing all dockers"
 docker rm $(docker ps -a -q)
 
+echo "Removing microservices network"
+sudo docker network rm microservices
+
+echo "CLEAN COMPLETE"
 #Chamar Docker Compose
 #O shell poe no docker desktop o docker file
