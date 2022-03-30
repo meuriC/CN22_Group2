@@ -16,7 +16,7 @@ class GamesStub(object):
         """
         self.GetGames = channel.unary_unary(
                 '/Games/GetGames',
-                request_serializer=games__pb2.GetGamesRequest.SerializeToString,
+                request_serializer=games__pb2.GetMostReviewedGamesRequest.SerializeToString,
                 response_deserializer=games__pb2.GamesDataResponse.FromString,
                 )
         self.GameByID = channel.unary_unary(
@@ -57,7 +57,7 @@ def add_GamesServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetGames': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGames,
-                    request_deserializer=games__pb2.GetGamesRequest.FromString,
+                    request_deserializer=games__pb2.GetMostReviewedGamesRequest.FromString,
                     response_serializer=games__pb2.GamesDataResponse.SerializeToString,
             ),
             'GameByID': grpc.unary_unary_rpc_method_handler(
@@ -92,7 +92,7 @@ class Games(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Games/GetGames',
-            games__pb2.GetGamesRequest.SerializeToString,
+            games__pb2.GetMostReviewedGamesRequest.SerializeToString,
             games__pb2.GamesDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

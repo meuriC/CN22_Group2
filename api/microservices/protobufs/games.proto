@@ -3,17 +3,16 @@ syntax = "proto3";
 message GamesData {
 	string id = 1;
 	string name = 2;
-    string reviews_number = 3;
+    int32 reviews_number = 3;
 	
 }
 
-message GetGamesRequest {
-    int32 page = 1;
-    int32 max_results = 2;
+message GetMostReviewedGamesRequest {
+    int32 max_results = 1;
 }
 
 message GamesDataResponse {
-    repeated GamesData games = 1;
+    repeated GamesData game = 1;
 }
 
 
@@ -28,7 +27,7 @@ message GameByNameRequest {
 
 
 service Games {
-    rpc GetGames (GetGamesRequest) returns (GamesDataResponse);
+    rpc GetGames (GetMostReviewedGamesRequest) returns (GamesDataResponse);
     rpc GameByID (GameByIdRequest) returns (GamesData);
 	rpc GameByName (GameByNameRequest) returns (GamesData);
 

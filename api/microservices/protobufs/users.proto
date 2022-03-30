@@ -13,7 +13,7 @@ message CreateUserRequest{
 }
 
 message GetUsersRequest{
-    int32 maxr_result = 1;
+    int32 max_result = 1;
 }
 
 // ######################
@@ -49,5 +49,5 @@ message CreateUserResponse{
 service Users {
     rpc GetUser (UsernameRequest) returns (UserData);
     rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
-    rpc GetUsers (GetUsersRequest) returns (UserData);
+    rpc GetUsers (GetUsersRequest) returns (UsersDataList);
 }
