@@ -6,8 +6,8 @@ COPY steam/ /service/steam/
 
 WORKDIR /service/steam
 RUN pip install -r requirements.txt
-RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/steam.proto
+RUN python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/users.proto
 
-EXPOSE 50050
+EXPOSE 5000
 ENV FLASK_APP=steam.py
 ENTRYPOINT [ "flask", "run", "--host=0.0.0.0"]

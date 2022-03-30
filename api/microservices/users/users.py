@@ -23,7 +23,7 @@ from users_pb2 import (
 
 def marshalUserdbToUserService(result):
     user = UserData(
-        user_nick_name = result["user_name"],
+        user_nick_name = result["user_nick_name"],
         user_num_reviews = result["user_num_reviews"],
         user_num_games_owned = result["user_num_games_owned"],
     )
