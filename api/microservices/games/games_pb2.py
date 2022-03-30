@@ -14,12 +14,13 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bgames.proto\"=\n\tGamesData\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\"2\n\x1bGetMostReviewedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"-\n\x11GamesDataResponse\x12\x18\n\x04game\x18\x01 \x03(\x0b\x32\n.GamesData\"\x1d\n\x0fGameByIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x11GameByNameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t2\x9d\x01\n\x05Games\x12<\n\x08GetGames\x12\x1c.GetMostReviewedGamesRequest\x1a\x12.GamesDataResponse\x12(\n\x08GameByID\x12\x10.GameByIdRequest\x1a\n.GamesData\x12,\n\nGameByName\x12\x12.GameByNameRequest\x1a\n.GamesDatab\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bgames.proto\"V\n\tGamesData\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"2\n\x1bGetMostReviewedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"5\n\x1eGetMostRecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"-\n\x11GamesDataResponse\x12\x18\n\x04game\x18\x01 \x03(\x0b\x32\n.GamesData\"\x1d\n\x0fGameByIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x11GameByNameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t2\xe9\x01\n\x05Games\x12<\n\x08GetGames\x12\x1c.GetMostReviewedGamesRequest\x1a\x12.GamesDataResponse\x12J\n\x13GetRecommendedGames\x12\x1f.GetMostRecommendedGamesRequest\x1a\x12.GamesDataResponse\x12(\n\x08GameByID\x12\x10.GameByIdRequest\x1a\n.GamesData\x12,\n\nGameByName\x12\x12.GameByNameRequest\x1a\n.GamesDatab\x06proto3')
 
 
 
 _GAMESDATA = DESCRIPTOR.message_types_by_name['GamesData']
 _GETMOSTREVIEWEDGAMESREQUEST = DESCRIPTOR.message_types_by_name['GetMostReviewedGamesRequest']
+_GETMOSTRECOMMENDEDGAMESREQUEST = DESCRIPTOR.message_types_by_name['GetMostRecommendedGamesRequest']
 _GAMESDATARESPONSE = DESCRIPTOR.message_types_by_name['GamesDataResponse']
 _GAMEBYIDREQUEST = DESCRIPTOR.message_types_by_name['GameByIdRequest']
 _GAMEBYNAMEREQUEST = DESCRIPTOR.message_types_by_name['GameByNameRequest']
@@ -36,6 +37,13 @@ GetMostReviewedGamesRequest = _reflection.GeneratedProtocolMessageType('GetMostR
   # @@protoc_insertion_point(class_scope:GetMostReviewedGamesRequest)
   })
 _sym_db.RegisterMessage(GetMostReviewedGamesRequest)
+
+GetMostRecommendedGamesRequest = _reflection.GeneratedProtocolMessageType('GetMostRecommendedGamesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETMOSTRECOMMENDEDGAMESREQUEST,
+  '__module__' : 'games_pb2'
+  # @@protoc_insertion_point(class_scope:GetMostRecommendedGamesRequest)
+  })
+_sym_db.RegisterMessage(GetMostRecommendedGamesRequest)
 
 GamesDataResponse = _reflection.GeneratedProtocolMessageType('GamesDataResponse', (_message.Message,), {
   'DESCRIPTOR' : _GAMESDATARESPONSE,
@@ -63,15 +71,17 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _GAMESDATA._serialized_start=15
-  _GAMESDATA._serialized_end=76
-  _GETMOSTREVIEWEDGAMESREQUEST._serialized_start=78
-  _GETMOSTREVIEWEDGAMESREQUEST._serialized_end=128
-  _GAMESDATARESPONSE._serialized_start=130
-  _GAMESDATARESPONSE._serialized_end=175
-  _GAMEBYIDREQUEST._serialized_start=177
-  _GAMEBYIDREQUEST._serialized_end=206
-  _GAMEBYNAMEREQUEST._serialized_start=208
-  _GAMEBYNAMEREQUEST._serialized_end=241
-  _GAMES._serialized_start=244
-  _GAMES._serialized_end=401
+  _GAMESDATA._serialized_end=101
+  _GETMOSTREVIEWEDGAMESREQUEST._serialized_start=103
+  _GETMOSTREVIEWEDGAMESREQUEST._serialized_end=153
+  _GETMOSTRECOMMENDEDGAMESREQUEST._serialized_start=155
+  _GETMOSTRECOMMENDEDGAMESREQUEST._serialized_end=208
+  _GAMESDATARESPONSE._serialized_start=210
+  _GAMESDATARESPONSE._serialized_end=255
+  _GAMEBYIDREQUEST._serialized_start=257
+  _GAMEBYIDREQUEST._serialized_end=286
+  _GAMEBYNAMEREQUEST._serialized_start=288
+  _GAMEBYNAMEREQUEST._serialized_end=321
+  _GAMES._serialized_start=324
+  _GAMES._serialized_end=557
 # @@protoc_insertion_point(module_scope)

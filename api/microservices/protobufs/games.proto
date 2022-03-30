@@ -4,10 +4,15 @@ message GamesData {
 	string id = 1;
 	string name = 2;
     int32 reviews_number = 3;
+    int32 recommend_count = 4;
 	
 }
 
 message GetMostReviewedGamesRequest {
+    int32 max_results = 1;
+}
+
+message GetMostRecommendedGamesRequest {
     int32 max_results = 1;
 }
 
@@ -28,6 +33,7 @@ message GameByNameRequest {
 
 service Games {
     rpc GetGames (GetMostReviewedGamesRequest) returns (GamesDataResponse);
+    rpc GetRecommendedGames (GetMostRecommendedGamesRequest) returns (GamesDataResponse);
     rpc GameByID (GameByIdRequest) returns (GamesData);
 	rpc GameByName (GameByNameRequest) returns (GamesData);
 

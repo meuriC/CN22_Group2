@@ -5,9 +5,9 @@ import grpc
 channel = grpc.insecure_channel("localhost:50051")
 client = GamesStub(channel)
 
-print("Request - Get top 5 reviewed games")
+print("Request - Get top 5 recommended games")
 
-request = GetMostReviewedGamesRequest(max_results=5)
-response = client.GetGames(request)
+request = GetMostRecommendedGamesRequest(max_results=5)
+response = client.GetRecommendedGames(request)
 
 print("Response: \n ",response)
