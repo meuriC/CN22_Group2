@@ -13,7 +13,7 @@ message CreateUserRequest{
 }
 
 message GetUsersRequest{
-    int32 maxr_result = 1;
+    int32 max_result = 1;
 }
 
 // ######################

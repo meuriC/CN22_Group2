@@ -9,13 +9,10 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 # Connect to MongoDB
-user = "CN_Grupo11"
-password = "jcAUsQouhCddO0xW"
-credentials = user + ":" + password
 
-db = MongoClient("mongodb+srv://" + credentials + "@users.lastb.mongodb.net/test")
-db = db["database"]
-db = db["users"]
+db = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@users.lastb.mongodb.net/test")
+db = db['database']
+db = db['users']
 
 import users_pb2_grpc
 from users_pb2 import (
@@ -25,12 +22,12 @@ from users_pb2 import (
 )
 
 def marshalUserdbToUserService(result):
-    UserData = UserData(
+    user = UserData(
         nick_name = result["user_name"],
         num_reviews = result["user_num_reviews"],
         num_games_owned = result["user_num_games_owned"],
     )
-    return UserData
+    return user
 
 def create_user(result):
     user = CreateUserResponse(
@@ -49,18 +46,13 @@ def create_user(result):
 
 class UserService(users_pb2_grpc.UsersServicer):
     def GetUser(self, request, context):
-        try:
-            results = list(db.find({"id": ObjectId(request.user_id)}).limit(1))
-            if len(results) <= 0:
-                return UserData()
-            return marshalUserdbToUserService(results[0])
-        except:
-            return UserData()
+        results = db.find({"_id": ObjectId(request.user_id)})
+        #print(results[0])
+        return marshalUserdbToUserService(results[0])
 
     def CreateUser(self, request, context):
-        try:
-            results = db.insert({ "user_name": request.username,
-             "user_id": 0, 
+        results = db.insert({ "user_name": request.user_name,
+             "user_id": "0", 
              "user_num_games_owned": 0, 
              "user_num_reviews": 0, 
              "user_playtime_forever": 0,
@@ -68,15 +60,16 @@ class UserService(users_pb2_grpc.UsersServicer):
              "user_playtime_at_review": 0,
              "author_last_played": 0,
              "user_pwd": "clear"})
-            #results = db.find({"user_name":"usn76561198054155096"})
-            return create_user(results)
-        except:
-            return CreateUserResponse()
+        resultsFinal = db.find({"_id": results})
+        #print(resultsFinal[0])
+        return create_user(resultsFinal[0])
 
     def GetUsers(self, request, context):
-        results = list(db.find().limit(request.max_results))
-        results = [marshalUserdbToUserService(user) for user in results]
-        return UsersDataList(users = results)
+        results = list(db.find().limit(request.max_result))
+        usersList=[]
+        for user in results:
+            usersList.append(marshalUserdbToUserService(user))
+        return UsersDataList(users=usersList)
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
