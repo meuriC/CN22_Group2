@@ -1,55 +1,46 @@
-"""
-Main module of the server file
-"""
-
+from concurrent import futures
 import os
-
-# 3rd party moudles
-from re import template
-from flask import Flask, render_template
-import connexion
-from microservices.reviews.reviews import review_by_id
 
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 
-import users_pb2
+import sys
+#print(sys.path)
+sys.path.insert(0, '../users')
+#print(sys.path)
+
+from users_pb2 import *
 from users_pb2_grpc import UsersStub
 
+#sys.path.insert(0, '../')
+#print(sys.path)
 
-#from ..reviews import reviews_pb2
+from steam_pb2 import *
+import steam_pb2_grpc
 
-import reviews
+users_host = os.getenv("USERS_HOST", "localhost")
+users_channel = grpc.insecure_channel(f"{users_host}:50052")
+users_client = UsersStub(users_channel)
 
-
-
-# Create the Steam application instance?
-app = connexion.App(__name__, specification_dir="./")
-
-# read the swagger.yml file to configure the endpoints
-app.add_api("swagger.yml")
-
-class SteamService():
-
-    def Steam():
-
-    def getReviewByID(id):
-        return review_by_id(id)
+class SteamService(steam_pb2_grpc.SteamServicer):
+    def ActiveUsers(self, request, context):
+        active_users_request = ActiveUsersRequest(request.user, request.max_results)
+        results = users_client.ActiveUsers(active_users_request).users
+        return results
     
+def serve():
+    interceptors = [ExceptionToStatusInterceptor()]
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=10), interceptors=interceptors
+    )
+    steam_pb2_grpc.add_SteamServicer_to_server(
+        SteamService(), server
+    )
     
-    
-# Create a URL route in our application for "/"
-@app.route("/")
-def home():
-    """
-    This function just responds to the browser URL
-    localhost:5000/
-
-    :return:        the rendered template "home.html"
-    """
-    return render_template("home.html")
+    server.add_insecure_port("[::]:50050")
+    server.start()
+    server.wait_for_termination()
 
 
 if __name__ == "__main__":
-    getReviewByID(883710)
-    app.run()
+    serve()

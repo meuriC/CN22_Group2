@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "users.proto";
+
+// ######################
+// ###### REQUESTS ###### 
+// ######################
+
+message ActiveUsersRequest {
+	/*UserData user = 1;*/
+	int32 max_results = 2;
+}
+
+// ######################
+// ###### RESPONSES ###### 
+// ######################
+
+message ActiveUsersResponse {
+	repeated UserData users = 1;
+}
+
+// ######################
+// ###### SERVICES ###### 
+// ######################
+
+service Steam {
+	rpc ActiveUsers (ActiveUsersRequest) returns (ActiveUsersResponse);
+}

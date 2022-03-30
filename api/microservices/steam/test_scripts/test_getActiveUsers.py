@@ -13,7 +13,8 @@ from steam_pb2_grpc import SteamStub
 
 channel = grpc.insecure_channel("localhost:50050")
 client = SteamStub(channel)
-request = ActiveUsersRequest(user_num_reviews=47, max_results=2)
+request2 = ActiveUsersRequest(max_results=2)
+#user={"user_nick_name": "<built-in function new>", "num_reviews": 47, "num_games_owned": 887},
 
-val = client.ActiveUsers(request)
+val = client.ActiveUsers(request=request2)
 print(val)

@@ -7,7 +7,7 @@ import steam_pb2 as steam__pb2
 
 class SteamStub(object):
     """######################
-    ##### SERVICES ####### 
+    ###### SERVICES ###### 
     ######################
 
     """
@@ -27,7 +27,7 @@ class SteamStub(object):
 
 class SteamServicer(object):
     """######################
-    ##### SERVICES ####### 
+    ###### SERVICES ###### 
     ######################
 
     """
@@ -55,7 +55,7 @@ def add_SteamServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class Steam(object):
     """######################
-    ##### SERVICES ####### 
+    ###### SERVICES ###### 
     ######################
 
     """
