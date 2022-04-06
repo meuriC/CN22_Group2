@@ -18,14 +18,16 @@ import users_pb2_grpc
 from users_pb2 import (
     UserData,
     CreateUserResponse,
-    UsersDataList
+    UsersDataList,
+    DeletionResponse
 )
 
 def marshalUserdbToUserService(result):
     user = UserData(
-        user_nick_name = result["user_nick_name"],
+        user_name = result["user_name"],
         user_num_reviews = result["user_num_reviews"],
         user_num_games_owned = result["user_num_games_owned"],
+        user_id = result["user_id"],
     )
     return user
 
@@ -43,12 +45,32 @@ def create_user(result):
     )
     return user
     
+def delete_user(result):
+    deleted = DeletionResponse(
+        deleted = True
+    )
+    return deleted
 
 class UserService(users_pb2_grpc.UsersServicer):
-    def GetUser(self, request, context):
+    def GetUserById(self, request, context):
         results = db.find({"_id": ObjectId(request.user_id)})
         #print(results[0])
         return marshalUserdbToUserService(results[0])
+    
+    def GetUserByUsername(self, request, context):
+        results = db.find({"user_name": request.user_name})
+        #print(results[0])
+        return marshalUserdbToUserService(results[0])
+    
+    def DeleteUserByUsername(self, request, context):
+        results = db.remove({"user_name": request.user_name})
+        #print(results)
+        return delete_user(results)
+    
+    def DeleteUserById(self, request, context):
+        results = db.remove({"_id": ObjectId(request.user_id)})
+        #print(results)
+        return delete_user(results)
 
     def CreateUser(self, request, context):
         results = db.insert({ "user_name": request.user_name,
@@ -61,6 +83,7 @@ class UserService(users_pb2_grpc.UsersServicer):
              "author_last_played": 0,
              "user_pwd": "clear"})
         resultsFinal = db.find({"_id": results})
+        db.update({ "_id" : resultsFinal[0]["_id"] },{"$set": {  "user_id" : str(resultsFinal[0]["_id"])}})
         #print(resultsFinal[0])
         return create_user(resultsFinal[0])
 

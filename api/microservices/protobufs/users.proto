@@ -4,8 +4,12 @@ syntax = "proto3";
 // ######################
 // ###### REQUESTS ###### 
 // ######################
-message UsernameRequest {
+message IdRequest {
     string user_id = 1;
+}
+
+message UsernameRequest{
+    string user_name = 1;
 }
 
 message CreateUserRequest{
@@ -20,9 +24,10 @@ message GetUsersRequest{
 // ##### RESPONSES ###### 
 // ######################
 message UserData {
-    string user_nick_name = 1;
+    string user_name = 1;
     int32 user_num_reviews = 2;
     int32 user_num_games_owned = 3;
+    string user_id = 4;
 }
 
 message UsersDataList {
@@ -41,13 +46,20 @@ message CreateUserResponse{
     string user_pwd = 9;
 }
 
+message DeletionResponse{
+    bool deleted = 1;
+}
+
 
 // ######################
 // ##### SERVICES #######
 // ######################
 
 service Users {
-    rpc GetUser (UsernameRequest) returns (UserData);
+    rpc GetUserById (IdRequest) returns (UserData);
+    rpc GetUserByUsername (UsernameRequest) returns (UserData);
     rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
     rpc GetUsers (GetUsersRequest) returns (UsersDataList);
+    rpc DeleteUserByUsername (UsernameRequest) returns (DeletionResponse);
+    rpc DeleteUserById (IdRequest) returns (DeletionResponse);
 }
