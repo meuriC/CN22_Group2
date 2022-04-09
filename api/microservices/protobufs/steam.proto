@@ -7,8 +7,8 @@ import "users.proto";
 // ######################
 
 message ActiveUsersRequest {
-	/*UserData user = 1;*/
-	int32 max_results = 2;
+	//UserData user = 1;
+	int32 max_results = 1;
 }
 
 // ######################
