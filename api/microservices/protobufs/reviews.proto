@@ -1,7 +1,10 @@
 syntax = "proto3";
 
-/* At the moment is only being requested the review by ID and All the reviews of a game. The other services will implemented after checking if it works. */
-
+/* 
+At the moment it´s being requested:
+	The review by ID;
+	All the reviews of a game. 
+*/
 
 // ######################
 // ###### REQUESTS ###### 
