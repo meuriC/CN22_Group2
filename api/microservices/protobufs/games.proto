@@ -16,10 +16,6 @@ message GetMostRecommendedGamesRequest {
     int32 max_results = 1;
 }
 
-message GamesDataResponse {
-    repeated GamesData game = 1;
-}
-
 
 message GameByIdRequest {
     string id = 1;
@@ -31,10 +27,26 @@ message GameByNameRequest {
 }
 
 
+message CreateGameRequest {
+    string name = 1;
+}
+
+
+message GamesDataResponse {
+    repeated GamesData game = 1;
+}
+
+
+message DeletionResponse{
+    bool deleted = 1;
+}
+
 service Games {
     rpc GetGames (GetMostReviewedGamesRequest) returns (GamesDataResponse);
     rpc GetRecommendedGames (GetMostRecommendedGamesRequest) returns (GamesDataResponse);
     rpc GameByID (GameByIdRequest) returns (GamesData);
 	rpc GameByName (GameByNameRequest) returns (GamesData);
+    rpc CreateGame (CreateGameRequest) returns (GamesData);
+	rpc DeleteGameByName (GameByNameRequest) returns (DeletionResponse);
 
 }

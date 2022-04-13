@@ -14,16 +14,18 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bgames.proto\"V\n\tGamesData\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"2\n\x1bGetMostReviewedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"5\n\x1eGetMostRecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"-\n\x11GamesDataResponse\x12\x18\n\x04game\x18\x01 \x03(\x0b\x32\n.GamesData\"\x1d\n\x0fGameByIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x11GameByNameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t2\xe9\x01\n\x05Games\x12<\n\x08GetGames\x12\x1c.GetMostReviewedGamesRequest\x1a\x12.GamesDataResponse\x12J\n\x13GetRecommendedGames\x12\x1f.GetMostRecommendedGamesRequest\x1a\x12.GamesDataResponse\x12(\n\x08GameByID\x12\x10.GameByIdRequest\x1a\n.GamesData\x12,\n\nGameByName\x12\x12.GameByNameRequest\x1a\n.GamesDatab\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bgames.proto\"V\n\tGamesData\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"2\n\x1bGetMostReviewedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"5\n\x1eGetMostRecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"\x1d\n\x0fGameByIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x11GameByNameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"!\n\x11\x43reateGameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"-\n\x11GamesDataResponse\x12\x18\n\x04game\x18\x01 \x03(\x0b\x32\n.GamesData\"#\n\x10\x44\x65letionResponse\x12\x0f\n\x07\x64\x65leted\x18\x01 \x01(\x08\x32\xd2\x02\n\x05Games\x12<\n\x08GetGames\x12\x1c.GetMostReviewedGamesRequest\x1a\x12.GamesDataResponse\x12J\n\x13GetRecommendedGames\x12\x1f.GetMostRecommendedGamesRequest\x1a\x12.GamesDataResponse\x12(\n\x08GameByID\x12\x10.GameByIdRequest\x1a\n.GamesData\x12,\n\nGameByName\x12\x12.GameByNameRequest\x1a\n.GamesData\x12,\n\nCreateGame\x12\x12.CreateGameRequest\x1a\n.GamesData\x12\x39\n\x10\x44\x65leteGameByName\x12\x12.GameByNameRequest\x1a\x11.DeletionResponseb\x06proto3')
 
 
 
 _GAMESDATA = DESCRIPTOR.message_types_by_name['GamesData']
 _GETMOSTREVIEWEDGAMESREQUEST = DESCRIPTOR.message_types_by_name['GetMostReviewedGamesRequest']
 _GETMOSTRECOMMENDEDGAMESREQUEST = DESCRIPTOR.message_types_by_name['GetMostRecommendedGamesRequest']
-_GAMESDATARESPONSE = DESCRIPTOR.message_types_by_name['GamesDataResponse']
 _GAMEBYIDREQUEST = DESCRIPTOR.message_types_by_name['GameByIdRequest']
 _GAMEBYNAMEREQUEST = DESCRIPTOR.message_types_by_name['GameByNameRequest']
+_CREATEGAMEREQUEST = DESCRIPTOR.message_types_by_name['CreateGameRequest']
+_GAMESDATARESPONSE = DESCRIPTOR.message_types_by_name['GamesDataResponse']
+_DELETIONRESPONSE = DESCRIPTOR.message_types_by_name['DeletionResponse']
 GamesData = _reflection.GeneratedProtocolMessageType('GamesData', (_message.Message,), {
   'DESCRIPTOR' : _GAMESDATA,
   '__module__' : 'games_pb2'
@@ -45,13 +47,6 @@ GetMostRecommendedGamesRequest = _reflection.GeneratedProtocolMessageType('GetMo
   })
 _sym_db.RegisterMessage(GetMostRecommendedGamesRequest)
 
-GamesDataResponse = _reflection.GeneratedProtocolMessageType('GamesDataResponse', (_message.Message,), {
-  'DESCRIPTOR' : _GAMESDATARESPONSE,
-  '__module__' : 'games_pb2'
-  # @@protoc_insertion_point(class_scope:GamesDataResponse)
-  })
-_sym_db.RegisterMessage(GamesDataResponse)
-
 GameByIdRequest = _reflection.GeneratedProtocolMessageType('GameByIdRequest', (_message.Message,), {
   'DESCRIPTOR' : _GAMEBYIDREQUEST,
   '__module__' : 'games_pb2'
@@ -66,6 +61,27 @@ GameByNameRequest = _reflection.GeneratedProtocolMessageType('GameByNameRequest'
   })
 _sym_db.RegisterMessage(GameByNameRequest)
 
+CreateGameRequest = _reflection.GeneratedProtocolMessageType('CreateGameRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CREATEGAMEREQUEST,
+  '__module__' : 'games_pb2'
+  # @@protoc_insertion_point(class_scope:CreateGameRequest)
+  })
+_sym_db.RegisterMessage(CreateGameRequest)
+
+GamesDataResponse = _reflection.GeneratedProtocolMessageType('GamesDataResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GAMESDATARESPONSE,
+  '__module__' : 'games_pb2'
+  # @@protoc_insertion_point(class_scope:GamesDataResponse)
+  })
+_sym_db.RegisterMessage(GamesDataResponse)
+
+DeletionResponse = _reflection.GeneratedProtocolMessageType('DeletionResponse', (_message.Message,), {
+  'DESCRIPTOR' : _DELETIONRESPONSE,
+  '__module__' : 'games_pb2'
+  # @@protoc_insertion_point(class_scope:DeletionResponse)
+  })
+_sym_db.RegisterMessage(DeletionResponse)
+
 _GAMES = DESCRIPTOR.services_by_name['Games']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -76,12 +92,16 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _GETMOSTREVIEWEDGAMESREQUEST._serialized_end=153
   _GETMOSTRECOMMENDEDGAMESREQUEST._serialized_start=155
   _GETMOSTRECOMMENDEDGAMESREQUEST._serialized_end=208
-  _GAMESDATARESPONSE._serialized_start=210
-  _GAMESDATARESPONSE._serialized_end=255
-  _GAMEBYIDREQUEST._serialized_start=257
-  _GAMEBYIDREQUEST._serialized_end=286
-  _GAMEBYNAMEREQUEST._serialized_start=288
-  _GAMEBYNAMEREQUEST._serialized_end=321
-  _GAMES._serialized_start=324
-  _GAMES._serialized_end=557
+  _GAMEBYIDREQUEST._serialized_start=210
+  _GAMEBYIDREQUEST._serialized_end=239
+  _GAMEBYNAMEREQUEST._serialized_start=241
+  _GAMEBYNAMEREQUEST._serialized_end=274
+  _CREATEGAMEREQUEST._serialized_start=276
+  _CREATEGAMEREQUEST._serialized_end=309
+  _GAMESDATARESPONSE._serialized_start=311
+  _GAMESDATARESPONSE._serialized_end=356
+  _DELETIONRESPONSE._serialized_start=358
+  _DELETIONRESPONSE._serialized_end=393
+  _GAMES._serialized_start=396
+  _GAMES._serialized_end=734
 # @@protoc_insertion_point(module_scope)

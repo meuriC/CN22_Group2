@@ -21,7 +21,8 @@ from games_pb2 import (
     GameByIdRequest,
     GameByNameRequest,
     GetMostReviewedGamesRequest,
-    GetMostRecommendedGamesRequest
+    GetMostRecommendedGamesRequest, 
+    DeletionResponse
 )
 import games_pb2_grpc
 
@@ -35,6 +36,13 @@ def games_response(result):
         recommend_count = int(result["recommend_count"])
     )
     return game
+
+
+def delete_game(result):
+    deleted = DeletionResponse(deleted = True)
+        
+    return deleted
+
 
 class GamesService(games_pb2_grpc.GamesServicer):
 
@@ -68,6 +76,24 @@ class GamesService(games_pb2_grpc.GamesServicer):
             return games_response(results[0])
         except:
             return GamesData()
+
+
+    def CreateGame(self, request, context):
+
+        result = db.insert({ 
+             "id": "0", 
+             "name": request.name,
+             "reviews_number": 0, 
+             "recommend_count": 0})
+
+        resultFinal = db.find({"_id": result})
+        db.update({ "_id" : resultFinal[0]["_id"] },{"$set": {  "id" : str(resultFinal[0]["_id"])}})
+        return games_response(resultFinal[0])
+
+    def DeleteGameByName(self, request, context):
+        result = db.remove({"name": request.name})
+        
+        return delete_game(result)
 
 
 def serve():

@@ -34,6 +34,16 @@ class GamesStub(object):
                 request_serializer=games__pb2.GameByNameRequest.SerializeToString,
                 response_deserializer=games__pb2.GamesData.FromString,
                 )
+        self.CreateGame = channel.unary_unary(
+                '/Games/CreateGame',
+                request_serializer=games__pb2.CreateGameRequest.SerializeToString,
+                response_deserializer=games__pb2.GamesData.FromString,
+                )
+        self.DeleteGameByName = channel.unary_unary(
+                '/Games/DeleteGameByName',
+                request_serializer=games__pb2.GameByNameRequest.SerializeToString,
+                response_deserializer=games__pb2.DeletionResponse.FromString,
+                )
 
 
 class GamesServicer(object):
@@ -63,6 +73,18 @@ class GamesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateGame(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteGameByName(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_GamesServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -85,6 +107,16 @@ def add_GamesServicer_to_server(servicer, server):
                     servicer.GameByName,
                     request_deserializer=games__pb2.GameByNameRequest.FromString,
                     response_serializer=games__pb2.GamesData.SerializeToString,
+            ),
+            'CreateGame': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateGame,
+                    request_deserializer=games__pb2.CreateGameRequest.FromString,
+                    response_serializer=games__pb2.GamesData.SerializeToString,
+            ),
+            'DeleteGameByName': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteGameByName,
+                    request_deserializer=games__pb2.GameByNameRequest.FromString,
+                    response_serializer=games__pb2.DeletionResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -161,5 +193,39 @@ class Games(object):
         return grpc.experimental.unary_unary(request, target, '/Games/GameByName',
             games__pb2.GameByNameRequest.SerializeToString,
             games__pb2.GamesData.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateGame(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Games/CreateGame',
+            games__pb2.CreateGameRequest.SerializeToString,
+            games__pb2.GamesData.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteGameByName(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Games/DeleteGameByName',
+            games__pb2.GameByNameRequest.SerializeToString,
+            games__pb2.DeletionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
