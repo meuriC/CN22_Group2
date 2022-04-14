@@ -30,7 +30,7 @@ db = db["users"]
 
 insert_list = []
 count = 0
-total = 2_000_000
+total = 1_500_000
 
 with open("api/databases/users/users.csv","r",encoding="ISO-8859-1") as f:
 
@@ -40,7 +40,7 @@ with open("api/databases/users/users.csv","r",encoding="ISO-8859-1") as f:
 
     for row in reader:
         
-        if count >= 2_000_000: #stop populating
+        if count >= total: #stop populating
             break
 
         if first_elem:
@@ -50,12 +50,15 @@ with open("api/databases/users/users.csv","r",encoding="ISO-8859-1") as f:
         count+=1
 
         users = {
-                'steamid' : row[2],
-                'num_games_owned': row[3],
-                'num_reviews' : row[4],
-                'playtime_forever' : row[5],
-                'playtime_at_review' : row[6],
-                'last_played' : row[7]
+                'language' : row[2],
+                'steamid' : row[3],
+                'num_games_owned': row[4],
+                'num_reviews' : row[5],
+                'playtime_forever' : row[6],
+                'playtime_at_review' : row[7],
+                'last_played' : row[8],
+                'user_name' : "usn" + row[3],
+                'user_pwd' : "pwd" + row[3]
         }
     
         insert_list.append(users)
