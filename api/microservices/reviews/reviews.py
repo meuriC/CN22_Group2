@@ -33,10 +33,9 @@ db3 = db3["reviews"]
 #print("\nESTIMATED NUMBER OF ELEMENTS IN 3RD BD: ", db3.estimated_document_count())
 
 from reviews_pb2 import (
-    ReviewByIdRequest,
-    ReviewsByGameRequest,
     ReviewData,
     ReviewDataResponse,
+	DeleteReviewResponse
 )
 import reviews_pb2_grpc
 
@@ -51,7 +50,7 @@ def review_by_id(result):
         timestamp_updated = result["timestamp_updated"],
         recommended = result["recommended"],
         votes_helpful = result["votes_helpful"],
-        author_steam_id = result["author.steamid"]
+        author_steam_id = result["author_steamid"]
     )
     return review
 
@@ -59,12 +58,15 @@ def review_by_id(result):
 class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
     def GetReview(self, request, context):
         try:
-            results = list(db.find({"review_id": request.review_id}).limit(1))
+            # Search on the 1st database
+            results = list(db.find({"review_id": request.review_id}))
             if len(results) <= 0:
-                results = list(db2.find({"review_id": request.review_id}).limit(1))
+                # Search on the 2nd database
+                results = list(db2.find({"review_id": request.review_id}))
 				
             if len(results) <= 0:
-                results = list(db3.find({"review_id": request.review_id}).limit(1))
+                # Search on the 3rd database
+                results = list(db3.find({"review_id": request.review_id}))
 
             if len(results) <= 0:
                 print("Review not found ... Check if the id of the review is correct.")
@@ -75,13 +77,136 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             return ReviewData()
 
     def GetGameReviews(self, request, context):
+        # Search on the 1st database
         results = list(db.find({"app_id": {"$all": [request.app_id]} }).limit(request.max_results))
         if len(results) < request.max_results:
+            # Search on the 2nd database
             results += list(db2.find({"app_id": {"$all": [request.app_id] } }).limit((request.max_results - len(results))))
 			
         if len(results) < request.max_results:
+            # Search on the 3rd database
             results += list(db3.find({"app_id": {"$all": [request.app_id] } }).limit((request.max_results - len(results))))
 			
+        results = [review_by_id(review) for review in results]
+        return ReviewDataResponse(reviews = results)
+
+    def PutReview(self, request, context):
+        try:
+            # Search on the 1st database
+            results = list(db.find({"review_id": request.review_id}))
+            database = db
+			
+            if len(results) <= 0:
+                # Search on the 2nd database
+                results = list(db2.find({"review_id": request.review_id}))
+                database = db2
+				
+            if len(results) <= 0:
+                # Search on the 3rd database
+                results = list(db3.find({"review_id": request.review_id}))
+                database = db3
+
+            if len(results) <= 0:
+                print("Try: Review not found.")
+                return ReviewData()
+
+            database.update_one({"review_id": request.review_id}, {"$set": {"review": request.review}})
+            database.update_one({"review_id": request.review_id}, {"$set": {"recommended": request.recommended}})
+            results = list(database.find({"review_id": request.review_id}))
+            return review_by_id(results[0])
+        except:
+            print("Except: Review not found.")
+            return ReviewData()
+
+    def DeleteReview(self, request, context):
+        try:
+            # Search on the 1st database
+            results = list(db.find({"review_id": request.review_id}))
+            database = db
+			
+            if len(results) <= 0:
+                # Search on the 2nd database
+                results = list(db2.find({"review_id": request.review_id}))
+                database = db2
+				
+            if len(results) <= 0:
+                # Search on the 3rd database
+                results = list(db3.find({"review_id": request.review_id}))
+                database = db3
+
+            if len(results) <= 0:
+                print("Try: Review not found, thus not deleted.")
+                return DeleteReviewResponse(status=False)
+
+            database.delete_one({"review_id": request.review_id})
+            return DeleteReviewResponse(status=True)
+        except:
+            print("Except: Review not found, thus not deleted.")
+            return DeleteReviewResponse(status=False)
+			
+    def PutHelpfulReview(self, request, context):
+        try:
+            # Search on the 1st database
+            results = list(db.find({"review_id": request.review_id}))
+            database = db
+			
+            if len(results) <= 0:
+                # Search on the 2nd database
+                results = list(db2.find({"review_id": request.review_id}))
+                database = db2
+				
+            if len(results) <= 0:
+                # Search on the 3rd database
+                results = list(db3.find({"review_id": request.review_id}))
+                database = db3
+
+            if len(results) <= 0:
+                print("Try: Review not found.")
+                return ReviewData()
+
+            database.update_one({"review_id": request.review_id}, {"$set": {"votes_helpful": request.votes_helpful}})
+            results = list(database.find({"review_id": request.review_id}))
+            return review_by_id(results[0])
+        except:
+            print("Except: Review not found.")
+            return ReviewData()
+    
+    def GetGameReviewsByLanguage(self, request, context):
+        # Search on the 1st database
+        results = list(db.find({"app_id": {"$all": [request.app_id]}, "language": {"$all": [request.language]}}).limit(request.max_results))
+        if len(results) < request.max_results:
+            # Search on the 2nd database
+            results += list(db2.find({"app_id": {"$all": [request.app_id]}, "language": {"$all": [request.language]}}).limit((request.max_results - len(results))))
+			
+        if len(results) < request.max_results:
+            # Search on the 3rd database
+            results += list(db3.find({"app_id": {"$all": [request.app_id]}, "language": {"$all": [request.language]}}).limit((request.max_results - len(results))))
+        results = [review_by_id(review) for review in results]
+        return ReviewDataResponse(reviews = results)
+		
+    def GetReviewsByUser(self, request, context):
+        # Search on the 1st database
+        results = list(db.find({"author_steamid": {"$all": [request.author_steam_id]}}).limit(request.max_results))
+        if len(results) < request.max_results:
+            # Search on the 2nd database
+            results += list(db2.find({"author_steamid": {"$all": [request.author_steam_id]}}).limit((request.max_results - len(results))))
+			
+        if len(results) < request.max_results:
+            # Search on the 3rd database
+            results += list(db3.find({"author_steamid": {"$all": [request.author_steam_id]}}).limit((request.max_results - len(results))))
+        results = [review_by_id(review) for review in results]
+        return ReviewDataResponse(reviews = results)
+		
+    def GetReviewsByHelpful(self, request, context):
+        # Search on the 1st database
+        results = list(db.find({"votes_helpful": {"$all": [request.votes_helpful]}}).limit(request.max_results))
+        if len(results) < request.max_results:
+            # Search on the 2nd database
+            results += list(db2.find({"votes_helpful": {"$all": [request.votes_helpful]}}).limit((request.max_results - len(results))))
+			
+        if len(results) < request.max_results:
+            # Search on the 3rd database
+            results += list(db3.find({"votes_helpful": {"$all": [request.votes_helpful]}}).limit((request.max_results - len(results))))
         results = [review_by_id(review) for review in results]
         return ReviewDataResponse(reviews = results)
 

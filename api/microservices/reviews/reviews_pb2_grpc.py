@@ -7,7 +7,7 @@ import reviews_pb2 as reviews__pb2
 
 class ReviewsStub(object):
     """######################
-    ##### SERVICES ###### 
+    ##### SERVICES ####### 
     ######################
 
     Services provided by the reviews microservice
@@ -44,9 +44,9 @@ class ReviewsStub(object):
                 request_serializer=reviews__pb2.UpdateHelpfulOnReviewByIdRequest.SerializeToString,
                 response_deserializer=reviews__pb2.ReviewData.FromString,
                 )
-        self.GetReviewsByLanguage = channel.unary_unary(
-                '/Reviews/GetReviewsByLanguage',
-                request_serializer=reviews__pb2.ReviewsByLanguageRequest.SerializeToString,
+        self.GetGameReviewsByLanguage = channel.unary_unary(
+                '/Reviews/GetGameReviewsByLanguage',
+                request_serializer=reviews__pb2.GameReviewsByLanguageRequest.SerializeToString,
                 response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
                 )
         self.GetReviewsByUser = channel.unary_unary(
@@ -63,7 +63,7 @@ class ReviewsStub(object):
 
 class ReviewsServicer(object):
     """######################
-    ##### SERVICES ###### 
+    ##### SERVICES ####### 
     ######################
 
     Services provided by the reviews microservice
@@ -99,7 +99,7 @@ class ReviewsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetReviewsByLanguage(self, request, context):
+    def GetGameReviewsByLanguage(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -145,9 +145,9 @@ def add_ReviewsServicer_to_server(servicer, server):
                     request_deserializer=reviews__pb2.UpdateHelpfulOnReviewByIdRequest.FromString,
                     response_serializer=reviews__pb2.ReviewData.SerializeToString,
             ),
-            'GetReviewsByLanguage': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetReviewsByLanguage,
-                    request_deserializer=reviews__pb2.ReviewsByLanguageRequest.FromString,
+            'GetGameReviewsByLanguage': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetGameReviewsByLanguage,
+                    request_deserializer=reviews__pb2.GameReviewsByLanguageRequest.FromString,
                     response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
             ),
             'GetReviewsByUser': grpc.unary_unary_rpc_method_handler(
@@ -169,7 +169,7 @@ def add_ReviewsServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class Reviews(object):
     """######################
-    ##### SERVICES ###### 
+    ##### SERVICES ####### 
     ######################
 
     Services provided by the reviews microservice
@@ -261,7 +261,7 @@ class Reviews(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetReviewsByLanguage(request,
+    def GetGameReviewsByLanguage(request,
             target,
             options=(),
             channel_credentials=None,
@@ -271,8 +271,8 @@ class Reviews(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Reviews/GetReviewsByLanguage',
-            reviews__pb2.ReviewsByLanguageRequest.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/Reviews/GetGameReviewsByLanguage',
+            reviews__pb2.GameReviewsByLanguageRequest.SerializeToString,
             reviews__pb2.ReviewDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

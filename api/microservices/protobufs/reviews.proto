@@ -32,9 +32,10 @@ message UpdateHelpfulOnReviewByIdRequest {
 	string votes_helpful = 2; 
 }
 
-message ReviewsByLanguageRequest {
-	string language = 1;
-	int32 max_results = 2;
+message GameReviewsByLanguageRequest {
+	string app_id = 1;
+	string language = 2;
+	int32 max_results = 3;
 }
 
 message ReviewsByUserIdRequest {
@@ -76,7 +77,7 @@ message DeleteReviewResponse {
 
 
 // ######################
-// ##### SERVICES ###### 
+// ##### SERVICES ####### 
 // ######################
 
 // Services provided by the reviews microservice
@@ -86,7 +87,7 @@ service Reviews {
 	rpc PutReview (UpdateReviewByIdRequest) returns (ReviewData);
 	rpc DeleteReview (ReviewByIdRequest) returns (DeleteReviewResponse);
 	rpc PutHelpfulReview (UpdateHelpfulOnReviewByIdRequest) returns (ReviewData);
-	rpc GetReviewsByLanguage (ReviewsByLanguageRequest) returns (ReviewDataResponse);
+	rpc GetGameReviewsByLanguage (GameReviewsByLanguageRequest) returns (ReviewDataResponse);
 	rpc GetReviewsByUser (ReviewsByUserIdRequest) returns (ReviewDataResponse);
 	rpc GetReviewsByHelpful (ReviewsByHelpfulRequest) returns (ReviewDataResponse);
 }

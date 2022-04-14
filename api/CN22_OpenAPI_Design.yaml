@@ -213,16 +213,20 @@ paths:
           description: invalid id, object invalid
         "404":
           description: id not found
-  /reviews/filter/{language}:
+  /reviews/games/{id}/{language}:
     get:
       tags:
       - Reviews Service
-      summary: Get review by language
-      description: With this call you can get reviews made in steam, in a specific language
-      operationId: getReviewByLanguage
+      summary: Get game reviews by language
+      description: With this call you can get all reviews in a game in a specific language
+      operationId: getGameReviewsByLanguage
       produces:
       - application/json
       parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
       - name: language
         in: path
         required: true

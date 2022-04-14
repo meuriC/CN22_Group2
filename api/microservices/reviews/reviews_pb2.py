@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rreviews.proto\"&\n\x11ReviewByIdRequest\x12\x11\n\treview_id\x18\x01 \x01(\t\";\n\x14ReviewsByGameRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x13\n\x0bmax_results\x18\x02 \x01(\x05\"Q\n\x17UpdateReviewByIdRequest\x12\x11\n\treview_id\x18\x01 \x01(\t\x12\x0e\n\x06review\x18\x02 \x01(\t\x12\x13\n\x0brecommended\x18\x03 \x01(\t\"L\n UpdateHelpfulOnReviewByIdRequest\x12\x11\n\treview_id\x18\x01 \x01(\t\x12\x15\n\rvotes_helpful\x18\x02 \x01(\t\"A\n\x18ReviewsByLanguageRequest\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x13\n\x0bmax_results\x18\x02 \x01(\x05\"F\n\x16ReviewsByUserIdRequest\x12\x17\n\x0f\x61uthor_steam_id\x18\x01 \x01(\t\x12\x13\n\x0bmax_results\x18\x02 \x01(\x05\"E\n\x17ReviewsByHelpfulRequest\x12\x15\n\rvotes_helpful\x18\x01 \x01(\t\x12\x13\n\x0bmax_results\x18\x02 \x01(\x05\"\xcc\x01\n\nReviewData\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x11\n\treview_id\x18\x02 \x01(\t\x12\x10\n\x08language\x18\x03 \x01(\t\x12\x0e\n\x06review\x18\x04 \x01(\t\x12\x19\n\x11timestamp_created\x18\x05 \x01(\t\x12\x19\n\x11timestamp_updated\x18\x06 \x01(\t\x12\x13\n\x0brecommended\x18\x07 \x01(\t\x12\x15\n\rvotes_helpful\x18\x08 \x01(\t\x12\x17\n\x0f\x61uthor_steam_id\x18\t \x01(\t\"2\n\x12ReviewDataResponse\x12\x1c\n\x07reviews\x18\x01 \x03(\x0b\x32\x0b.ReviewData\"&\n\x14\x44\x65leteReviewResponse\x12\x0e\n\x06status\x18\x01 \x01(\x08\x32\xf8\x03\n\x07Reviews\x12,\n\tGetReview\x12\x12.ReviewByIdRequest\x1a\x0b.ReviewData\x12<\n\x0eGetGameReviews\x12\x15.ReviewsByGameRequest\x1a\x13.ReviewDataResponse\x12\x32\n\tPutReview\x12\x18.UpdateReviewByIdRequest\x1a\x0b.ReviewData\x12\x39\n\x0c\x44\x65leteReview\x12\x12.ReviewByIdRequest\x1a\x15.DeleteReviewResponse\x12\x42\n\x10PutHelpfulReview\x12!.UpdateHelpfulOnReviewByIdRequest\x1a\x0b.ReviewData\x12\x46\n\x14GetReviewsByLanguage\x12\x19.ReviewsByLanguageRequest\x1a\x13.ReviewDataResponse\x12@\n\x10GetReviewsByUser\x12\x17.ReviewsByUserIdRequest\x1a\x13.ReviewDataResponse\x12\x44\n\x13GetReviewsByHelpful\x12\x18.ReviewsByHelpfulRequest\x1a\x13.ReviewDataResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rreviews.proto\"&\n\x11ReviewByIdRequest\x12\x11\n\treview_id\x18\x01 \x01(\t\";\n\x14ReviewsByGameRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x13\n\x0bmax_results\x18\x02 \x01(\x05\"Q\n\x17UpdateReviewByIdRequest\x12\x11\n\treview_id\x18\x01 \x01(\t\x12\x0e\n\x06review\x18\x02 \x01(\t\x12\x13\n\x0brecommended\x18\x03 \x01(\t\"L\n UpdateHelpfulOnReviewByIdRequest\x12\x11\n\treview_id\x18\x01 \x01(\t\x12\x15\n\rvotes_helpful\x18\x02 \x01(\t\"U\n\x1cGameReviewsByLanguageRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x13\n\x0bmax_results\x18\x03 \x01(\x05\"F\n\x16ReviewsByUserIdRequest\x12\x17\n\x0f\x61uthor_steam_id\x18\x01 \x01(\t\x12\x13\n\x0bmax_results\x18\x02 \x01(\x05\"E\n\x17ReviewsByHelpfulRequest\x12\x15\n\rvotes_helpful\x18\x01 \x01(\t\x12\x13\n\x0bmax_results\x18\x02 \x01(\x05\"\xcc\x01\n\nReviewData\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x11\n\treview_id\x18\x02 \x01(\t\x12\x10\n\x08language\x18\x03 \x01(\t\x12\x0e\n\x06review\x18\x04 \x01(\t\x12\x19\n\x11timestamp_created\x18\x05 \x01(\t\x12\x19\n\x11timestamp_updated\x18\x06 \x01(\t\x12\x13\n\x0brecommended\x18\x07 \x01(\t\x12\x15\n\rvotes_helpful\x18\x08 \x01(\t\x12\x17\n\x0f\x61uthor_steam_id\x18\t \x01(\t\"2\n\x12ReviewDataResponse\x12\x1c\n\x07reviews\x18\x01 \x03(\x0b\x32\x0b.ReviewData\"&\n\x14\x44\x65leteReviewResponse\x12\x0e\n\x06status\x18\x01 \x01(\x08\x32\x80\x04\n\x07Reviews\x12,\n\tGetReview\x12\x12.ReviewByIdRequest\x1a\x0b.ReviewData\x12<\n\x0eGetGameReviews\x12\x15.ReviewsByGameRequest\x1a\x13.ReviewDataResponse\x12\x32\n\tPutReview\x12\x18.UpdateReviewByIdRequest\x1a\x0b.ReviewData\x12\x39\n\x0c\x44\x65leteReview\x12\x12.ReviewByIdRequest\x1a\x15.DeleteReviewResponse\x12\x42\n\x10PutHelpfulReview\x12!.UpdateHelpfulOnReviewByIdRequest\x1a\x0b.ReviewData\x12N\n\x18GetGameReviewsByLanguage\x12\x1d.GameReviewsByLanguageRequest\x1a\x13.ReviewDataResponse\x12@\n\x10GetReviewsByUser\x12\x17.ReviewsByUserIdRequest\x1a\x13.ReviewDataResponse\x12\x44\n\x13GetReviewsByHelpful\x12\x18.ReviewsByHelpfulRequest\x1a\x13.ReviewDataResponseb\x06proto3')
 
 
 
@@ -22,7 +22,7 @@ _REVIEWBYIDREQUEST = DESCRIPTOR.message_types_by_name['ReviewByIdRequest']
 _REVIEWSBYGAMEREQUEST = DESCRIPTOR.message_types_by_name['ReviewsByGameRequest']
 _UPDATEREVIEWBYIDREQUEST = DESCRIPTOR.message_types_by_name['UpdateReviewByIdRequest']
 _UPDATEHELPFULONREVIEWBYIDREQUEST = DESCRIPTOR.message_types_by_name['UpdateHelpfulOnReviewByIdRequest']
-_REVIEWSBYLANGUAGEREQUEST = DESCRIPTOR.message_types_by_name['ReviewsByLanguageRequest']
+_GAMEREVIEWSBYLANGUAGEREQUEST = DESCRIPTOR.message_types_by_name['GameReviewsByLanguageRequest']
 _REVIEWSBYUSERIDREQUEST = DESCRIPTOR.message_types_by_name['ReviewsByUserIdRequest']
 _REVIEWSBYHELPFULREQUEST = DESCRIPTOR.message_types_by_name['ReviewsByHelpfulRequest']
 _REVIEWDATA = DESCRIPTOR.message_types_by_name['ReviewData']
@@ -56,12 +56,12 @@ UpdateHelpfulOnReviewByIdRequest = _reflection.GeneratedProtocolMessageType('Upd
   })
 _sym_db.RegisterMessage(UpdateHelpfulOnReviewByIdRequest)
 
-ReviewsByLanguageRequest = _reflection.GeneratedProtocolMessageType('ReviewsByLanguageRequest', (_message.Message,), {
-  'DESCRIPTOR' : _REVIEWSBYLANGUAGEREQUEST,
+GameReviewsByLanguageRequest = _reflection.GeneratedProtocolMessageType('GameReviewsByLanguageRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GAMEREVIEWSBYLANGUAGEREQUEST,
   '__module__' : 'reviews_pb2'
-  # @@protoc_insertion_point(class_scope:ReviewsByLanguageRequest)
+  # @@protoc_insertion_point(class_scope:GameReviewsByLanguageRequest)
   })
-_sym_db.RegisterMessage(ReviewsByLanguageRequest)
+_sym_db.RegisterMessage(GameReviewsByLanguageRequest)
 
 ReviewsByUserIdRequest = _reflection.GeneratedProtocolMessageType('ReviewsByUserIdRequest', (_message.Message,), {
   'DESCRIPTOR' : _REVIEWSBYUSERIDREQUEST,
@@ -110,18 +110,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _UPDATEREVIEWBYIDREQUEST._serialized_end=199
   _UPDATEHELPFULONREVIEWBYIDREQUEST._serialized_start=201
   _UPDATEHELPFULONREVIEWBYIDREQUEST._serialized_end=277
-  _REVIEWSBYLANGUAGEREQUEST._serialized_start=279
-  _REVIEWSBYLANGUAGEREQUEST._serialized_end=344
-  _REVIEWSBYUSERIDREQUEST._serialized_start=346
-  _REVIEWSBYUSERIDREQUEST._serialized_end=416
-  _REVIEWSBYHELPFULREQUEST._serialized_start=418
-  _REVIEWSBYHELPFULREQUEST._serialized_end=487
-  _REVIEWDATA._serialized_start=490
-  _REVIEWDATA._serialized_end=694
-  _REVIEWDATARESPONSE._serialized_start=696
-  _REVIEWDATARESPONSE._serialized_end=746
-  _DELETEREVIEWRESPONSE._serialized_start=748
-  _DELETEREVIEWRESPONSE._serialized_end=786
-  _REVIEWS._serialized_start=789
-  _REVIEWS._serialized_end=1293
+  _GAMEREVIEWSBYLANGUAGEREQUEST._serialized_start=279
+  _GAMEREVIEWSBYLANGUAGEREQUEST._serialized_end=364
+  _REVIEWSBYUSERIDREQUEST._serialized_start=366
+  _REVIEWSBYUSERIDREQUEST._serialized_end=436
+  _REVIEWSBYHELPFULREQUEST._serialized_start=438
+  _REVIEWSBYHELPFULREQUEST._serialized_end=507
+  _REVIEWDATA._serialized_start=510
+  _REVIEWDATA._serialized_end=714
+  _REVIEWDATARESPONSE._serialized_start=716
+  _REVIEWDATARESPONSE._serialized_end=766
+  _DELETEREVIEWRESPONSE._serialized_start=768
+  _DELETEREVIEWRESPONSE._serialized_end=806
+  _REVIEWS._serialized_start=809
+  _REVIEWS._serialized_end=1321
 # @@protoc_insertion_point(module_scope)
