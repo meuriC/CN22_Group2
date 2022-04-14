@@ -34,9 +34,9 @@ db = db["reviews"]
 
 insert_list = []
 count = 0
-total = 2_000_000   #docs we want to populate
+total = 1_000_000   #docs we want to populate
 
-with open("api/databases/reviews/steam_reviews_3.csv","r",encoding="ISO-8859-1") as f:
+with open("api/databases/reviews/steam_reviews_3.csv","r") as f:
 
     reader = csv.reader(f)
     first_elem = True
@@ -45,7 +45,7 @@ with open("api/databases/reviews/steam_reviews_3.csv","r",encoding="ISO-8859-1")
     for row in reader:
         
         #stop populating
-        if count >= 1_000_000:
+        if count >= total:
             break
 
         if first_elem:
@@ -64,7 +64,7 @@ with open("api/databases/reviews/steam_reviews_3.csv","r",encoding="ISO-8859-1")
                 'timestamp_updated' : row[8],
                 'recommended' : row[9],
                 'votes_helpful' : row[10],
-                'author.steamid' : row[17]
+                'author_steamid' : row[17]
         }
         
         insert_list.append(reviews)
