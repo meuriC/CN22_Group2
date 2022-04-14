@@ -23,8 +23,14 @@ secondClient = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@reviews2.q
 db2 = secondClient["database"]
 db2 = db2["reviews"]
 
+# Third connection, mainly for new created reviews
+thirdClient = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@reviews3.keyxx.mongodb.net/test")
+db3 = thirdClient["database"]
+db3 = db3["reviews"]
+
 #print("ESTIMATED NUMBER OF ELEMENTS IN 1ST BD: ", db.estimated_document_count())
 #print("\nESTIMATED NUMBER OF ELEMENTS IN 2ND BD: ", db2.estimated_document_count())
+#print("\nESTIMATED NUMBER OF ELEMENTS IN 3RD BD: ", db3.estimated_document_count())
 
 from reviews_pb2 import (
     ReviewByIdRequest,
@@ -56,6 +62,9 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             results = list(db.find({"review_id": request.review_id}).limit(1))
             if len(results) <= 0:
                 results = list(db2.find({"review_id": request.review_id}).limit(1))
+				
+            if len(results) <= 0:
+                results = list(db3.find({"review_id": request.review_id}).limit(1))
 
             if len(results) <= 0:
                 print("Review not found ... Check if the id of the review is correct.")
@@ -69,6 +78,9 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
         results = list(db.find({"app_id": {"$all": [request.app_id]} }).limit(request.max_results))
         if len(results) < request.max_results:
             results += list(db2.find({"app_id": {"$all": [request.app_id] } }).limit((request.max_results - len(results))))
+			
+        if len(results) < request.max_results:
+            results += list(db3.find({"app_id": {"$all": [request.app_id] } }).limit((request.max_results - len(results))))
 			
         results = [review_by_id(review) for review in results]
         return ReviewDataResponse(reviews = results)

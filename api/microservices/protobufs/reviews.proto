@@ -21,6 +21,33 @@ message ReviewsByGameRequest {
 	int32 max_results = 2;
 }
 
+message UpdateReviewByIdRequest {
+	string review_id = 1;
+	string review = 2;
+	string recommended = 3;
+}
+
+message UpdateHelpfulOnReviewByIdRequest {
+	string review_id = 1;
+	string votes_helpful = 2; 
+}
+
+message ReviewsByLanguageRequest {
+	string language = 1;
+	int32 max_results = 2;
+}
+
+message ReviewsByUserIdRequest {
+	string author_steam_id = 1;
+	int32 max_results = 2;
+}
+
+message ReviewsByHelpfulRequest {
+	string votes_helpful = 1;
+	int32 max_results = 2;
+}
+
+
 
 // ######################
 // ##### RESPONSES ###### 
@@ -42,6 +69,11 @@ message ReviewDataResponse {
     repeated ReviewData reviews = 1;
 }
 
+message DeleteReviewResponse {
+	bool status = 1;
+}
+
+
 
 // ######################
 // ##### SERVICES ###### 
@@ -51,4 +83,10 @@ message ReviewDataResponse {
 service Reviews {
     rpc GetReview (ReviewByIdRequest) returns (ReviewData);
 	rpc GetGameReviews (ReviewsByGameRequest) returns (ReviewDataResponse);
+	rpc PutReview (UpdateReviewByIdRequest) returns (ReviewData);
+	rpc DeleteReview (ReviewByIdRequest) returns (DeleteReviewResponse);
+	rpc PutHelpfulReview (UpdateHelpfulOnReviewByIdRequest) returns (ReviewData);
+	rpc GetReviewsByLanguage (ReviewsByLanguageRequest) returns (ReviewDataResponse);
+	rpc GetReviewsByUser (ReviewsByUserIdRequest) returns (ReviewDataResponse);
+	rpc GetReviewsByHelpful (ReviewsByHelpfulRequest) returns (ReviewDataResponse);
 }

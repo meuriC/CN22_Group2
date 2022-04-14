@@ -29,6 +29,36 @@ class ReviewsStub(object):
                 request_serializer=reviews__pb2.ReviewsByGameRequest.SerializeToString,
                 response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
                 )
+        self.PutReview = channel.unary_unary(
+                '/Reviews/PutReview',
+                request_serializer=reviews__pb2.UpdateReviewByIdRequest.SerializeToString,
+                response_deserializer=reviews__pb2.ReviewData.FromString,
+                )
+        self.DeleteReview = channel.unary_unary(
+                '/Reviews/DeleteReview',
+                request_serializer=reviews__pb2.ReviewByIdRequest.SerializeToString,
+                response_deserializer=reviews__pb2.DeleteReviewResponse.FromString,
+                )
+        self.PutHelpfulReview = channel.unary_unary(
+                '/Reviews/PutHelpfulReview',
+                request_serializer=reviews__pb2.UpdateHelpfulOnReviewByIdRequest.SerializeToString,
+                response_deserializer=reviews__pb2.ReviewData.FromString,
+                )
+        self.GetReviewsByLanguage = channel.unary_unary(
+                '/Reviews/GetReviewsByLanguage',
+                request_serializer=reviews__pb2.ReviewsByLanguageRequest.SerializeToString,
+                response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
+                )
+        self.GetReviewsByUser = channel.unary_unary(
+                '/Reviews/GetReviewsByUser',
+                request_serializer=reviews__pb2.ReviewsByUserIdRequest.SerializeToString,
+                response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
+                )
+        self.GetReviewsByHelpful = channel.unary_unary(
+                '/Reviews/GetReviewsByHelpful',
+                request_serializer=reviews__pb2.ReviewsByHelpfulRequest.SerializeToString,
+                response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
+                )
 
 
 class ReviewsServicer(object):
@@ -51,6 +81,42 @@ class ReviewsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PutReview(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteReview(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PutHelpfulReview(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetReviewsByLanguage(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetReviewsByUser(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetReviewsByHelpful(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ReviewsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -62,6 +128,36 @@ def add_ReviewsServicer_to_server(servicer, server):
             'GetGameReviews': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGameReviews,
                     request_deserializer=reviews__pb2.ReviewsByGameRequest.FromString,
+                    response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
+            ),
+            'PutReview': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutReview,
+                    request_deserializer=reviews__pb2.UpdateReviewByIdRequest.FromString,
+                    response_serializer=reviews__pb2.ReviewData.SerializeToString,
+            ),
+            'DeleteReview': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteReview,
+                    request_deserializer=reviews__pb2.ReviewByIdRequest.FromString,
+                    response_serializer=reviews__pb2.DeleteReviewResponse.SerializeToString,
+            ),
+            'PutHelpfulReview': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutHelpfulReview,
+                    request_deserializer=reviews__pb2.UpdateHelpfulOnReviewByIdRequest.FromString,
+                    response_serializer=reviews__pb2.ReviewData.SerializeToString,
+            ),
+            'GetReviewsByLanguage': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetReviewsByLanguage,
+                    request_deserializer=reviews__pb2.ReviewsByLanguageRequest.FromString,
+                    response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
+            ),
+            'GetReviewsByUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetReviewsByUser,
+                    request_deserializer=reviews__pb2.ReviewsByUserIdRequest.FromString,
+                    response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
+            ),
+            'GetReviewsByHelpful': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetReviewsByHelpful,
+                    request_deserializer=reviews__pb2.ReviewsByHelpfulRequest.FromString,
                     response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
             ),
     }
@@ -109,6 +205,108 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/GetGameReviews',
             reviews__pb2.ReviewsByGameRequest.SerializeToString,
+            reviews__pb2.ReviewDataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutReview(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reviews/PutReview',
+            reviews__pb2.UpdateReviewByIdRequest.SerializeToString,
+            reviews__pb2.ReviewData.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteReview(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reviews/DeleteReview',
+            reviews__pb2.ReviewByIdRequest.SerializeToString,
+            reviews__pb2.DeleteReviewResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutHelpfulReview(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reviews/PutHelpfulReview',
+            reviews__pb2.UpdateHelpfulOnReviewByIdRequest.SerializeToString,
+            reviews__pb2.ReviewData.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetReviewsByLanguage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reviews/GetReviewsByLanguage',
+            reviews__pb2.ReviewsByLanguageRequest.SerializeToString,
+            reviews__pb2.ReviewDataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetReviewsByUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reviews/GetReviewsByUser',
+            reviews__pb2.ReviewsByUserIdRequest.SerializeToString,
+            reviews__pb2.ReviewDataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetReviewsByHelpful(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reviews/GetReviewsByHelpful',
+            reviews__pb2.ReviewsByHelpfulRequest.SerializeToString,
             reviews__pb2.ReviewDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

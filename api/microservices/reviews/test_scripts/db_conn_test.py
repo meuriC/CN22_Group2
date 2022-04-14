@@ -1,6 +1,7 @@
 from bson.objectid import ObjectId  
 from pymongo import MongoClient
 import pymongo
+#import time
 
 def get_database():
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
@@ -19,7 +20,10 @@ if __name__ == "__main__":
     collection_name = dbname['reviews']
     #item_details = collection_name.find({"_id": ObjectId("62410a9b8b3c1792b732e1e0")}) # IT WORKS
     #item_details = collection_name.find({"review_id": "50463082"})  # IT WORKS
-    item_details = collection_name.find({"app_id": {"$all": ["883710"]} }).limit(3)  # IT WORKS
+    item_details = collection_name.find({"app_id": {"$all": ["883710"]} }).limit(3)  # IT WORKS    
+	
+    #epoch_time = int(time.time())
+    #print(epoch_time)
 	
     for item in item_details:
        print(item)

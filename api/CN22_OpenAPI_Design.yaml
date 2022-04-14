@@ -5,7 +5,7 @@ info:
   version: 1.0.0
   title: Steam Reviews API
   contact:
-    email: miguelescsilva@gmail.com
+    email: cngroup2@gmail.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -213,13 +213,13 @@ paths:
           description: invalid id, object invalid
         "404":
           description: id not found
-  /reviews/filter/{language}/{id}:
+  /reviews/filter/{language}:
     get:
       tags:
       - Reviews Service
-      summary: Get review by id, in the defined language
-      description: With this call you can get a specific review made in steam, in a specific language
-      operationId: getReviewByIdAndLanguage
+      summary: Get review by language
+      description: With this call you can get reviews made in steam, in a specific language
+      operationId: getReviewByLanguage
       produces:
       - application/json
       parameters:
@@ -227,10 +227,6 @@ paths:
         in: path
         required: true
         type: string
-      - name: id
-        in: path
-        required: true
-        type: integer
       responses:
         "200":
           description: search results for the specific review in the given language
@@ -282,14 +278,18 @@ paths:
               $ref: '#/definitions/ReviewsItem'
         "400":
           description: couldn´t find any helpful reviews
-  /reviews/:
+  /reviews/games/{id}:
     get:
       tags:
       - Reviews Service
       summary: Get all reviews of a game
       description: With this call you can get all reviews of a game
       operationId: getReviewByGame
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: integer
       responses:
         "200":
           description: search results for all the reviews with in a game
