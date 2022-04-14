@@ -24,7 +24,7 @@ db = db["games"]
 
 insert_list = []
 
-with open("api/databases/games/games.csv","r",encoding="ISO-8859-1") as f:
+with open("api/databases/games/games.csv","r") as f:
 
     reader = csv.reader(f)
     first_elem = True
