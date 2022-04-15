@@ -11,20 +11,46 @@ from users_pb2_grpc import UsersStub
 from steam_pb2 import *
 import steam_pb2_grpc
 
-#app = Flask(__name__)
+from pymongo import MongoClient
+from bson.objectid import ObjectId
 
 users_host = os.getenv("USERS_HOST", "localhost")
 users_channel = grpc.insecure_channel(f"{users_host}:50052")
 users_client = UsersStub(users_channel)
 
 
+"""from pymongo import MongoClient
+from bson.objectid import ObjectId
+
+db = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@users.lastb.mongodb.net/test")
+db = db['database']
+db = db['users']
+
+#app = Flask(__name__)
+
+"""
+
+def mostActive_users(result):
+    user = UserInfo(
+        user_name = result["user_name"],
+        num_reviews = result["num_reviews"],
+        num_games_owned = result["num_games_owned"],
+        steamid = result["steamid"]      
+    )
+    return user
 
 class SteamService(steam_pb2_grpc.SteamServicer):
     def ActiveUsers(self, request, context):
+        db = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@users.lastb.mongodb.net/test")
+        db = db['database']
+        db = db['users']
+        #active_users_request = ActiveUsersRequest(request.max_results)
+        #results = users_client.GetUsers(active_users_request).users
+        results = list(db.find().sort("num_reviews", -1).limit(request.max_results))
+        results = [mostActive_users(user) for user in results]
         
-        active_users_request = ActiveUsersRequest(request.max_results)
-        results = users_client.GetUsers(active_users_request).users
-        return ActiveUsersResponse(results)
+        return ActiveUsersResponse(user = results)
+ 
    
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]

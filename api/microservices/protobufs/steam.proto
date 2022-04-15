@@ -11,6 +11,13 @@ message ActiveUsersRequest {
 	int32 max_results = 1;
 }
 
+message UserInfo {
+    string user_name = 1;
+    int32 num_reviews = 2;
+    int32 num_games_owned = 3;
+    string steamid = 4;
+}
+
 // ######################
 // ###### RESPONSES ###### 
 // ######################

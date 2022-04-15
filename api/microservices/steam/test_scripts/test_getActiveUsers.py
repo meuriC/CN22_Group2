@@ -1,5 +1,7 @@
 import grpc
 import sys
+import os
+
 sys.path.append('../')
 
 #sys.path.insert(0, '../../users')
@@ -12,7 +14,8 @@ from users_pb2 import *
 from steam_pb2 import *
 from steam_pb2_grpc import SteamStub
 
-channel = grpc.insecure_channel("localhost:50050")
+host = os.getenv("STEAM_HOST", "localhost")
+channel = grpc.insecure_channel(f"{host}:50050")
 client = SteamStub(channel)
 
 #user={"user_nick_name": "<built-in function new>", "num_reviews": 47, "num_games_owned": 887},
