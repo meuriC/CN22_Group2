@@ -6,6 +6,7 @@ from grpc_interceptor.exceptions import NotFound
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
+import time
 import grpc
 import pymongo  
 
@@ -112,6 +113,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
 
             database.update_one({"review_id": request.review_id}, {"$set": {"review": request.review}})
             database.update_one({"review_id": request.review_id}, {"$set": {"recommended": request.recommended}})
+            database.update_one({"review_id": request.review_id}, {"$set": {"timestamp_updated": str(int(time.time()))}})
             results = list(database.find({"review_id": request.review_id}))
             return review_by_id(results[0])
         except:
