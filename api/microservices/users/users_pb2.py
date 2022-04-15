@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0busers.proto\"\x1c\n\tIdRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"$\n\x0fUsernameRequest\x12\x11\n\tuser_name\x18\x01 \x01(\t\"&\n\x11\x43reateUserRequest\x12\x11\n\tuser_name\x18\x01 \x01(\t\"%\n\x0fGetUsersRequest\x12\x12\n\nmax_result\x18\x01 \x01(\x05\"f\n\x08UserData\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x18\n\x10user_num_reviews\x18\x02 \x01(\x05\x12\x1c\n\x14user_num_games_owned\x18\x03 \x01(\x05\x12\x0f\n\x07user_id\x18\x04 \x01(\t\")\n\rUsersDataList\x12\x18\n\x05users\x18\x01 \x03(\x0b\x32\t.UserData\"\x84\x02\n\x12\x43reateUserResponse\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x1c\n\x14user_num_games_owned\x18\x03 \x01(\x05\x12\x18\n\x10user_num_reviews\x18\x04 \x01(\x05\x12\x1d\n\x15user_playtime_forever\x18\x05 \x01(\x05\x12$\n\x1cuser_playtime_last_two_weeks\x18\x06 \x01(\x05\x12\x1f\n\x17user_playtime_at_review\x18\x07 \x01(\x05\x12\x1a\n\x12\x61uthor_last_played\x18\x08 \x01(\x05\x12\x10\n\x08user_pwd\x18\t \x01(\t\"#\n\x10\x44\x65letionResponse\x12\x0f\n\x07\x64\x65leted\x18\x01 \x01(\x08\x32\xb2\x02\n\x05Users\x12$\n\x0bGetUserById\x12\n.IdRequest\x1a\t.UserData\x12\x30\n\x11GetUserByUsername\x12\x10.UsernameRequest\x1a\t.UserData\x12\x35\n\nCreateUser\x12\x12.CreateUserRequest\x1a\x13.CreateUserResponse\x12,\n\x08GetUsers\x12\x10.GetUsersRequest\x1a\x0e.UsersDataList\x12;\n\x14\x44\x65leteUserByUsername\x12\x10.UsernameRequest\x1a\x11.DeletionResponse\x12/\n\x0e\x44\x65leteUserById\x12\n.IdRequest\x1a\x11.DeletionResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0busers.proto\"\x1c\n\tIdRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"$\n\x0fUsernameRequest\x12\x11\n\tuser_name\x18\x01 \x01(\t\"&\n\x11\x43reateUserRequest\x12\x11\n\tuser_name\x18\x01 \x01(\t\"%\n\x0fGetUsersRequest\x12\x12\n\nmax_result\x18\x01 \x01(\x05\"[\n\x13\x43reateReviewRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x0e\n\x06review\x18\x02 \x01(\t\x12\x13\n\x0brecommended\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\"f\n\x08UserData\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x18\n\x10user_num_reviews\x18\x02 \x01(\x05\x12\x1c\n\x14user_num_games_owned\x18\x03 \x01(\x05\x12\x0f\n\x07user_id\x18\x04 \x01(\t\")\n\rUsersDataList\x12\x18\n\x05users\x18\x01 \x03(\x0b\x32\t.UserData\"\x84\x02\n\x12\x43reateUserResponse\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x1c\n\x14user_num_games_owned\x18\x03 \x01(\x05\x12\x18\n\x10user_num_reviews\x18\x04 \x01(\x05\x12\x1d\n\x15user_playtime_forever\x18\x05 \x01(\x05\x12$\n\x1cuser_playtime_last_two_weeks\x18\x06 \x01(\x05\x12\x1f\n\x17user_playtime_at_review\x18\x07 \x01(\x05\x12\x1a\n\x12\x61uthor_last_played\x18\x08 \x01(\x05\x12\x10\n\x08user_pwd\x18\t \x01(\t\"#\n\x10\x44\x65letionResponse\x12\x0f\n\x07\x64\x65leted\x18\x01 \x01(\x08\"\xcc\x01\n\nReviewData\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x11\n\treview_id\x18\x02 \x01(\t\x12\x10\n\x08language\x18\x03 \x01(\t\x12\x0e\n\x06review\x18\x04 \x01(\t\x12\x19\n\x11timestamp_created\x18\x05 \x01(\t\x12\x19\n\x11timestamp_updated\x18\x06 \x01(\t\x12\x13\n\x0brecommended\x18\x07 \x01(\t\x12\x15\n\rvotes_helpful\x18\x08 \x01(\t\x12\x17\n\x0f\x61uthor_steam_id\x18\t \x01(\t2\xe3\x02\n\x05Users\x12$\n\x0bGetUserById\x12\n.IdRequest\x1a\t.UserData\x12\x30\n\x11GetUserByUsername\x12\x10.UsernameRequest\x1a\t.UserData\x12\x35\n\nCreateUser\x12\x12.CreateUserRequest\x1a\x13.CreateUserResponse\x12,\n\x08GetUsers\x12\x10.GetUsersRequest\x1a\x0e.UsersDataList\x12;\n\x14\x44\x65leteUserByUsername\x12\x10.UsernameRequest\x1a\x11.DeletionResponse\x12/\n\x0e\x44\x65leteUserById\x12\n.IdRequest\x1a\x11.DeletionResponse\x12/\n\nPostReview\x12\x14.CreateReviewRequest\x1a\x0b.ReviewDatab\x06proto3')
 
 
 
@@ -22,10 +22,12 @@ _IDREQUEST = DESCRIPTOR.message_types_by_name['IdRequest']
 _USERNAMEREQUEST = DESCRIPTOR.message_types_by_name['UsernameRequest']
 _CREATEUSERREQUEST = DESCRIPTOR.message_types_by_name['CreateUserRequest']
 _GETUSERSREQUEST = DESCRIPTOR.message_types_by_name['GetUsersRequest']
+_CREATEREVIEWREQUEST = DESCRIPTOR.message_types_by_name['CreateReviewRequest']
 _USERDATA = DESCRIPTOR.message_types_by_name['UserData']
 _USERSDATALIST = DESCRIPTOR.message_types_by_name['UsersDataList']
 _CREATEUSERRESPONSE = DESCRIPTOR.message_types_by_name['CreateUserResponse']
 _DELETIONRESPONSE = DESCRIPTOR.message_types_by_name['DeletionResponse']
+_REVIEWDATA = DESCRIPTOR.message_types_by_name['ReviewData']
 IdRequest = _reflection.GeneratedProtocolMessageType('IdRequest', (_message.Message,), {
   'DESCRIPTOR' : _IDREQUEST,
   '__module__' : 'users_pb2'
@@ -53,6 +55,13 @@ GetUsersRequest = _reflection.GeneratedProtocolMessageType('GetUsersRequest', (_
   # @@protoc_insertion_point(class_scope:GetUsersRequest)
   })
 _sym_db.RegisterMessage(GetUsersRequest)
+
+CreateReviewRequest = _reflection.GeneratedProtocolMessageType('CreateReviewRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CREATEREVIEWREQUEST,
+  '__module__' : 'users_pb2'
+  # @@protoc_insertion_point(class_scope:CreateReviewRequest)
+  })
+_sym_db.RegisterMessage(CreateReviewRequest)
 
 UserData = _reflection.GeneratedProtocolMessageType('UserData', (_message.Message,), {
   'DESCRIPTOR' : _USERDATA,
@@ -82,6 +91,13 @@ DeletionResponse = _reflection.GeneratedProtocolMessageType('DeletionResponse', 
   })
 _sym_db.RegisterMessage(DeletionResponse)
 
+ReviewData = _reflection.GeneratedProtocolMessageType('ReviewData', (_message.Message,), {
+  'DESCRIPTOR' : _REVIEWDATA,
+  '__module__' : 'users_pb2'
+  # @@protoc_insertion_point(class_scope:ReviewData)
+  })
+_sym_db.RegisterMessage(ReviewData)
+
 _USERS = DESCRIPTOR.services_by_name['Users']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -94,14 +110,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CREATEUSERREQUEST._serialized_end=121
   _GETUSERSREQUEST._serialized_start=123
   _GETUSERSREQUEST._serialized_end=160
-  _USERDATA._serialized_start=162
-  _USERDATA._serialized_end=264
-  _USERSDATALIST._serialized_start=266
-  _USERSDATALIST._serialized_end=307
-  _CREATEUSERRESPONSE._serialized_start=310
-  _CREATEUSERRESPONSE._serialized_end=570
-  _DELETIONRESPONSE._serialized_start=572
-  _DELETIONRESPONSE._serialized_end=607
-  _USERS._serialized_start=610
-  _USERS._serialized_end=916
+  _CREATEREVIEWREQUEST._serialized_start=162
+  _CREATEREVIEWREQUEST._serialized_end=253
+  _USERDATA._serialized_start=255
+  _USERDATA._serialized_end=357
+  _USERSDATALIST._serialized_start=359
+  _USERSDATALIST._serialized_end=400
+  _CREATEUSERRESPONSE._serialized_start=403
+  _CREATEUSERRESPONSE._serialized_end=663
+  _DELETIONRESPONSE._serialized_start=665
+  _DELETIONRESPONSE._serialized_end=700
+  _REVIEWDATA._serialized_start=703
+  _REVIEWDATA._serialized_end=907
+  _USERS._serialized_start=910
+  _USERS._serialized_end=1265
 # @@protoc_insertion_point(module_scope)

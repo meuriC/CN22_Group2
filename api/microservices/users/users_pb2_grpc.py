@@ -48,6 +48,11 @@ class UsersStub(object):
                 request_serializer=users__pb2.IdRequest.SerializeToString,
                 response_deserializer=users__pb2.DeletionResponse.FromString,
                 )
+        self.PostReview = channel.unary_unary(
+                '/Users/PostReview',
+                request_serializer=users__pb2.CreateReviewRequest.SerializeToString,
+                response_deserializer=users__pb2.ReviewData.FromString,
+                )
 
 
 class UsersServicer(object):
@@ -93,6 +98,12 @@ class UsersServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostReview(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_UsersServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -125,6 +136,11 @@ def add_UsersServicer_to_server(servicer, server):
                     servicer.DeleteUserById,
                     request_deserializer=users__pb2.IdRequest.FromString,
                     response_serializer=users__pb2.DeletionResponse.SerializeToString,
+            ),
+            'PostReview': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostReview,
+                    request_deserializer=users__pb2.CreateReviewRequest.FromString,
+                    response_serializer=users__pb2.ReviewData.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -239,5 +255,22 @@ class Users(object):
         return grpc.experimental.unary_unary(request, target, '/Users/DeleteUserById',
             users__pb2.IdRequest.SerializeToString,
             users__pb2.DeletionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostReview(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Users/PostReview',
+            users__pb2.CreateReviewRequest.SerializeToString,
+            users__pb2.ReviewData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

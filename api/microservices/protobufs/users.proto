@@ -4,6 +4,7 @@ syntax = "proto3";
 // ######################
 // ###### REQUESTS ###### 
 // ######################
+
 message IdRequest {
     string user_id = 1;
 }
@@ -19,6 +20,16 @@ message CreateUserRequest{
 message GetUsersRequest{
     int32 max_result = 1;
 }
+
+message CreateReviewRequest { 
+	string app_id = 1;
+	string review = 2;
+	string recommended = 3;
+	string user_id = 4;
+}
+
+
+
 
 // ######################
 // ##### RESPONSES ###### 
@@ -50,6 +61,19 @@ message DeletionResponse{
     bool deleted = 1;
 }
 
+message ReviewData {
+	string app_id = 1;
+	string review_id = 2;
+	string language = 3;
+	string review = 4;
+	string timestamp_created = 5;
+	string timestamp_updated = 6;
+	string recommended = 7;
+	string votes_helpful = 8;
+	string author_steam_id = 9;
+} 
+
+
 
 // ######################
 // ##### SERVICES #######
@@ -62,4 +86,5 @@ service Users {
     rpc GetUsers (GetUsersRequest) returns (UsersDataList);
     rpc DeleteUserByUsername (UsernameRequest) returns (DeletionResponse);
     rpc DeleteUserById (IdRequest) returns (DeletionResponse);
+	rpc PostReview (CreateReviewRequest) returns (ReviewData);
 }

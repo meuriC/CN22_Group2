@@ -2,6 +2,7 @@
 from concurrent import futures
 
 import grpc
+import time
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
 
@@ -19,7 +20,8 @@ from users_pb2 import (
     UserData,
     CreateUserResponse,
     UsersDataList,
-    DeletionResponse
+    DeletionResponse, 
+	ReviewData
 )
 
 def marshalUserdbToUserService(result):
@@ -50,6 +52,20 @@ def delete_user(result):
         deleted = True
     )
     return deleted
+	
+def create_review(result):
+    review = ReviewData(
+        app_id = result["app_id"],
+        review_id = result["review_id"],
+        language = result["language"],
+        review = result["review"],
+        timestamp_created = result["timestamp_created"],
+        timestamp_updated = result["timestamp_updated"],
+        recommended = result["recommended"],
+        votes_helpful = result["votes_helpful"],
+        author_steam_id = result["author_steamid"]
+	)
+    return review
 
 class UserService(users_pb2_grpc.UsersServicer):
     def GetUserById(self, request, context):
@@ -93,6 +109,27 @@ class UserService(users_pb2_grpc.UsersServicer):
         for user in results:
             usersList.append(marshalUserdbToUserService(user))
         return UsersDataList(users=usersList)
+		
+    def PostReview(self, request, context):
+        thirdClient = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@reviews3.keyxx.mongodb.net/test")
+        db3 = thirdClient["database"]
+        db3 = db3["reviews"]
+		
+        findUser = db.find({"steamid": request.user_id})
+        results = db3.insert({
+             "app_id": request.app_id,
+             "review_id": "0",			 
+             "language": findUser[0]["language"],
+             "review": request.review, 
+             "timestamp_created": str(int(time.time())),
+             "timestamp_updated": str(int(time.time())),
+             "recommended": request.recommended,
+             "votes_helpful": "0",
+		     "author_steamid": request.user_id})
+
+        resultsFinal = db3.find({"_id": results})
+        db3.update_one({"_id": resultsFinal[0]["_id"]},{"$set": {"review_id": str(resultsFinal[0]["_id"])}})
+        return create_review(resultsFinal[0])
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
