@@ -115,7 +115,7 @@ class UserService(users_pb2_grpc.UsersServicer):
         db3 = thirdClient["database"]
         db3 = db3["reviews"]
 		
-        findUser = db.find({"steamid": request.user_id})
+        findUser = db.find({"user_id": request.user_id})
         results = db3.insert({
              "app_id": request.app_id,
              "review_id": "0",			 
