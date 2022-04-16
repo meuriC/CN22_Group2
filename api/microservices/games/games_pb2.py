@@ -14,10 +14,13 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bgames.proto\"V\n\tGamesData\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"2\n\x1bGetMostReviewedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"5\n\x1eGetMostRecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"\x1d\n\x0fGameByIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x11GameByNameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"!\n\x11\x43reateGameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"-\n\x11GamesDataResponse\x12\x18\n\x04game\x18\x01 \x03(\x0b\x32\n.GamesData\"#\n\x10\x44\x65letionResponse\x12\x0f\n\x07\x64\x65leted\x18\x01 \x01(\x08\x32\xd2\x02\n\x05Games\x12<\n\x08GetGames\x12\x1c.GetMostReviewedGamesRequest\x1a\x12.GamesDataResponse\x12J\n\x13GetRecommendedGames\x12\x1f.GetMostRecommendedGamesRequest\x1a\x12.GamesDataResponse\x12(\n\x08GameByID\x12\x10.GameByIdRequest\x1a\n.GamesData\x12,\n\nGameByName\x12\x12.GameByNameRequest\x1a\n.GamesData\x12,\n\nCreateGame\x12\x12.CreateGameRequest\x1a\n.GamesData\x12\x39\n\x10\x44\x65leteGameByName\x12\x12.GameByNameRequest\x1a\x11.DeletionResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bgames.proto\"9\n\x12GameReviewsRequest\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x13\n\x0bmax_results\x18\x02 \x01(\x05\"\xbc\x01\n\nReviewInfo\x12\x11\n\treview_id\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x0e\n\x06review\x18\x03 \x01(\t\x12\x19\n\x11timestamp_created\x18\x04 \x01(\t\x12\x19\n\x11timestamp_updated\x18\x05 \x01(\t\x12\x13\n\x0brecommended\x18\x06 \x01(\t\x12\x15\n\rvotes_helpful\x18\x07 \x01(\t\x12\x17\n\x0f\x61uthor_steam_id\x18\x08 \x01(\t\"2\n\x12ReviewInfoResponse\x12\x1c\n\x07reviews\x18\x01 \x03(\x0b\x32\x0b.ReviewInfo\"V\n\tGamesData\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"2\n\x1bGetMostReviewedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"5\n\x1eGetMostRecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"\x1d\n\x0fGameByIdRequest\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x11GameByNameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"!\n\x11\x43reateGameRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"-\n\x11GamesDataResponse\x12\x18\n\x04game\x18\x01 \x03(\x0b\x32\n.GamesData\"#\n\x10\x44\x65letionResponse\x12\x0f\n\x07\x64\x65leted\x18\x01 \x01(\x08\x32\x8b\x03\n\x05Games\x12\x37\n\x0bGameReviews\x12\x13.GameReviewsRequest\x1a\x13.ReviewInfoResponse\x12<\n\x08GetGames\x12\x1c.GetMostReviewedGamesRequest\x1a\x12.GamesDataResponse\x12J\n\x13GetRecommendedGames\x12\x1f.GetMostRecommendedGamesRequest\x1a\x12.GamesDataResponse\x12(\n\x08GameByID\x12\x10.GameByIdRequest\x1a\n.GamesData\x12,\n\nGameByName\x12\x12.GameByNameRequest\x1a\n.GamesData\x12,\n\nCreateGame\x12\x12.CreateGameRequest\x1a\n.GamesData\x12\x39\n\x10\x44\x65leteGameByName\x12\x12.GameByNameRequest\x1a\x11.DeletionResponseb\x06proto3')
 
 
 
+_GAMEREVIEWSREQUEST = DESCRIPTOR.message_types_by_name['GameReviewsRequest']
+_REVIEWINFO = DESCRIPTOR.message_types_by_name['ReviewInfo']
+_REVIEWINFORESPONSE = DESCRIPTOR.message_types_by_name['ReviewInfoResponse']
 _GAMESDATA = DESCRIPTOR.message_types_by_name['GamesData']
 _GETMOSTREVIEWEDGAMESREQUEST = DESCRIPTOR.message_types_by_name['GetMostReviewedGamesRequest']
 _GETMOSTRECOMMENDEDGAMESREQUEST = DESCRIPTOR.message_types_by_name['GetMostRecommendedGamesRequest']
@@ -26,6 +29,27 @@ _GAMEBYNAMEREQUEST = DESCRIPTOR.message_types_by_name['GameByNameRequest']
 _CREATEGAMEREQUEST = DESCRIPTOR.message_types_by_name['CreateGameRequest']
 _GAMESDATARESPONSE = DESCRIPTOR.message_types_by_name['GamesDataResponse']
 _DELETIONRESPONSE = DESCRIPTOR.message_types_by_name['DeletionResponse']
+GameReviewsRequest = _reflection.GeneratedProtocolMessageType('GameReviewsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GAMEREVIEWSREQUEST,
+  '__module__' : 'games_pb2'
+  # @@protoc_insertion_point(class_scope:GameReviewsRequest)
+  })
+_sym_db.RegisterMessage(GameReviewsRequest)
+
+ReviewInfo = _reflection.GeneratedProtocolMessageType('ReviewInfo', (_message.Message,), {
+  'DESCRIPTOR' : _REVIEWINFO,
+  '__module__' : 'games_pb2'
+  # @@protoc_insertion_point(class_scope:ReviewInfo)
+  })
+_sym_db.RegisterMessage(ReviewInfo)
+
+ReviewInfoResponse = _reflection.GeneratedProtocolMessageType('ReviewInfoResponse', (_message.Message,), {
+  'DESCRIPTOR' : _REVIEWINFORESPONSE,
+  '__module__' : 'games_pb2'
+  # @@protoc_insertion_point(class_scope:ReviewInfoResponse)
+  })
+_sym_db.RegisterMessage(ReviewInfoResponse)
+
 GamesData = _reflection.GeneratedProtocolMessageType('GamesData', (_message.Message,), {
   'DESCRIPTOR' : _GAMESDATA,
   '__module__' : 'games_pb2'
@@ -86,22 +110,28 @@ _GAMES = DESCRIPTOR.services_by_name['Games']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _GAMESDATA._serialized_start=15
-  _GAMESDATA._serialized_end=101
-  _GETMOSTREVIEWEDGAMESREQUEST._serialized_start=103
-  _GETMOSTREVIEWEDGAMESREQUEST._serialized_end=153
-  _GETMOSTRECOMMENDEDGAMESREQUEST._serialized_start=155
-  _GETMOSTRECOMMENDEDGAMESREQUEST._serialized_end=208
-  _GAMEBYIDREQUEST._serialized_start=210
-  _GAMEBYIDREQUEST._serialized_end=239
-  _GAMEBYNAMEREQUEST._serialized_start=241
-  _GAMEBYNAMEREQUEST._serialized_end=274
-  _CREATEGAMEREQUEST._serialized_start=276
-  _CREATEGAMEREQUEST._serialized_end=309
-  _GAMESDATARESPONSE._serialized_start=311
-  _GAMESDATARESPONSE._serialized_end=356
-  _DELETIONRESPONSE._serialized_start=358
-  _DELETIONRESPONSE._serialized_end=393
-  _GAMES._serialized_start=396
-  _GAMES._serialized_end=734
+  _GAMEREVIEWSREQUEST._serialized_start=15
+  _GAMEREVIEWSREQUEST._serialized_end=72
+  _REVIEWINFO._serialized_start=75
+  _REVIEWINFO._serialized_end=263
+  _REVIEWINFORESPONSE._serialized_start=265
+  _REVIEWINFORESPONSE._serialized_end=315
+  _GAMESDATA._serialized_start=317
+  _GAMESDATA._serialized_end=403
+  _GETMOSTREVIEWEDGAMESREQUEST._serialized_start=405
+  _GETMOSTREVIEWEDGAMESREQUEST._serialized_end=455
+  _GETMOSTRECOMMENDEDGAMESREQUEST._serialized_start=457
+  _GETMOSTRECOMMENDEDGAMESREQUEST._serialized_end=510
+  _GAMEBYIDREQUEST._serialized_start=512
+  _GAMEBYIDREQUEST._serialized_end=541
+  _GAMEBYNAMEREQUEST._serialized_start=543
+  _GAMEBYNAMEREQUEST._serialized_end=576
+  _CREATEGAMEREQUEST._serialized_start=578
+  _CREATEGAMEREQUEST._serialized_end=611
+  _GAMESDATARESPONSE._serialized_start=613
+  _GAMESDATARESPONSE._serialized_end=658
+  _DELETIONRESPONSE._serialized_start=660
+  _DELETIONRESPONSE._serialized_end=695
+  _GAMES._serialized_start=698
+  _GAMES._serialized_end=1093
 # @@protoc_insertion_point(module_scope)

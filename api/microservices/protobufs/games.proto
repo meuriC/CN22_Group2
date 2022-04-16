@@ -1,5 +1,26 @@
 syntax = "proto3";
 
+
+message GameReviewsRequest {
+    string app_id = 1;
+	int32 max_results = 2;
+}
+
+message ReviewInfo {
+	string review_id = 1;
+	string language = 2;
+	string review = 3;
+	string timestamp_created = 4;
+	string timestamp_updated = 5;
+	string recommended = 6;
+	string votes_helpful = 7;
+	string author_steam_id = 8;
+}
+
+message ReviewInfoResponse {
+    repeated ReviewInfo reviews = 1;
+}
+
 message GamesData {
 	string id = 1;
 	string name = 2;
@@ -42,6 +63,7 @@ message DeletionResponse{
 }
 
 service Games {
+	rpc GameReviews (GameReviewsRequest) returns (ReviewInfoResponse);
     rpc GetGames (GetMostReviewedGamesRequest) returns (GamesDataResponse);
     rpc GetRecommendedGames (GetMostRecommendedGamesRequest) returns (GamesDataResponse);
     rpc GameByID (GameByIdRequest) returns (GamesData);

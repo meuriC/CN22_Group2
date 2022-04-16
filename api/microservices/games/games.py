@@ -1,4 +1,5 @@
 from concurrent import futures
+import os
 
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
@@ -9,23 +10,20 @@ from bson.objectid import ObjectId
 import grpc
 import pymongo
 
-# connect to MongoDB
+from games_pb2 import *
+import games_pb2_grpc
 
+from reviews_pb2 import *
+from reviews_pb2_grpc import ReviewsStub
+
+reviews_host = os.getenv("REVIEWS_HOST", "localhost")
+reviews_channel = grpc.insecure_channel(f"{reviews_host}:50053")
+reviews_client = ReviewsStub(reviews_channel)
+
+# connect to MongoDB
 client = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@games.2gyca.mongodb.net/test")
 db = client["database"]
 db = db["games"]
-
-from games_pb2 import (
-    GamesData,
-    GamesDataResponse,
-    GameByIdRequest,
-    GameByNameRequest,
-    GetMostReviewedGamesRequest,
-    GetMostRecommendedGamesRequest, 
-    DeletionResponse
-)
-import games_pb2_grpc
-
 
 def games_response(result):
 
@@ -40,11 +38,17 @@ def games_response(result):
 
 def delete_game(result):
     deleted = DeletionResponse(deleted = True)
-        
     return deleted
 
 
 class GamesService(games_pb2_grpc.GamesServicer):
+    def GameReviews(self, request, context):
+        rev_request = ReviewsByGameRequest(app_id = request.app_id, max_results = request.max_results)
+        result = reviews_client.GetGameReviews(rev_request).reviews
+		
+        finalResult = [ReviewInfo(review_id=r.review_id, language=r.language, review=r.review, timestamp_created=r.timestamp_created, timestamp_updated=r.timestamp_updated, recommended=r.recommended, votes_helpful=r.votes_helpful, author_steam_id=r.author_steam_id) for r in result]
+		
+        return ReviewInfoResponse(reviews = finalResult)
 
     def GetGames(self, request, context):
         results = list(db.find().sort("reviews_number", -1).limit(request.max_results))

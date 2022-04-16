@@ -14,6 +14,11 @@ class GamesStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.GameReviews = channel.unary_unary(
+                '/Games/GameReviews',
+                request_serializer=games__pb2.GameReviewsRequest.SerializeToString,
+                response_deserializer=games__pb2.ReviewInfoResponse.FromString,
+                )
         self.GetGames = channel.unary_unary(
                 '/Games/GetGames',
                 request_serializer=games__pb2.GetMostReviewedGamesRequest.SerializeToString,
@@ -48,6 +53,12 @@ class GamesStub(object):
 
 class GamesServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def GameReviews(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def GetGames(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -88,6 +99,11 @@ class GamesServicer(object):
 
 def add_GamesServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'GameReviews': grpc.unary_unary_rpc_method_handler(
+                    servicer.GameReviews,
+                    request_deserializer=games__pb2.GameReviewsRequest.FromString,
+                    response_serializer=games__pb2.ReviewInfoResponse.SerializeToString,
+            ),
             'GetGames': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGames,
                     request_deserializer=games__pb2.GetMostReviewedGamesRequest.FromString,
@@ -127,6 +143,23 @@ def add_GamesServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class Games(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def GameReviews(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Games/GameReviews',
+            games__pb2.GameReviewsRequest.SerializeToString,
+            games__pb2.ReviewInfoResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetGames(request,
