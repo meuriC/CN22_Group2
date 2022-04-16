@@ -1,9 +1,49 @@
 syntax = "proto3";
 
 
+// ######################
+// ###### REQUESTS ###### 
+// ######################
+
+message GetMostReviewedGamesRequest {
+    int32 max_results = 1;
+}
+
+message GetMostRecommendedGamesRequest {
+    int32 max_results = 1;
+}
+
+message GameByIdRequest {
+    string id = 1;
+}
+
+message GameByNameRequest {
+    string name = 1;
+}
+
+message CreateGameRequest {
+    string name = 1;
+}
+
 message GameReviewsRequest {
     string app_id = 1;
 	int32 max_results = 2;
+}
+
+
+// #######################
+// ###### RESPONSES ###### 
+// #######################
+
+message GamesData {
+	string id = 1;
+	string name = 2;
+    int32 reviews_number = 3;
+    int32 recommend_count = 4;
+}
+
+message GamesDataResponse {
+    repeated GamesData game = 1;
 }
 
 message ReviewInfo {
@@ -21,46 +61,14 @@ message ReviewInfoResponse {
     repeated ReviewInfo reviews = 1;
 }
 
-message GamesData {
-	string id = 1;
-	string name = 2;
-    int32 reviews_number = 3;
-    int32 recommend_count = 4;
-	
-}
-
-message GetMostReviewedGamesRequest {
-    int32 max_results = 1;
-}
-
-message GetMostRecommendedGamesRequest {
-    int32 max_results = 1;
-}
-
-
-message GameByIdRequest {
-    string id = 1;
-}
-
-
-message GameByNameRequest {
-    string name = 1;
-}
-
-
-message CreateGameRequest {
-    string name = 1;
-}
-
-
-message GamesDataResponse {
-    repeated GamesData game = 1;
-}
-
-
 message DeletionResponse{
     bool deleted = 1;
 }
+
+
+// ######################
+// ###### SERVICES ###### 
+// ######################
 
 service Games {
 	rpc GameReviews (GameReviewsRequest) returns (ReviewInfoResponse);

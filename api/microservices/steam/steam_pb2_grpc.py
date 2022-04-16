@@ -18,10 +18,10 @@ class SteamStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ActiveUsers = channel.unary_unary(
-                '/Steam/ActiveUsers',
-                request_serializer=steam__pb2.ActiveUsersRequest.SerializeToString,
-                response_deserializer=steam__pb2.ActiveUsersResponse.FromString,
+        self.RecommendedGames = channel.unary_unary(
+                '/Steam/RecommendedGames',
+                request_serializer=steam__pb2.RecommendedGamesRequest.SerializeToString,
+                response_deserializer=steam__pb2.GamesInfoResponse.FromString,
                 )
 
 
@@ -32,7 +32,7 @@ class SteamServicer(object):
 
     """
 
-    def ActiveUsers(self, request, context):
+    def RecommendedGames(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -41,10 +41,10 @@ class SteamServicer(object):
 
 def add_SteamServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ActiveUsers': grpc.unary_unary_rpc_method_handler(
-                    servicer.ActiveUsers,
-                    request_deserializer=steam__pb2.ActiveUsersRequest.FromString,
-                    response_serializer=steam__pb2.ActiveUsersResponse.SerializeToString,
+            'RecommendedGames': grpc.unary_unary_rpc_method_handler(
+                    servicer.RecommendedGames,
+                    request_deserializer=steam__pb2.RecommendedGamesRequest.FromString,
+                    response_serializer=steam__pb2.GamesInfoResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -61,7 +61,7 @@ class Steam(object):
     """
 
     @staticmethod
-    def ActiveUsers(request,
+    def RecommendedGames(request,
             target,
             options=(),
             channel_credentials=None,
@@ -71,8 +71,8 @@ class Steam(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Steam/ActiveUsers',
-            steam__pb2.ActiveUsersRequest.SerializeToString,
-            steam__pb2.ActiveUsersResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Steam/RecommendedGames',
+            steam__pb2.RecommendedGamesRequest.SerializeToString,
+            steam__pb2.GamesInfoResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

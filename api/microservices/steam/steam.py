@@ -1,12 +1,11 @@
 from concurrent import futures
 import os
 
-from flask import Flask, render_template
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
 
-from users_pb2 import *
-from users_pb2_grpc import UsersStub
+from games_pb2 import *
+from games_pb2_grpc import GamesStub
 
 from steam_pb2 import *
 import steam_pb2_grpc
@@ -14,33 +13,22 @@ import steam_pb2_grpc
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-users_host = os.getenv("USERS_HOST", "localhost")
-users_channel = grpc.insecure_channel(f"{users_host}:50052")
-users_client = UsersStub(users_channel)
+games_host = os.getenv("GAMES_HOST", "localhost")
+games_channel = grpc.insecure_channel(f"{games_host}:50051")
+games_client = GamesStub(games_channel)
 
 
-"""from pymongo import MongoClient
-from bson.objectid import ObjectId
-
-db = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@users.lastb.mongodb.net/test")
-db = db['database']
-db = db['users']
-
-#app = Flask(__name__)
-
-"""
-
-def mostActive_users(result):
+"""def mostActive_users(result):
     user = UserInfo(
         user_name = result["user_name"],
         num_reviews = result["num_reviews"],
         num_games_owned = result["num_games_owned"],
         steamid = result["steamid"]      
     )
-    return user
+    return user"""
 
 class SteamService(steam_pb2_grpc.SteamServicer):
-    def ActiveUsers(self, request, context):
+    """def ActiveUsers(self, request, context):
         db = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@users.lastb.mongodb.net/test")
         db = db['database']
         db = db['users']
@@ -49,7 +37,13 @@ class SteamService(steam_pb2_grpc.SteamServicer):
         results = list(db.find().sort("num_reviews", -1).limit(request.max_results))
         results = [mostActive_users(user) for user in results]
         
-        return ActiveUsersResponse(user = results)
+        return ActiveUsersResponse(user = results)"""
+    def RecommendedGames(self, request, context):
+        game_request = GetMostRecommendedGamesRequest(max_results = request.max_results)
+        result = games_client.GetRecommendedGames(game_request).game
+		
+        finalResult = [GameInfo(id=r.id, name=r.name, reviews_number=r.reviews_number, recommend_count=r.recommend_count) for r in result]
+        return GamesInfoResponse(games = finalResult)
  
    
 def serve():
@@ -68,39 +62,4 @@ def serve():
 
 if __name__ == "__main__":
     serve()
-
-
-"""
-@app.route("/")
-def render_homepage():
-    users_request = ActiveUsersRequest(max_result=3)
-    users_response = users_client.GetUsers(users_request)
 	
-    return render_template(
-        "homepage.html",
-        users = users_response.users,
-    )
-"""
-
-"""from concurrent import futures
-import os
-
-import grpc
-from grpc_interceptor import ExceptionToStatusInterceptor
-
-import sys
-sys.path.insert(0, '../users')
-
-from users_pb2 import *
-from users_pb2_grpc import UsersStub
-
-sys.path.insert(0, '../')
-
-from steam_pb2 import *
-import steam_pb2_grpc
-
-users_host = os.getenv("USERS_HOST", "localhost")
-users_channel = grpc.insecure_channel(f"{users_host}:50052")
-users_client = UsersStub(users_channel)
-"""
-

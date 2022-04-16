@@ -1,29 +1,26 @@
 syntax = "proto3";
 
-import "users.proto";
-
 // ######################
 // ###### REQUESTS ###### 
 // ######################
 
-message ActiveUsersRequest {
-	//UserData user = 1;
-	int32 max_results = 1;
+message RecommendedGamesRequest {
+    int32 max_results = 1;
 }
 
-message UserInfo {
-    string user_name = 1;
-    int32 num_reviews = 2;
-    int32 num_games_owned = 3;
-    string steamid = 4;
-}
-
-// ######################
+// #######################
 // ###### RESPONSES ###### 
-// ######################
+// #######################
 
-message ActiveUsersResponse {
-	repeated UserData users = 1;
+message GameInfo {
+	string id = 1;
+	string name = 2;
+    int32 reviews_number = 3;
+    int32 recommend_count = 4;
+}
+
+message GamesInfoResponse {
+    repeated GameInfo games = 1;
 }
 
 // ######################
@@ -31,5 +28,5 @@ message ActiveUsersResponse {
 // ######################
 
 service Steam {
-	rpc ActiveUsers (ActiveUsersRequest) returns (ActiveUsersResponse);
+	rpc RecommendedGames (RecommendedGamesRequest) returns (GamesInfoResponse);
 }
