@@ -88,31 +88,6 @@ paths:
               $ref: '#/definitions/UserItem'
         "400":
           description: invalid input, object invalid
-  /reviews:
-      post:
-        tags:
-        - Reviews Service
-        summary: Creates a new Review
-        description: Creates a new review
-        operationId: createReview
-        consumes:
-        - application/json
-        produces:
-        - application/json
-        parameters:
-        - in: body
-          name: ReviewsItem
-          description: Review to create
-          required: false
-          schema:
-            $ref: '#/definitions/ReviewsItem'
-        responses:
-          "201":
-            description: item created
-          "400":
-            description: invalid input, object invalid
-          "409":
-            description: an existing item already exists
   /reviews/{id}:
     get:
       tags:
@@ -369,6 +344,39 @@ paths:
           description: Username not found
         "401":
           description: Unauthorized
+  /users/{username}/games/{id}/reviews:
+      post:
+        tags:
+        - Users Service
+        summary: Creates a new Review
+        description: Creates a new review
+        operationId: createReview
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: username
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: ReviewsItem
+          description: Review to create
+          required: false
+          schema:
+            $ref: '#/definitions/ReviewsItem'
+        responses:
+          "201":
+            description: item created
+          "400":
+            description: invalid input, object invalid
+          "409":
+            description: an existing item already exists
   /auth/register:
     put:
       tags:
