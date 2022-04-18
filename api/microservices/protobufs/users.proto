@@ -14,7 +14,8 @@ message UsernameRequest{
 }
 
 message CreateUserRequest{
-    string user_name = 1;
+    string user_language = 1;
+    string user_name = 2;    
 }
 
 message GetUsersRequest{
@@ -30,7 +31,6 @@ message CreateReviewRequest {
 
 
 
-
 // ######################
 // ##### RESPONSES ###### 
 // ######################
@@ -39,6 +39,7 @@ message UserData {
     int32 user_num_reviews = 2;
     int32 user_num_games_owned = 3;
     string user_id = 4;
+    string user_language = 5;
 }
 
 message UsersDataList {
@@ -46,18 +47,15 @@ message UsersDataList {
 }
 
 message CreateUserResponse{
-    string user_name = 1;
+    string user_language = 1;
     string user_id = 2;
     int32 user_num_games_owned = 3;
     int32 user_num_reviews = 4;
-    int32 user_playtime_forever = 5;
-    int32 user_playtime_last_two_weeks = 6;
-    int32 user_playtime_at_review = 7;
-    int32 author_last_played = 8;
-    string user_pwd = 9;
+    string user_name = 5;
+    string user_pwd = 6;
 }
 
-message DeletionResponse{
+message DeletionResponseUser{
     bool deleted = 1;
 }
 
@@ -84,7 +82,8 @@ service Users {
     rpc GetUserByUsername (UsernameRequest) returns (UserData);
     rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
     rpc GetUsers (GetUsersRequest) returns (UsersDataList);
-    rpc DeleteUserByUsername (UsernameRequest) returns (DeletionResponse);
-    rpc DeleteUserById (IdRequest) returns (DeletionResponse);
+    rpc GetActiveUsers (GetUsersRequest) returns (UsersDataList);
+    rpc DeleteUserByUsername (UsernameRequest) returns (DeletionResponseUser);
+    rpc DeleteUserById (IdRequest) returns (DeletionResponseUser);
 	rpc PostReview (CreateReviewRequest) returns (ReviewData);
 }

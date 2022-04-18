@@ -14,13 +14,23 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bsteam.proto\".\n\x17RecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"U\n\x08GameInfo\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"-\n\x11GamesInfoResponse\x12\x18\n\x05games\x18\x01 \x03(\x0b\x32\t.GameInfo2I\n\x05Steam\x12@\n\x10RecommendedGames\x12\x18.RecommendedGamesRequest\x1a\x12.GamesInfoResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bsteam.proto\")\n\x12\x41\x63tiveUsersRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\".\n\x17RecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"s\n\x08UserInfo\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x13\n\x0bnum_reviews\x18\x02 \x01(\x05\x12\x17\n\x0fnum_games_owned\x18\x03 \x01(\x05\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x15\n\ruser_language\x18\x05 \x01(\t\"U\n\x08GameInfo\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"/\n\x13\x41\x63tiveUsersResponse\x12\x18\n\x05users\x18\x01 \x03(\x0b\x32\t.UserInfo\"-\n\x11GamesInfoResponse\x12\x18\n\x05games\x18\x01 \x03(\x0b\x32\t.GameInfo2\x83\x01\n\x05Steam\x12\x38\n\x0b\x41\x63tiveUsers\x12\x13.ActiveUsersRequest\x1a\x14.ActiveUsersResponse\x12@\n\x10RecommendedGames\x12\x18.RecommendedGamesRequest\x1a\x12.GamesInfoResponseb\x06proto3')
 
 
 
+_ACTIVEUSERSREQUEST = DESCRIPTOR.message_types_by_name['ActiveUsersRequest']
 _RECOMMENDEDGAMESREQUEST = DESCRIPTOR.message_types_by_name['RecommendedGamesRequest']
+_USERINFO = DESCRIPTOR.message_types_by_name['UserInfo']
 _GAMEINFO = DESCRIPTOR.message_types_by_name['GameInfo']
+_ACTIVEUSERSRESPONSE = DESCRIPTOR.message_types_by_name['ActiveUsersResponse']
 _GAMESINFORESPONSE = DESCRIPTOR.message_types_by_name['GamesInfoResponse']
+ActiveUsersRequest = _reflection.GeneratedProtocolMessageType('ActiveUsersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ACTIVEUSERSREQUEST,
+  '__module__' : 'steam_pb2'
+  # @@protoc_insertion_point(class_scope:ActiveUsersRequest)
+  })
+_sym_db.RegisterMessage(ActiveUsersRequest)
+
 RecommendedGamesRequest = _reflection.GeneratedProtocolMessageType('RecommendedGamesRequest', (_message.Message,), {
   'DESCRIPTOR' : _RECOMMENDEDGAMESREQUEST,
   '__module__' : 'steam_pb2'
@@ -28,12 +38,26 @@ RecommendedGamesRequest = _reflection.GeneratedProtocolMessageType('RecommendedG
   })
 _sym_db.RegisterMessage(RecommendedGamesRequest)
 
+UserInfo = _reflection.GeneratedProtocolMessageType('UserInfo', (_message.Message,), {
+  'DESCRIPTOR' : _USERINFO,
+  '__module__' : 'steam_pb2'
+  # @@protoc_insertion_point(class_scope:UserInfo)
+  })
+_sym_db.RegisterMessage(UserInfo)
+
 GameInfo = _reflection.GeneratedProtocolMessageType('GameInfo', (_message.Message,), {
   'DESCRIPTOR' : _GAMEINFO,
   '__module__' : 'steam_pb2'
   # @@protoc_insertion_point(class_scope:GameInfo)
   })
 _sym_db.RegisterMessage(GameInfo)
+
+ActiveUsersResponse = _reflection.GeneratedProtocolMessageType('ActiveUsersResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ACTIVEUSERSRESPONSE,
+  '__module__' : 'steam_pb2'
+  # @@protoc_insertion_point(class_scope:ActiveUsersResponse)
+  })
+_sym_db.RegisterMessage(ActiveUsersResponse)
 
 GamesInfoResponse = _reflection.GeneratedProtocolMessageType('GamesInfoResponse', (_message.Message,), {
   'DESCRIPTOR' : _GAMESINFORESPONSE,
@@ -46,12 +70,18 @@ _STEAM = DESCRIPTOR.services_by_name['Steam']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _RECOMMENDEDGAMESREQUEST._serialized_start=15
-  _RECOMMENDEDGAMESREQUEST._serialized_end=61
-  _GAMEINFO._serialized_start=63
-  _GAMEINFO._serialized_end=148
-  _GAMESINFORESPONSE._serialized_start=150
-  _GAMESINFORESPONSE._serialized_end=195
-  _STEAM._serialized_start=197
-  _STEAM._serialized_end=270
+  _ACTIVEUSERSREQUEST._serialized_start=15
+  _ACTIVEUSERSREQUEST._serialized_end=56
+  _RECOMMENDEDGAMESREQUEST._serialized_start=58
+  _RECOMMENDEDGAMESREQUEST._serialized_end=104
+  _USERINFO._serialized_start=106
+  _USERINFO._serialized_end=221
+  _GAMEINFO._serialized_start=223
+  _GAMEINFO._serialized_end=308
+  _ACTIVEUSERSRESPONSE._serialized_start=310
+  _ACTIVEUSERSRESPONSE._serialized_end=357
+  _GAMESINFORESPONSE._serialized_start=359
+  _GAMESINFORESPONSE._serialized_end=404
+  _STEAM._serialized_start=407
+  _STEAM._serialized_end=538
 # @@protoc_insertion_point(module_scope)

@@ -17,30 +17,30 @@ from users_pb2_grpc import UsersStub
 channel = grpc.insecure_channel("localhost:50052")
 client = UsersStub(channel)
 
-users_request = CreateReviewRequest(app_id="883710", review="Test made by the boyz", recommended="True", user_id="76561198054155096")
+"""users_request = CreateReviewRequest(app_id="883710", review="Test made by the boyz", recommended="True", user_id="76561198054155096")
 val = client.PostReview(users_request)
-print(val)
+print(val)"""
 
 #Test CreateUser
-"""createUserRequest = CreateUserRequest(user_name="CNGroup2")
+"""createUserRequest = CreateUserRequest(user_language = "portuguese",user_name="CNGroup2")
 res = client.CreateUser(createUserRequest)
-createUserRequest2 = CreateUserRequest(user_name="CompNuvem")
+createUserRequest2 = CreateUserRequest(user_language = "portuguese",user_name="CompNuvem")
 res2 = client.CreateUser(createUserRequest2)
 if res:
     print("----------CreateUser----------")
     print(res)
     print(res2)
 else :
-    print("Empty")
+    print("Empty")"""
 
 #Test GetUser by Username
-username_request = UsernameRequest(user_name="CNGroup2")
+"""username_request = UsernameRequest(user_name="CNGroup2")
 val = client.GetUserByUsername(username_request)
 if val:
     print("----------GetUserByUsername----------")
     print(val)
 else :
-    print("Empty")
+    print("Empty")"""
 
 #Test DeleteUser by Username
 username_request = UsernameRequest(user_name="CNGroup2")
@@ -52,7 +52,7 @@ if val:
 else :
     print("Empty")
 
-#Test DeleteUser by Id
+"""#Test DeleteUser by Id
 UserCompNuvemId = ""
 user_request = IdRequest(user_id=UserCompNuvemId)
 val = client.DeleteUserById(user_request)
@@ -61,19 +61,19 @@ if val:
     print("Deleting CompNuvem")
     print(val)
 else :
-    print("Empty")
+    print("Empty")"""
 
 #Test GetUser by ID
-user_request = IdRequest(user_id="62445a0bd6d85ec0f8f6cc24")
+"""user_request = IdRequest(user_id="625ca6e44b01279a30c8cf5d")
 val = client.GetUserById(user_request)
 if val:
     print("----------GetUserByID----------")
     print(val)
 else :
-    print("Empty")
+    print("Empty")"""
 
 #Test GetUsers
-users_request = GetUsersRequest(max_result=2)
+"""users_request = GetUsersRequest(max_result=2)
 val = client.GetUsers(users_request)
 if val:
     print("----------GetUsers----------")

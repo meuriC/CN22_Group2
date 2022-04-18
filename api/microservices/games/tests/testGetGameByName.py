@@ -1,3 +1,6 @@
+import sys
+sys.path.append('../')
+
 from games_pb2 import *
 from games_pb2_grpc import GamesStub
 import grpc

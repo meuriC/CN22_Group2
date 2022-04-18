@@ -32,7 +32,7 @@ insert_list = []
 count = 0
 total = 1_500_000
 
-with open("api/databases/users/users.csv","r",encoding="ISO-8859-1") as f:
+with open("api/databases/users/users.csv","r") as f:
 
     reader = csv.reader(f)
     first_elem = True
@@ -50,13 +50,10 @@ with open("api/databases/users/users.csv","r",encoding="ISO-8859-1") as f:
         count+=1
 
         users = {
-                'language' : row[2],
-                'steamid' : row[3],
-                'num_games_owned': row[4],
-                'num_reviews' : row[5],
-                'playtime_forever' : row[6],
-                'playtime_at_review' : row[7],
-                'last_played' : row[8],
+                'user_language' : row[2],
+                'user_id' : row[3],
+                'user_num_games_owned': int(row[4]),
+                'user_num_reviews' : int(row[5]),
                 'user_name' : "usn" + row[3],
                 'user_pwd' : "pwd" + row[3]
         }

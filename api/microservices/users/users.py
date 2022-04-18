@@ -20,7 +20,7 @@ from users_pb2 import (
     UserData,
     CreateUserResponse,
     UsersDataList,
-    DeletionResponse, 
+    DeletionResponseUser, 
 	ReviewData
 )
 
@@ -30,25 +30,23 @@ def marshalUserdbToUserService(result):
         user_num_reviews = result["user_num_reviews"],
         user_num_games_owned = result["user_num_games_owned"],
         user_id = result["user_id"],
+        user_language = result["user_language"]
     )
     return user
 
 def create_user(result):
     user = CreateUserResponse(
-        user_name = result["user_name"],
+        user_language = result["user_language"],
         user_id = result["user_id"],
         user_num_games_owned = result["user_num_games_owned"],
         user_num_reviews = result["user_num_reviews"],
-        user_playtime_forever = result["user_playtime_forever"],
-        user_playtime_last_two_weeks = result["user_playtime_last_two_weeks"],
-        user_playtime_at_review = result["user_playtime_at_review"],
-        author_last_played = result["author_last_played"],
-        user_pwd = result["user_pwd"],
+        user_name = result["user_name"],
+        user_pwd = result["user_pwd"]
     )
     return user
     
 def delete_user(result):
-    deleted = DeletionResponse(
+    deleted = DeletionResponseUser(
         deleted = True
     )
     return deleted
@@ -89,14 +87,11 @@ class UserService(users_pb2_grpc.UsersServicer):
         return delete_user(results)
 
     def CreateUser(self, request, context):
-        results = db.insert({ "user_name": request.user_name,
+        results = db.insert({ "user_language" : request.user_language,
              "user_id": "0", 
              "user_num_games_owned": 0, 
-             "user_num_reviews": 0, 
-             "user_playtime_forever": 0,
-             "user_playtime_last_two_weeks": 0,
-             "user_playtime_at_review": 0,
-             "author_last_played": 0,
+             "user_num_reviews": 0,
+             "user_name": request.user_name, 
              "user_pwd": "clear"})
         resultsFinal = db.find({"_id": results})
         db.update({ "_id" : resultsFinal[0]["_id"] },{"$set": {  "user_id" : str(resultsFinal[0]["_id"])}})
@@ -109,7 +104,14 @@ class UserService(users_pb2_grpc.UsersServicer):
         for user in results:
             usersList.append(marshalUserdbToUserService(user))
         return UsersDataList(users=usersList)
-		
+
+    def GetActiveUsers(self, request, context):
+        results = list(db.find().sort("user_num_reviews", -1).limit(request.max_results))
+        usersList=[]
+        for user in results:
+            usersList.append(marshalUserdbToUserService(user))
+        return UsersDataList(users=usersList)
+
     def PostReview(self, request, context):
         thirdClient = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@reviews3.keyxx.mongodb.net/test")
         db3 = thirdClient["database"]
@@ -119,7 +121,7 @@ class UserService(users_pb2_grpc.UsersServicer):
         results = db3.insert({
              "app_id": request.app_id,
              "review_id": "0",			 
-             "language": findUser[0]["language"],
+             "language": findUser[0]["user_language"],
              "review": request.review, 
              "timestamp_created": str(int(time.time())),
              "timestamp_updated": str(int(time.time())),
