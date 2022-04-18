@@ -1,4 +1,5 @@
 import os
+import re
 
 import grpc
 from grpc_interceptor import ExceptionToStatusInterceptor
@@ -23,3 +24,8 @@ def getUser(username):
 def deleteUserAccount(username):
     request = UsernameRequest(user_name = username)
     return users_client.DeleteUserByUsername(request).deleted 
+
+def createReview(user_id, app_id, ReviewsItem):
+    request = CreateReviewRequest(app_id = app_id, review = ReviewsItem["review"], recommended = ReviewsItem["recommended"], user_id = user_id)
+    response = users_client.PostReview(request)
+    return {"user_id": response.author_steam_id, "app_id": response.app_id, "review": response.review, "recommended": response.recommended}

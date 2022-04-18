@@ -122,6 +122,39 @@ paths:
           description: Unauthorized
         '404':
           description: Username not found
+  /users/{user_id}/games/{app_id}/reviews:
+      post:
+        tags:
+        - Users Service
+        summary: Creates a new Review
+        description: Creates a new review
+        operationId: api-users.createReview
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - name: app_id
+          in: path
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: ReviewsItem
+          description: Review to create
+          required: true
+          schema:
+            $ref: '#/definitions/ReviewsItem'
+        responses:
+          "201":
+            description: item created
+          "400":
+            description: invalid input, object invalid
+          "409":
+            description: an existing item already exists
 definitions:
   UserItem:
     type: object
@@ -138,27 +171,15 @@ definitions:
   ReviewsItem:
     type: object
     required:
-      - game
-      - helpful
-      - language
       - recommended
       - review
     properties:
-      game:
-        type: string
-        example: FIFA 22
-      language:
-        type: string
-        example: English
       review:
         type: string
         example: It's 2021. This is the first time I have played this. All of the good.
       recommended:
-        type: boolean
-        example: true
-      helpful:
-        type: boolean
-        example: true
+        type: string
+        example: True
   GamesItem:
     type: object
     required:
