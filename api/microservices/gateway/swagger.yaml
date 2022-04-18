@@ -155,6 +155,31 @@ paths:
             description: invalid input, object invalid
           "409":
             description: an existing item already exists
+  /reviews/{id}:
+    get:
+      tags:
+      - Reviews Service
+      summary: Get review by id
+      description: With this call you can get a specific review made in steam
+      operationId: api-reviews.getReviewById
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: search results for the specific review
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReviewsItem'
+        "400":
+          description: couldn´t find any reviews
+        "404":
+          description: id not found
 definitions:
   UserItem:
     type: object

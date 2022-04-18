@@ -54,7 +54,7 @@ message ReviewsByHelpfulRequest {
 // ##### RESPONSES ###### 
 // ######################
 
-message ReviewData {
+message ReviewDetails {
 	string app_id = 1;
 	string review_id = 2;
 	string language = 3;
@@ -66,8 +66,8 @@ message ReviewData {
 	string author_steam_id = 9;
 }
 
-message ReviewDataResponse {
-    repeated ReviewData reviews = 1;
+message ReviewDetailsResponse {
+    repeated ReviewDetails reviews = 1;
 }
 
 message DeleteReviewResponse {
@@ -82,12 +82,12 @@ message DeleteReviewResponse {
 
 // Services provided by the reviews microservice
 service Reviews {
-    rpc GetReview (ReviewByIdRequest) returns (ReviewData);
-	rpc GetGameReviews (ReviewsByGameRequest) returns (ReviewDataResponse);
-	rpc PutReview (UpdateReviewByIdRequest) returns (ReviewData);
-	rpc DeleteReview (ReviewByIdRequest) returns (DeleteReviewResponse);
-	rpc PutHelpfulReview (UpdateHelpfulOnReviewByIdRequest) returns (ReviewData);
-	rpc GetGameReviewsByLanguage (GameReviewsByLanguageRequest) returns (ReviewDataResponse);
-	rpc GetReviewsByUser (ReviewsByUserIdRequest) returns (ReviewDataResponse);
-	rpc GetReviewsByHelpful (ReviewsByHelpfulRequest) returns (ReviewDataResponse);
+    rpc GetReview (ReviewByIdRequest) returns (ReviewDetails);
+	rpc GetGameReviews (ReviewsByGameRequest) returns (ReviewDetailsResponse);
+	rpc PutReview (UpdateReviewByIdRequest) returns (ReviewDetails);
+	rpc DeleteReview (ReviewByIdRequest) returns (ReviewDetailsResponse);
+	rpc PutHelpfulReview (UpdateHelpfulOnReviewByIdRequest) returns (ReviewDetails);
+	rpc GetGameReviewsByLanguage (GameReviewsByLanguageRequest) returns (ReviewDetailsResponse);
+	rpc GetReviewsByUser (ReviewsByUserIdRequest) returns (ReviewDetailsResponse);
+	rpc GetReviewsByHelpful (ReviewsByHelpfulRequest) returns (ReviewDetailsResponse);
 }

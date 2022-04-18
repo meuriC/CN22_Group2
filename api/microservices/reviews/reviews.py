@@ -34,15 +34,15 @@ db3 = db3["reviews"]
 #print("\nESTIMATED NUMBER OF ELEMENTS IN 3RD BD: ", db3.estimated_document_count())
 
 from reviews_pb2 import (
-    ReviewData,
-    ReviewDataResponse,
+    ReviewDetails,
+    ReviewDetailsResponse,
 	DeleteReviewResponse
 )
 import reviews_pb2_grpc
 
 
 def review_by_id(result):
-    review = ReviewData(
+    review = ReviewDetails(
         app_id = result["app_id"],
         review_id = result["review_id"],
         language = result["language"],
@@ -71,11 +71,11 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
 
             if len(results) <= 0:
                 print("Review not found ... Check if the id of the review is correct.")
-                return ReviewData()
+                return ReviewDetails()
             return review_by_id(results[0])
         except:
             print("Review not found ... Check if the id of the review is correct.")
-            return ReviewData()
+            return ReviewDetails()
 
     def GetGameReviews(self, request, context):
         # Search on the 1st database
@@ -89,7 +89,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             results += list(db3.find({"app_id": {"$all": [request.app_id] } }).limit((request.max_results - len(results))))
 			
         results = [review_by_id(review) for review in results]
-        return ReviewDataResponse(reviews = results)
+        return ReviewDetailsResponse(reviews = results)
 
     def PutReview(self, request, context):
         try:
@@ -109,7 +109,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
 
             if len(results) <= 0:
                 print("Try: Review not found.")
-                return ReviewData()
+                return ReviewDetails()
 
             database.update_one({"review_id": request.review_id}, {"$set": {"review": request.review}})
             database.update_one({"review_id": request.review_id}, {"$set": {"recommended": request.recommended}})
@@ -118,7 +118,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             return review_by_id(results[0])
         except:
             print("Except: Review not found.")
-            return ReviewData()
+            return ReviewDetails()
 
     def DeleteReview(self, request, context):
         try:
@@ -164,14 +164,14 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
 
             if len(results) <= 0:
                 print("Try: Review not found.")
-                return ReviewData()
+                return ReviewDetails()
 
             database.update_one({"review_id": request.review_id}, {"$set": {"votes_helpful": request.votes_helpful}})
             results = list(database.find({"review_id": request.review_id}))
             return review_by_id(results[0])
         except:
             print("Except: Review not found.")
-            return ReviewData()
+            return ReviewDetails()
     
     def GetGameReviewsByLanguage(self, request, context):
         # Search on the 1st database
@@ -184,7 +184,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             # Search on the 3rd database
             results += list(db3.find({"app_id": {"$all": [request.app_id]}, "language": {"$all": [request.language]}}).limit((request.max_results - len(results))))
         results = [review_by_id(review) for review in results]
-        return ReviewDataResponse(reviews = results)
+        return ReviewDetailsResponse(reviews = results)
 		
     def GetReviewsByUser(self, request, context):
         # Search on the 1st database
@@ -197,7 +197,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             # Search on the 3rd database
             results += list(db3.find({"author_steamid": {"$all": [request.author_steam_id]}}).limit((request.max_results - len(results))))
         results = [review_by_id(review) for review in results]
-        return ReviewDataResponse(reviews = results)
+        return ReviewDetailsResponse(reviews = results)
 		
     def GetReviewsByHelpful(self, request, context):
         # Search on the 1st database
@@ -210,7 +210,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             # Search on the 3rd database
             results += list(db3.find({"votes_helpful": {"$all": [request.votes_helpful]}}).limit((request.max_results - len(results))))
         results = [review_by_id(review) for review in results]
-        return ReviewDataResponse(reviews = results)
+        return ReviewDetailsResponse(reviews = results)
 
 def serve():
     interceptors = [ExceptionToStatusInterceptor()]
