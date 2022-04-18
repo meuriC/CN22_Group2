@@ -12,7 +12,6 @@ steam_host = os.getenv("STEAM_HOST", "localhost")
 steam_channel = grpc.insecure_channel(f"{steam_host}:50050")
 steam_client = SteamStub(steam_channel)
 
-
 def getRecommendedGames():
     request = RecommendedGamesRequest(max_results = 10)
     

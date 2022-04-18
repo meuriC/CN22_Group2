@@ -11,14 +11,14 @@ users_channel = grpc.insecure_channel(f"{users_host}:50052")
 users_client = UsersStub(users_channel)
 
 
-def createUser(body):
-    request = CreateUserRequest(user_language = body["language"], user_name = body["username"])  
+def createUser(UserItem):
+    request = CreateUserRequest(user_language = UserItem["language"], user_name = UserItem["username"])  
     return users_client.CreateUser(request).user_name
 
 def getUser(username):
     request = UsernameRequest(user_name = username)
     response = users_client.GetUserByUsername(request)
-    return {"username": response.user_name, "id": user_id}
+    return {"user_name": response.user_name, "user_id": response.user_id}
 
 def deleteUserAccount(username):
     request = UsernameRequest(user_name = username)

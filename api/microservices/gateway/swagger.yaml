@@ -1,0 +1,201 @@
+swagger: '2.0'
+info:
+  description: API desenvolvida para Computação em Nuvem 2022
+  version: 1.0.0
+  title: Steam Reviews API
+  contact:
+    email: cngroup2@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /ui/api
+tags:
+  - name: Steam Service
+    description: General logic of the system
+  - name: Users Service
+    description: Manage the users that review games on steam
+schemes:
+  - http
+  - https
+paths:
+  /steam/recommendedGames:
+    get:
+      tags:
+        - Steam Service
+      summary: Get recommended games
+      description: Get the top 10 games that were more recommended by the users
+      operationId: api-steam.getRecommendedGames
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GamesItem'
+        '400':
+          description: invalid input, object invalid
+        '409':
+          description: an existing item already exists
+  /steam/activeusers:
+    get:
+      tags:
+        - Steam Service
+      summary: Get most active users
+      description: Get the top 10 most active users
+      operationId: api-steam.getActiveUsers
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserItem'
+        '400':
+          description: invalid input, object invalid
+  /users:
+    post:
+      tags:
+        - Users Service
+      summary: Creates or updates new User
+      description: Creates a new user
+      operationId: api-users.createUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: UserItem
+          description: User to create
+          required: false
+          schema:
+            $ref: '#/definitions/UserItem'
+      responses:
+        '201':
+          description: user created
+          schema:
+            $ref: '#/definitions/UserItem'
+        '202':
+          description: user updated
+        '400':
+          description: invalid input, object invalid
+  /users/{username}:
+    get:
+      tags:
+        - Users Service
+      summary: Get information about a specific user
+      description: This call returns information about a specified username
+      operationId: api-users.getUser
+      parameters:
+        - name: username
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: information about a user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserItem'
+        '400':
+          description: User id not found
+    delete:
+      tags:
+        - Users Service
+      summary: Delete account
+      description: Deletes the account of the user
+      operationId: api-users.deleteUserAccount
+      parameters:
+        - name: username
+          in: path
+          required: true
+          type: string
+      responses:
+        '204':
+          description: The account was deleted with success
+        '401':
+          description: Unauthorized
+        '404':
+          description: Username not found
+definitions:
+  UserItem:
+    type: object
+    required:
+      - username
+      - language
+    properties:
+      username:
+        type: string
+        example: random name
+      language:
+        type: string
+        example: random language
+  ReviewsItem:
+    type: object
+    required:
+      - game
+      - helpful
+      - language
+      - recommended
+      - review
+    properties:
+      game:
+        type: string
+        example: FIFA 22
+      language:
+        type: string
+        example: English
+      review:
+        type: string
+        example: It's 2021. This is the first time I have played this. All of the good.
+      recommended:
+        type: boolean
+        example: true
+      helpful:
+        type: boolean
+        example: true
+  GamesItem:
+    type: object
+    required:
+      - game
+      - mostCommonLanguage
+      - numberOfReviews
+      - recommendedPercentage
+    properties:
+      game:
+        type: string
+        example: Fifa 22
+      numberOfReviews:
+        type: integer
+        example: 1
+      mostCommonLanguage:
+        type: string
+        example: english
+      recommendedPercentage:
+        type: string
+        example: 100%
+  UserAuthItem:
+    type: object
+    required:
+      - username
+      - password
+    properties:
+      username:
+        type: string
+        example: userguest1
+      password:
+        type: string
+        example: password
+  TokenItem:
+    type: object
+    required:
+      - token
+    properties:
+      token:
+        type: string
+        example: ibsufbaw32432-isufaiefawfg-234234nkawf

@@ -46,31 +46,6 @@ paths:
           description: invalid input, object invalid
         "409":
           description: an existing item already exists
-  #/steam/recommendedgames/{amount}:
-    #get:
-      #tags:
-      #- Steam Service
-      #summary: Get a specific number of recommended games
-      #description: Get the games that were more recommended by the users
-      #operationId: getRecommendedGamesAmount
-      #produces:
-      #- application/json
-      #parameters:
-      #- in: path
-        #name: amount
-        #required: true
-        #type: integer
-      #responses:
-        #"200":
-          #description: success
-          #schema:
-            #type: array
-            #items:
-              #$ref: '#/definitions/GamesItem'
-        #"400":
-          #description: invalid input, object invalid
-        #"409":
-          #description: an existing item already exists
   /steam/activeusers:
     get:
       tags:
