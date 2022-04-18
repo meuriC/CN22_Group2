@@ -1,6 +1,4 @@
-from flask import render_template
 import connexion
-
 from yaml import Loader, load
 from flask_swagger_ui import get_swaggerui_blueprint
 
@@ -13,7 +11,6 @@ app.app.register_blueprint(swaggerui_blueprint)
 
 # swagger.yml file to configure the endpoints
 app.add_api("swagger.yaml")
-
 
 if __name__ == "__main__":
     app.run(debug=True)
