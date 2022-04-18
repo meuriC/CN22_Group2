@@ -25,11 +25,8 @@ games_channel = grpc.insecure_channel(f"{games_host}:50051")
 games_client = GamesStub(games_channel)
 
 
-
-
 class SteamService(steam_pb2_grpc.SteamServicer):
     def ActiveUsers(self, request, context):
-       
         active_users_request = ActiveUsersRequest(max_results = request.max_results)
         results = users_client.GetActiveUsers(active_users_request).users
 
