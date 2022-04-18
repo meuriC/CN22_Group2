@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviews-s-c
+  labels:
+    app: reviews
+spec:
+  type: ClusterIP
+  selector:
+    app: reviews
+  ports:
+    - name: http
+      protocol: TCP
+      port: 50053
+      targetPort: 50053
