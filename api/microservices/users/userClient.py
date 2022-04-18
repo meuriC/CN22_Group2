@@ -17,9 +17,9 @@ from users_pb2_grpc import UsersStub
 channel = grpc.insecure_channel("localhost:50052")
 client = UsersStub(channel)
 
-"""users_request = CreateReviewRequest(app_id="883710", review="Test made by the boyz", recommended="True", user_id="76561198054155096")
+users_request = CreateReviewRequest(app_id="883710", review="Test made by the boyz", recommended="True", user_id="76561198054155096")
 val = client.PostReview(users_request)
-print(val)"""
+print(val)
 
 #Test CreateUser
 """createUserRequest = CreateUserRequest(user_language = "portuguese",user_name="CNGroup2")
@@ -43,14 +43,14 @@ else :
     print("Empty")"""
 
 #Test DeleteUser by Username
-username_request = UsernameRequest(user_name="CNGroup2")
+"""username_request = UsernameRequest(user_name="CNGroup2")
 val = client.DeleteUserByUsername(username_request)
 if val:
     print("----------DeleteUserByUsername----------")
     print("Deleting CNGroup2")
     print(val)
 else :
-    print("Empty")
+    print("Empty")"""
 
 """#Test DeleteUser by Id
 UserCompNuvemId = ""
@@ -80,7 +80,15 @@ if val:
     print(val)
 else :
     print("Empty")"""
-	
+
+#Test GetActive
+"""users_request = GetUsersRequest(max_result=5)
+val = client.GetActiveUsers(users_request)
+if val:
+    print("----------GetUsers----------")
+    print(val)
+else :
+    print("Empty")"""	
 
 	
 

@@ -7,7 +7,7 @@ import grpc
 
 channel = grpc.insecure_channel("localhost:50050")
 client = SteamStub(channel)
-request = ActiveUsersRequest(max_results=5)
+request = ActiveUsersRequest(max_results = 5)
 
 val = client.ActiveUsers(request)
 print(val)

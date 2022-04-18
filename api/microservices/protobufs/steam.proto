@@ -18,8 +18,8 @@ message RecommendedGamesRequest {
 
 message UserInfo {
     string user_name = 1;
-    int32 num_reviews = 2;
-    int32 num_games_owned = 3;
+    int32 user_num_reviews = 2;
+    int32 user_num_games_owned = 3;
     string user_id = 4;
     string user_language = 5;
 }

@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bsteam.proto\")\n\x12\x41\x63tiveUsersRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\".\n\x17RecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"s\n\x08UserInfo\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x13\n\x0bnum_reviews\x18\x02 \x01(\x05\x12\x17\n\x0fnum_games_owned\x18\x03 \x01(\x05\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x15\n\ruser_language\x18\x05 \x01(\t\"U\n\x08GameInfo\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"/\n\x13\x41\x63tiveUsersResponse\x12\x18\n\x05users\x18\x01 \x03(\x0b\x32\t.UserInfo\"-\n\x11GamesInfoResponse\x12\x18\n\x05games\x18\x01 \x03(\x0b\x32\t.GameInfo2\x83\x01\n\x05Steam\x12\x38\n\x0b\x41\x63tiveUsers\x12\x13.ActiveUsersRequest\x1a\x14.ActiveUsersResponse\x12@\n\x10RecommendedGames\x12\x18.RecommendedGamesRequest\x1a\x12.GamesInfoResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bsteam.proto\")\n\x12\x41\x63tiveUsersRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\".\n\x17RecommendedGamesRequest\x12\x13\n\x0bmax_results\x18\x01 \x01(\x05\"}\n\x08UserInfo\x12\x11\n\tuser_name\x18\x01 \x01(\t\x12\x18\n\x10user_num_reviews\x18\x02 \x01(\x05\x12\x1c\n\x14user_num_games_owned\x18\x03 \x01(\x05\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x15\n\ruser_language\x18\x05 \x01(\t\"U\n\x08GameInfo\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x16\n\x0ereviews_number\x18\x03 \x01(\x05\x12\x17\n\x0frecommend_count\x18\x04 \x01(\x05\"/\n\x13\x41\x63tiveUsersResponse\x12\x18\n\x05users\x18\x01 \x03(\x0b\x32\t.UserInfo\"-\n\x11GamesInfoResponse\x12\x18\n\x05games\x18\x01 \x03(\x0b\x32\t.GameInfo2\x83\x01\n\x05Steam\x12\x38\n\x0b\x41\x63tiveUsers\x12\x13.ActiveUsersRequest\x1a\x14.ActiveUsersResponse\x12@\n\x10RecommendedGames\x12\x18.RecommendedGamesRequest\x1a\x12.GamesInfoResponseb\x06proto3')
 
 
 
@@ -75,13 +75,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _RECOMMENDEDGAMESREQUEST._serialized_start=58
   _RECOMMENDEDGAMESREQUEST._serialized_end=104
   _USERINFO._serialized_start=106
-  _USERINFO._serialized_end=221
-  _GAMEINFO._serialized_start=223
-  _GAMEINFO._serialized_end=308
-  _ACTIVEUSERSRESPONSE._serialized_start=310
-  _ACTIVEUSERSRESPONSE._serialized_end=357
-  _GAMESINFORESPONSE._serialized_start=359
-  _GAMESINFORESPONSE._serialized_end=404
-  _STEAM._serialized_start=407
-  _STEAM._serialized_end=538
+  _USERINFO._serialized_end=231
+  _GAMEINFO._serialized_start=233
+  _GAMEINFO._serialized_end=318
+  _ACTIVEUSERSRESPONSE._serialized_start=320
+  _ACTIVEUSERSRESPONSE._serialized_end=367
+  _GAMESINFORESPONSE._serialized_start=369
+  _GAMESINFORESPONSE._serialized_end=414
+  _STEAM._serialized_start=417
+  _STEAM._serialized_end=548
 # @@protoc_insertion_point(module_scope)

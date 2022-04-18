@@ -106,11 +106,9 @@ class UserService(users_pb2_grpc.UsersServicer):
         return UsersDataList(users=usersList)
 
     def GetActiveUsers(self, request, context):
-        results = list(db.find().sort("user_num_reviews", -1).limit(request.max_results))
-        usersList=[]
-        for user in results:
-            usersList.append(marshalUserdbToUserService(user))
-        return UsersDataList(users=usersList)
+        results = list(db.find().sort("user_num_reviews", -1).limit(request.max_result))
+        results = [ marshalUserdbToUserService(user) for user in results ]
+        return UsersDataList( users = results )
 
     def PostReview(self, request, context):
         thirdClient = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@reviews3.keyxx.mongodb.net/test")

@@ -32,7 +32,8 @@ class SteamService(steam_pb2_grpc.SteamServicer):
        
         active_users_request = ActiveUsersRequest(max_results = request.max_results)
         results = users_client.GetActiveUsers(active_users_request).users
-        finalResult = [UserInfo(user_name=r.user_name, num_reviews=r.num_reviews, num_games_owned=r.num_games_owned, user_id=r.user_id, user_language=r.user_language) for r in results]
+
+        finalResult = [UserInfo(user_name=r.user_name, user_num_reviews = r.user_num_reviews, user_num_games_owned=r.user_num_games_owned, user_id=r.user_id, user_language=r.user_language) for r in results]
         
         return ActiveUsersResponse(users = finalResult)
 
