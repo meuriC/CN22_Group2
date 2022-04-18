@@ -9,8 +9,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-host: virtserver.swaggerhub.com
-basePath: /ComputacaoNuvem2022/StreamReviews/1.0.0
+basePath: /
+#host: virtserver.swaggerhub.com
+#basePath: /ComputacaoNuvem2022/StreamReviews/1.0.0
 tags:
 - name: Steam Service
   description: General logic of the system
@@ -30,8 +31,8 @@ paths:
       tags:
       - Steam Service
       summary: Get recommended games
-      description: Get the games that were more recommended by the users
-      operationId: getRecommendedGames
+      description: Get the top 10 games that were more recommended by the users
+      operationId: api-steam.getRecommendedGames
       produces:
       - application/json
       responses:
@@ -45,38 +46,38 @@ paths:
           description: invalid input, object invalid
         "409":
           description: an existing item already exists
-  /steam/recommendedgames/{amount}:
-    get:
-      tags:
-      - Steam Service
-      summary: Get a specific number of recommended games
-      description: Get the games that were more recommended by the users
-      operationId: getRecommendedGamesAmount
-      produces:
-      - application/json
-      parameters:
-      - in: path
-        name: amount
-        required: true
-        type: integer
-      responses:
-        "200":
-          description: success
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/GamesItem'
-        "400":
-          description: invalid input, object invalid
-        "409":
-          description: an existing item already exists
+  #/steam/recommendedgames/{amount}:
+    #get:
+      #tags:
+      #- Steam Service
+      #summary: Get a specific number of recommended games
+      #description: Get the games that were more recommended by the users
+      #operationId: getRecommendedGamesAmount
+      #produces:
+      #- application/json
+      #parameters:
+      #- in: path
+        #name: amount
+        #required: true
+        #type: integer
+      #responses:
+        #"200":
+          #description: success
+          #schema:
+            #type: array
+            #items:
+              #$ref: '#/definitions/GamesItem'
+        #"400":
+          #description: invalid input, object invalid
+        #"409":
+          #description: an existing item already exists
   /steam/activeusers:
     get:
       tags:
       - Steam Service
       summary: Get most active users
       description: Get the top 10 most active users
-      operationId: getActiveUsers
+      operationId: api-steam.getActiveUsers
       produces:
       - application/json
       responses:
@@ -284,7 +285,7 @@ paths:
       - Users Service
       summary: Creates or updates new User
       description: Creates a new user
-      operationId: createUser
+      operationId: api-users.createUser
       consumes:
       - application/json
       produces:
@@ -311,7 +312,7 @@ paths:
       - Users Service
       summary: Get information about a specific user
       description: This call returns information about a specified username
-      operationId: getUser
+      operationId: api-users.getUser
       parameters:
       - name: username
         in: path
@@ -331,7 +332,7 @@ paths:
       - Users Service
       summary: Delete account
       description: Deletes the account of the user
-      operationId: deleteUserAccount
+      operationId: api-users.deleteUserAccount
       parameters:
       - name: username
         in: path

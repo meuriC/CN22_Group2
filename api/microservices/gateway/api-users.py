@@ -20,6 +20,6 @@ def getUser(username):
     response = users_client.GetUserByUsername(request)
     return {"username": response.user_name, "id": user_id}
 
-def deleteUser(username):
+def deleteUserAccount(username):
     request = UsernameRequest(user_name = username)
     return users_client.DeleteUserByUsername(request).deleted 
