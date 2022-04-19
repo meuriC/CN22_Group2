@@ -301,6 +301,72 @@ paths:
           description: Couldn't find any reviews written by the user
         "404":
           description: user id not found
+  /game:
+    post:
+      tags:
+      - Games Service
+      summary: Creates a new game on the list
+      description: Creates a new game
+      operationId: createGame
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: GamesItem
+        description: Game to create
+        required: false
+        schema:
+          $ref: '#/definitions/GamesItem'
+      responses:
+        "201":
+          description: game created
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: an existing game already exists
+  /game/{name}:
+    get:
+      tags:
+      - Games Service
+      summary: Search for a game
+      description: The user gets the game he searched
+      operationId: getSearchedGame
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: search for a game
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GamesItem'
+        "400":
+          description: couldn't find any games with reviews
+    delete:
+      tags:
+      - Games Service
+      summary: Delete a game by it´s name
+      description: Deletes a game from the dataset
+      operationId: deleteGame
+      parameters:
+      - name: name
+        in: path
+        required: true
+        type: string
+      responses:
+        "204":
+          description: Successful deletion
+        "404":
+          description: Error name not found
+        "401":
+          description: Unauthorized
 definitions:
   UserItem:
     type: object
@@ -329,23 +395,11 @@ definitions:
   GamesItem:
     type: object
     required:
-      - game
-      - mostCommonLanguage
-      - numberOfReviews
-      - recommendedPercentage
+      - name
     properties:
       game:
         type: string
         example: Fifa 22
-      numberOfReviews:
-        type: integer
-        example: 1
-      mostCommonLanguage:
-        type: string
-        example: english
-      recommendedPercentage:
-        type: string
-        example: 100%
   UserAuthItem:
     type: object
     required:
