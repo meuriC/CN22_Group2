@@ -165,8 +165,9 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
             if len(results) <= 0:
                 print("Try: Review not found.")
                 return ReviewDetails()
-
-            database.update_one({"review_id": request.review_id}, {"$set": {"votes_helpful": request.votes_helpful}})
+            
+            totalVotes = str(int(results[0]["votes_helpful"]) + int(request.votes_helpful))
+            database.update_one({"review_id": request.review_id}, {"$set": {"votes_helpful": totalVotes}}) #request.votes_helpful
             results = list(database.find({"review_id": request.review_id}))
             return review_by_id(results[0])
         except:

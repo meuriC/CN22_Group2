@@ -325,7 +325,7 @@ definitions:
         example: It's 2021. This is the first time I have played this. All of the good.
       recommended:
         type: string
-        example: True
+        example: "True"
   GamesItem:
     type: object
     required:
