@@ -7,6 +7,7 @@ services:
             REVIEWS_HOST: reviews
             GAMES_HOST: games
         image: gateway
+        container_name: gateway
         networks:
             - microservices
         ports:
@@ -17,6 +18,7 @@ services:
             USERS_HOST: users
             GAMES_HOST: games
         image: steam
+        container_name: steam
         networks:
             - microservices
         ports:
@@ -26,6 +28,7 @@ services:
         environment:
             REVIEWS_HOST: reviews
         image: games
+        container_name: games
         networks:
             - microservices
         ports:
@@ -33,6 +36,7 @@ services:
             
     users:
         image: users
+        container_name: users
         networks:
             - microservices
         ports:
@@ -40,6 +44,7 @@ services:
 
     reviews:
         image: reviews
+        container_name: reviews
         networks:
             - microservices
         ports:

@@ -6,7 +6,6 @@
 
 ########################################################
 
-
 printf "Populating Databases\n"
 printf "\t Populating Games"
 # { python3 "./api/databases/games/PopulateGames.py" } &> /dev/null
