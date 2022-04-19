@@ -37,7 +37,7 @@ class ReviewsStub(object):
         self.DeleteReview = channel.unary_unary(
                 '/Reviews/DeleteReview',
                 request_serializer=reviews__pb2.ReviewByIdRequest.SerializeToString,
-                response_deserializer=reviews__pb2.ReviewDetailsResponse.FromString,
+                response_deserializer=reviews__pb2.DeleteReviewResponse.FromString,
                 )
         self.PutHelpfulReview = channel.unary_unary(
                 '/Reviews/PutHelpfulReview',
@@ -138,7 +138,7 @@ def add_ReviewsServicer_to_server(servicer, server):
             'DeleteReview': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteReview,
                     request_deserializer=reviews__pb2.ReviewByIdRequest.FromString,
-                    response_serializer=reviews__pb2.ReviewDetailsResponse.SerializeToString,
+                    response_serializer=reviews__pb2.DeleteReviewResponse.SerializeToString,
             ),
             'PutHelpfulReview': grpc.unary_unary_rpc_method_handler(
                     servicer.PutHelpfulReview,
@@ -239,7 +239,7 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/DeleteReview',
             reviews__pb2.ReviewByIdRequest.SerializeToString,
-            reviews__pb2.ReviewDetailsResponse.FromString,
+            reviews__pb2.DeleteReviewResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

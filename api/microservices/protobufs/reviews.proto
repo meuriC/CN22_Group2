@@ -85,7 +85,7 @@ service Reviews {
     rpc GetReview (ReviewByIdRequest) returns (ReviewDetails);
 	rpc GetGameReviews (ReviewsByGameRequest) returns (ReviewDetailsResponse);
 	rpc PutReview (UpdateReviewByIdRequest) returns (ReviewDetails);
-	rpc DeleteReview (ReviewByIdRequest) returns (ReviewDetailsResponse);
+	rpc DeleteReview (ReviewByIdRequest) returns (DeleteReviewResponse);
 	rpc PutHelpfulReview (UpdateHelpfulOnReviewByIdRequest) returns (ReviewDetails);
 	rpc GetGameReviewsByLanguage (GameReviewsByLanguageRequest) returns (ReviewDetailsResponse);
 	rpc GetReviewsByUser (ReviewsByUserIdRequest) returns (ReviewDetailsResponse);

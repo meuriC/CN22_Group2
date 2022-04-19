@@ -180,6 +180,127 @@ paths:
           description: couldn´t find any reviews
         "404":
           description: id not found
+    put:
+      tags:
+      - Reviews Service
+      summary: Updates an existing review
+      description: Updates a review existing in the dataset
+      operationId: api-reviews.updateReview
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - in: body
+        name: ReviewsItem
+        description: Review to update
+        required: true
+        schema:
+          $ref: '#/definitions/ReviewsItem'
+      responses:
+        "201":
+          description: item updated
+        "400":
+          description: invalid id, object invalid
+        "404":
+          description: id not found
+    delete:
+      tags:
+      - Reviews Service
+      summary: Delete a review by it´s id
+      description: Deletes a review from the dataset
+      operationId: api-reviews.deleteReview
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        "204":
+          description: Successful deletion
+        "404":
+          description: Error id not found
+        "401":
+          description: Unauthorized
+  /reviews/helpful/{id}:
+    put:
+      tags:
+      - Reviews Service
+      summary: Set Review as helpful
+      description: Sets a specific review as helpful
+      operationId: api-reviews.setReviewHelpful
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        "201":
+          description: item updated
+        "400":
+          description: invalid id, object invalid
+        "404":
+          description: id not found
+  /reviews/games/{id}/{language}:
+    get:
+      tags:
+      - Reviews Service
+      summary: Get game reviews by language
+      description: With this call you can get all reviews in a game in a specific language
+      operationId: api-reviews.getGameReviewsByLanguage
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      - name: language
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: search results for the specific review in the given language
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReviewsItem'
+        "400":
+          description: couldn´t find any reviews
+        "404":
+          description: id or language not found
+  /reviews/filter/users/{user_id}:
+    get:
+      tags:
+      - Reviews Service
+      summary: Get all reviews from a specific user
+      description: With this call you can get all the reviews that a specific user wrote
+      operationId: api-reviews.userReviews
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: All reviews written by the user
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReviewsItem'
+        "400":
+          description: Couldn't find any reviews written by the user
+        "404":
+          description: user id not found
 definitions:
   UserItem:
     type: object
