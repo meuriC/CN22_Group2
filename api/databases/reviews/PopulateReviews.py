@@ -63,7 +63,7 @@ with open("api/databases/reviews/steam_reviews_3.csv","r") as f:
                 'timestamp_created' : row[7],
                 'timestamp_updated' : row[8],
                 'recommended' : row[9],
-                'votes_helpful' : row[10],
+                'votes_helpful' : int(row[10]),
                 'author_steamid' : row[17]
         }
         
