@@ -202,7 +202,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
 		
     def GetReviewsByHelpful(self, request, context):
         # Search on the 1st database
-        results = list(db.find({"votes_helpful": {"$all": [request.votes_helpful]}}).limit(request.max_results))
+        results = list(db.find({"votes_helpful": {"$all": [request.votes_helpful]}}).limit(request.max_results)) 
         if len(results) < request.max_results:
             # Search on the 2nd database
             results += list(db2.find({"votes_helpful": {"$all": [request.votes_helpful]}}).limit((request.max_results - len(results))))
