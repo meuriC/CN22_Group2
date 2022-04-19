@@ -59,3 +59,20 @@ def userReviews(user_id):
         object = {"user_id": r.author_steam_id, "app_id": r.app_id, "review": r.review, "recommended": r.recommended}
         reviewsList.append(object)
     return reviewsList
+	
+def getHelpfulReviews():
+    request = ReviewsByHelpfulRequest(votes_helpful = "1", max_results = 5)
+    helpfulReviewsList = []
+    for r in reviews_client.GetReviewsByHelpful(request).reviews:
+        object = {"user_id": r.author_steam_id, "app_id": r.app_id, "review": r.review, "votes_helpful": r.votes_helpful}
+        helpfulReviewsList.append(object)
+    return helpfulReviewsList
+
+def getReviewByGame(id):
+    request = ReviewsByGameRequest(app_id = id, max_results = 5)
+    gameReviewsList = []
+    for r in reviews_client.GetGameReviews(request).reviews:
+        object = {"user_id": r.author_steam_id, "app_id": r.app_id, "recommended": r.recommended, "language": r.language, "votes_helpful": r.votes_helpful, "timestamp_created": r.timestamp_created, "timestamp_updated": r.timestamp_updated, "review": r.review}
+        gameReviewsList.append(object)
+    return gameReviewsList
+
