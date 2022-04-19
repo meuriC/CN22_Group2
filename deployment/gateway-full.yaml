@@ -1,0 +1,266 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "steam-config-tn5f"
+  namespace: "default"
+  labels:
+    app: "steam-reviews"
+data:
+  REVIEWS_HOST: "reviews"
+  GAMES_HOST: "games"
+  USERS_HOST: "users"
+  STEAM_HOST: "steam"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "reviews"
+  namespace: "default"
+  labels:
+    app: "reviews"
+spec:
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "reviews"
+  template:
+    metadata:
+      labels:
+        app: "reviews"
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: "reviews"
+        image: "cn20222/reviews-microservice:1.0"
+        ports:
+        - containerPort: 50053
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviews
+spec:
+  #  type: ClusterIP
+  selector:
+    app: reviews
+  ports:
+  - name: grpc
+    port: 50053
+    targetPort: 50053
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "games"
+  namespace: "default"
+  labels:
+    app: "games"
+spec:
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "games"
+  template:
+    metadata:
+      labels:
+        app: "games"
+    spec:
+      serviceAccountName: default
+#      terminationGracePeriodSeconds: 5
+      containers:
+      - name: "games"
+        image: "cn20222/games-microservice:1.0"
+        ports:
+        - containerPort: 50051
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: games
+spec:
+  #  type: ClusterIP
+  selector:
+    app: games
+  ports:
+  - name: grpc
+    port: 50051
+    targetPort: 50051
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "users"
+  namespace: "default"
+  labels:
+    app: "users"
+spec:
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "users"
+  template:
+    metadata:
+      labels:
+        app: "users"
+    spec:
+      serviceAccountName: default
+#      terminationGracePeriodSeconds: 5
+      containers:
+      - name: "users"
+        image: "cn20222/users-microservice:1.0"
+        ports:
+        - containerPort: 50052
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users
+spec:
+  #  type: ClusterIP
+  selector:
+    app: users
+  ports:
+  - name: grpc
+    port: 50052
+    targetPort: 50052
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "steam"
+  namespace: "default"
+  labels:
+    app: "steam"
+spec:
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "steam"
+  template:
+    metadata:
+      labels:
+        app: "steam"
+    spec:
+      serviceAccountName: default
+#      terminationGracePeriodSeconds: 5
+      containers:
+      - name: "steam"
+        image: "cn20222/steam-microservice:1.0"
+        ports:
+        - containerPort: 50050
+        env:
+        - name: "REVIEWS_HOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "REVIEWS_HOST"
+              name: "steam-config-tn5f"
+        - name: "GAMES_HOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "GAMES_HOST"
+              name: "steam-config-tn5f"
+        - name: "USERS_HOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "USERS_HOST"
+              name: "steam-config-tn5f"
+        - name: "STEAM_HOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "STEAM_HOST"
+              name: "steam-config-tn5f"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: steam
+spec:
+  #  type: ClusterIP
+  selector:
+    app: steam
+  ports:
+  - name: grpc
+    port: 50050
+    targetPort: 50050
+---
+apiVersion: "apps/v1"
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      serviceAccountName: default
+#      terminationGracePeriodSeconds: 5
+      containers:
+      - name: api-gateway
+        image: "cn20222/gateway-microservice:1.0"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8443
+        livenessProbe:
+          initialDelaySeconds: 10
+
+          httpGet:
+            path: "/health"
+#            scheme: HTTPS
+            port: 8443
+#            httpHeaders:
+#            - name: "Cookie"
+#              value: "shop_session-id=x-liveness-probe"
+        env:
+        - name: "REVIEWS_HOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "REVIEWS_HOST"
+              name: "steam-config-tn5f"
+        - name: "GAMES_HOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "GAMES_HOST"
+              name: "steam-config-tn5f"
+        - name: "USERS_HOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "USERS_HOST"
+              name: "steam-config-tn5f"
+        - name: "STEAM_HOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "STEAM_HOST"
+              name: "steam-config-tn5f"
+
+---
+apiVersion: "v1"
+kind: Service
+metadata:
+  name: api-gateway
+#  annotations:
+#    cloud.google.com/app-protocols: '{"https":"HTTPS"}'
+spec:
+#  type: ClusterIP
+  selector:
+    app: api-gateway
+  ports:
+  - name: http
+    port: 8443
+    targetPort: 8443
