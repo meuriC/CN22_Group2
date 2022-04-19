@@ -37,4 +37,12 @@ def createGame (GamesItem):
 
 def deleteGameByName (name):
     request = GameByNameRequest(name = name)
-    return games_client.GameByName(request).deleted
+    return games_client.DeleteGameByName(request).deleted
+
+def getReviewByGame(id):
+    request = GameReviewsRequest(app_id = id, max_results = 5)
+    gameReviewsList = []
+    for r in games_client.GameReviews(request).reviews:
+        object = {"user_id": r.author_steam_id, "recommended": r.recommended, "language": r.language, "votes_helpful": r.votes_helpful, "timestamp_created": r.timestamp_created, "timestamp_updated": r.timestamp_updated, "review": r.review}
+        gameReviewsList.append(object)
+    return gameReviewsList

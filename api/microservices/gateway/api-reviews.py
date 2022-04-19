@@ -68,11 +68,5 @@ def getHelpfulReviews():
         helpfulReviewsList.append(object)
     return helpfulReviewsList
 
-def getReviewByGame(id):
-    request = ReviewsByGameRequest(app_id = id, max_results = 5)
-    gameReviewsList = []
-    for r in reviews_client.GetGameReviews(request).reviews:
-        object = {"user_id": r.author_steam_id, "app_id": r.app_id, "recommended": r.recommended, "language": r.language, "votes_helpful": r.votes_helpful, "timestamp_created": r.timestamp_created, "timestamp_updated": r.timestamp_updated, "review": r.review}
-        gameReviewsList.append(object)
-    return gameReviewsList
+
 

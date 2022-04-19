@@ -318,27 +318,6 @@ paths:
               $ref: '#/definitions/ReviewsItem'
         "400":
           description: couldn´t find any helpful reviews
-  /reviews/games/{id}:
-    get:
-      tags:
-      - Reviews Service
-      summary: Get all reviews of a game
-      description: With this call you can get all reviews of a game
-      operationId: api-reviews.getReviewByGame
-      parameters:
-      - name: id
-        in: path
-        required: true
-        type: string
-      responses:
-        "200":
-          description: search results for all the reviews with in a game
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ReviewsItem'
-        "400":
-          description: couldn´t find any helpful reviews
   /game/{name}:
     get:
       tags:
@@ -386,7 +365,7 @@ paths:
       - Games Service
       summary: Creates a new game on the list
       description: Creates a new game
-      operationId: createGame
+      operationId: api-games.createGame
       consumes:
       - application/json
       produces:
@@ -405,6 +384,27 @@ paths:
           description: invalid input, object invalid
         "409":
           description: an existing game already exists
+  /games/{id}/reviews:
+    get:
+      tags:
+      - Games Service
+      summary: Get all reviews of a game
+      description: With this call you can get all reviews of a game
+      operationId: api-games.getReviewByGame
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        "200":
+          description: search results for all the reviews with in a game
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReviewsItem'
+        "400":
+          description: couldn´t find any helpful reviews
 definitions:
   UserItem:
     type: object
@@ -435,7 +435,7 @@ definitions:
     required:
       - name
     properties:
-      game:
+      name:
         type: string
         example: Fifa 22
   UserAuthItem:
