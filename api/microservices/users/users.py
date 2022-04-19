@@ -68,7 +68,7 @@ def create_review(result):
 class UserService(users_pb2_grpc.UsersServicer):
     def GetUserById(self, request, context):
         #results = db.remove({"_id": ObjectId(request.user_id)})
-        results = db.find({"user_id": request.user_id})
+        results = db.remove({"user_id": request.user_id})
         return marshalUserdbToUserService(results[0])
     
     def GetUserByUsername(self, request, context):
@@ -81,7 +81,7 @@ class UserService(users_pb2_grpc.UsersServicer):
     
     def DeleteUserById(self, request, context):
         #results = db.remove({"_id": ObjectId(request.user_id)})
-        results = db.find({"user_id": request.user_id})
+        results = db.remove({"user_id": request.user_id})
         return delete_user(results)
 
     def CreateUser(self, request, context):
