@@ -1,0 +1,49 @@
+version: "3.8"
+services:            
+    gateway:
+        environment:
+            STEAM_HOST: steam
+            USERS_HOST: users
+            REVIEWS_HOST: reviews
+            GAMES_HOST: games
+        image: gateway
+        networks:
+            - microservices
+        ports:
+            - 5000:5000
+
+    steam:
+        environment:
+            USERS_HOST: users
+            GAMES_HOST: games
+        image: steam
+        networks:
+            - microservices
+        ports:
+            - 50050:50050
+
+    games:
+        environment:
+            REVIEWS_HOST: reviews
+        image: games
+        networks:
+            - microservices
+        ports:
+            - 50051:50051
+            
+    users:
+        image: users
+        networks:
+            - microservices
+        ports:
+            - 50052:50052
+
+    reviews:
+        image: reviews
+        networks:
+            - microservices
+        ports:
+            - 50053:50053
+
+networks:
+    microservices:
