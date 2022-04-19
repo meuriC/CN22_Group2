@@ -14,16 +14,17 @@ users_client = UsersStub(users_channel)
 
 def createUser(UserItem):
     request = CreateUserRequest(user_language = UserItem["language"], user_name = UserItem["username"])  
-    return users_client.CreateUser(request).user_name
-
-def getUser(username):
-    request = UsernameRequest(user_name = username)
-    response = users_client.GetUserByUsername(request)
+    response = users_client.CreateUser(request)
     return {"user_name": response.user_name, "user_id": response.user_id}
-
-def deleteUserAccount(username):
-    request = UsernameRequest(user_name = username)
-    return users_client.DeleteUserByUsername(request).deleted 
+	
+def getUser(user_id):
+    request = IdRequest(user_id = user_id)
+    response = users_client.GetUserById(request)
+    return {"user_name": response.user_name, "user_id": response.user_id, "user_language": response.user_language, "user_num_reviews": response.user_num_reviews, "user_num_games_owned": response.user_num_games_owned}
+	
+def deleteUserAccount(user_id):
+    request = IdRequest(user_id = user_id)
+    return users_client.DeleteUserById(request).deleted 
 
 def createReview(user_id, app_id, ReviewsItem):
     request = CreateReviewRequest(app_id = app_id, review = ReviewsItem["review"], recommended = ReviewsItem["recommended"], user_id = user_id)
