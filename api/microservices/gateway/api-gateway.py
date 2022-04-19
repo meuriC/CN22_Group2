@@ -12,6 +12,10 @@ app.app.register_blueprint(swaggerui_blueprint)
 # swagger.yml file to configure the endpoints
 app.add_api("swagger.yaml")
 
+@app.app.route('/health')
+def health():
+    return "OK", 200
+
 if __name__ == "__main__":
     app.run(debug=True)
 	
