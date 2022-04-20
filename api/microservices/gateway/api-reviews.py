@@ -33,7 +33,7 @@ def deleteReview(id):
     return reviews_client.DeleteReview(request).status
 
 def setReviewHelpful(id):
-    request = UpdateHelpfulOnReviewByIdRequest(review_id = id, votes_helpful = "1")
+    request = UpdateHelpfulOnReviewByIdRequest(review_id = id, votes_helpful = 1)
     response = reviews_client.PutHelpfulReview(request)
     return {"user_id": response.author_steam_id, 
     "app_id": response.app_id, 
@@ -61,7 +61,7 @@ def userReviews(user_id):
     return reviewsList
 	
 def getHelpfulReviews():
-    request = ReviewsByHelpfulRequest(votes_helpful = "1", max_results = 5)
+    request = ReviewsByHelpfulRequest(votes_helpful = 1, max_results = 5)
     helpfulReviewsList = []
     for r in reviews_client.GetReviewsByHelpful(request).reviews:
         object = {"user_id": r.author_steam_id, "app_id": r.app_id, "review": r.review, "votes_helpful": r.votes_helpful}

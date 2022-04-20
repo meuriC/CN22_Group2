@@ -68,7 +68,7 @@ def create_review(result):
 class UserService(users_pb2_grpc.UsersServicer):
     def GetUserById(self, request, context):
         #results = db.remove({"_id": ObjectId(request.user_id)})
-        results = db.remove({"user_id": request.user_id})
+        results = db.find({"user_id": request.user_id})
         return marshalUserdbToUserService(results[0])
     
     def GetUserByUsername(self, request, context):
@@ -122,7 +122,7 @@ class UserService(users_pb2_grpc.UsersServicer):
              "timestamp_created": str(int(time.time())),
              "timestamp_updated": str(int(time.time())),
              "recommended": request.recommended,
-             "votes_helpful": "0",
+             "votes_helpful": 0,
 		     "author_steamid": request.user_id})
 
         resultsFinal = db3.find({"_id": results})

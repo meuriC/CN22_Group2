@@ -166,7 +166,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
                 print("Try: Review not found.")
                 return ReviewDetails()
             
-            totalVotes = str(int(results[0]["votes_helpful"]) + int(request.votes_helpful))
+            totalVotes = results[0]["votes_helpful"] + request.votes_helpful
             database.update_one({"review_id": request.review_id}, {"$set": {"votes_helpful": totalVotes}}) #request.votes_helpful
             results = list(database.find({"review_id": request.review_id}))
             return review_by_id(results[0])
@@ -202,6 +202,7 @@ class ReviewsService(reviews_pb2_grpc.ReviewsServicer):
 		
     def GetReviewsByHelpful(self, request, context):
         # Search on the 1st database
+        # NEED TO MODIFY LATER THE "$all" TO "$gte"
         results = list(db.find({"votes_helpful": {"$all": [request.votes_helpful]}}).limit(request.max_results)) 
         if len(results) < request.max_results:
             # Search on the 2nd database

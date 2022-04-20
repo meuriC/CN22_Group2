@@ -29,7 +29,7 @@ message UpdateReviewByIdRequest {
 
 message UpdateHelpfulOnReviewByIdRequest {
 	string review_id = 1;
-	string votes_helpful = 2; 
+	int32 votes_helpful = 2; 
 }
 
 message GameReviewsByLanguageRequest {
@@ -44,7 +44,7 @@ message ReviewsByUserIdRequest {
 }
 
 message ReviewsByHelpfulRequest {
-	string votes_helpful = 1;
+	int32 votes_helpful = 1;
 	int32 max_results = 2;
 }
 
@@ -62,7 +62,7 @@ message ReviewDetails {
 	string timestamp_created = 5;
 	string timestamp_updated = 6;
 	string recommended = 7;
-	string votes_helpful = 8;
+	int32 votes_helpful = 8;
 	string author_steam_id = 9;
 }
 

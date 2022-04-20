@@ -67,7 +67,7 @@ message ReviewData {
 	string timestamp_created = 5;
 	string timestamp_updated = 6;
 	string recommended = 7;
-	string votes_helpful = 8;
+	int32 votes_helpful = 8;
 	string author_steam_id = 9;
 } 
 

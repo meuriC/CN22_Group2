@@ -22,17 +22,17 @@ class ReviewsStub(object):
         self.GetReview = channel.unary_unary(
                 '/Reviews/GetReview',
                 request_serializer=reviews__pb2.ReviewByIdRequest.SerializeToString,
-                response_deserializer=reviews__pb2.ReviewData.FromString,
+                response_deserializer=reviews__pb2.ReviewDetails.FromString,
                 )
         self.GetGameReviews = channel.unary_unary(
                 '/Reviews/GetGameReviews',
                 request_serializer=reviews__pb2.ReviewsByGameRequest.SerializeToString,
-                response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
+                response_deserializer=reviews__pb2.ReviewDetailsResponse.FromString,
                 )
         self.PutReview = channel.unary_unary(
                 '/Reviews/PutReview',
                 request_serializer=reviews__pb2.UpdateReviewByIdRequest.SerializeToString,
-                response_deserializer=reviews__pb2.ReviewData.FromString,
+                response_deserializer=reviews__pb2.ReviewDetails.FromString,
                 )
         self.DeleteReview = channel.unary_unary(
                 '/Reviews/DeleteReview',
@@ -42,22 +42,22 @@ class ReviewsStub(object):
         self.PutHelpfulReview = channel.unary_unary(
                 '/Reviews/PutHelpfulReview',
                 request_serializer=reviews__pb2.UpdateHelpfulOnReviewByIdRequest.SerializeToString,
-                response_deserializer=reviews__pb2.ReviewData.FromString,
+                response_deserializer=reviews__pb2.ReviewDetails.FromString,
                 )
         self.GetGameReviewsByLanguage = channel.unary_unary(
                 '/Reviews/GetGameReviewsByLanguage',
                 request_serializer=reviews__pb2.GameReviewsByLanguageRequest.SerializeToString,
-                response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
+                response_deserializer=reviews__pb2.ReviewDetailsResponse.FromString,
                 )
         self.GetReviewsByUser = channel.unary_unary(
                 '/Reviews/GetReviewsByUser',
                 request_serializer=reviews__pb2.ReviewsByUserIdRequest.SerializeToString,
-                response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
+                response_deserializer=reviews__pb2.ReviewDetailsResponse.FromString,
                 )
         self.GetReviewsByHelpful = channel.unary_unary(
                 '/Reviews/GetReviewsByHelpful',
                 request_serializer=reviews__pb2.ReviewsByHelpfulRequest.SerializeToString,
-                response_deserializer=reviews__pb2.ReviewDataResponse.FromString,
+                response_deserializer=reviews__pb2.ReviewDetailsResponse.FromString,
                 )
 
 
@@ -123,17 +123,17 @@ def add_ReviewsServicer_to_server(servicer, server):
             'GetReview': grpc.unary_unary_rpc_method_handler(
                     servicer.GetReview,
                     request_deserializer=reviews__pb2.ReviewByIdRequest.FromString,
-                    response_serializer=reviews__pb2.ReviewData.SerializeToString,
+                    response_serializer=reviews__pb2.ReviewDetails.SerializeToString,
             ),
             'GetGameReviews': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGameReviews,
                     request_deserializer=reviews__pb2.ReviewsByGameRequest.FromString,
-                    response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
+                    response_serializer=reviews__pb2.ReviewDetailsResponse.SerializeToString,
             ),
             'PutReview': grpc.unary_unary_rpc_method_handler(
                     servicer.PutReview,
                     request_deserializer=reviews__pb2.UpdateReviewByIdRequest.FromString,
-                    response_serializer=reviews__pb2.ReviewData.SerializeToString,
+                    response_serializer=reviews__pb2.ReviewDetails.SerializeToString,
             ),
             'DeleteReview': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteReview,
@@ -143,22 +143,22 @@ def add_ReviewsServicer_to_server(servicer, server):
             'PutHelpfulReview': grpc.unary_unary_rpc_method_handler(
                     servicer.PutHelpfulReview,
                     request_deserializer=reviews__pb2.UpdateHelpfulOnReviewByIdRequest.FromString,
-                    response_serializer=reviews__pb2.ReviewData.SerializeToString,
+                    response_serializer=reviews__pb2.ReviewDetails.SerializeToString,
             ),
             'GetGameReviewsByLanguage': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGameReviewsByLanguage,
                     request_deserializer=reviews__pb2.GameReviewsByLanguageRequest.FromString,
-                    response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
+                    response_serializer=reviews__pb2.ReviewDetailsResponse.SerializeToString,
             ),
             'GetReviewsByUser': grpc.unary_unary_rpc_method_handler(
                     servicer.GetReviewsByUser,
                     request_deserializer=reviews__pb2.ReviewsByUserIdRequest.FromString,
-                    response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
+                    response_serializer=reviews__pb2.ReviewDetailsResponse.SerializeToString,
             ),
             'GetReviewsByHelpful': grpc.unary_unary_rpc_method_handler(
                     servicer.GetReviewsByHelpful,
                     request_deserializer=reviews__pb2.ReviewsByHelpfulRequest.FromString,
-                    response_serializer=reviews__pb2.ReviewDataResponse.SerializeToString,
+                    response_serializer=reviews__pb2.ReviewDetailsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -188,7 +188,7 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/GetReview',
             reviews__pb2.ReviewByIdRequest.SerializeToString,
-            reviews__pb2.ReviewData.FromString,
+            reviews__pb2.ReviewDetails.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -205,7 +205,7 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/GetGameReviews',
             reviews__pb2.ReviewsByGameRequest.SerializeToString,
-            reviews__pb2.ReviewDataResponse.FromString,
+            reviews__pb2.ReviewDetailsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -222,7 +222,7 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/PutReview',
             reviews__pb2.UpdateReviewByIdRequest.SerializeToString,
-            reviews__pb2.ReviewData.FromString,
+            reviews__pb2.ReviewDetails.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -256,7 +256,7 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/PutHelpfulReview',
             reviews__pb2.UpdateHelpfulOnReviewByIdRequest.SerializeToString,
-            reviews__pb2.ReviewData.FromString,
+            reviews__pb2.ReviewDetails.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -273,7 +273,7 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/GetGameReviewsByLanguage',
             reviews__pb2.GameReviewsByLanguageRequest.SerializeToString,
-            reviews__pb2.ReviewDataResponse.FromString,
+            reviews__pb2.ReviewDetailsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -290,7 +290,7 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/GetReviewsByUser',
             reviews__pb2.ReviewsByUserIdRequest.SerializeToString,
-            reviews__pb2.ReviewDataResponse.FromString,
+            reviews__pb2.ReviewDetailsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -307,6 +307,6 @@ class Reviews(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Reviews/GetReviewsByHelpful',
             reviews__pb2.ReviewsByHelpfulRequest.SerializeToString,
-            reviews__pb2.ReviewDataResponse.FromString,
+            reviews__pb2.ReviewDetailsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

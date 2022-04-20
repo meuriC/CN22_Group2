@@ -53,7 +53,7 @@ message ReviewInfo {
 	string timestamp_created = 4;
 	string timestamp_updated = 5;
 	string recommended = 6;
-	string votes_helpful = 7;
+	int32 votes_helpful = 7;
 	string author_steam_id = 8;
 }
 
