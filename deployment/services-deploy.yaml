@@ -217,26 +217,18 @@ spec:
         image: "cn20222/gateway-microservice:1.0"
         imagePullPolicy: Always
         ports:
-        - containerPort: 8443
+        - containerPort: 5000
         readinessProbe:
-          initialDelaySeconds: 10
+          initialDelaySeconds: 300
           httpGet:
             path: "/health"
-#            scheme: HTTPS
-            port: 8443
-#            httpHeaders:
-#            - name: "Cookie"
-#              value: "shop_session-id=x-readiness-probe"
+            port: 5000
         livenessProbe:
-          initialDelaySeconds: 10
-
+          initialDelaySeconds: 300
           httpGet:
             path: "/health"
-#            scheme: HTTPS
-            port: 8443
-#            httpHeaders:
-#            - name: "Cookie"
-#              value: "shop_session-id=x-liveness-probe"
+            port: 5000
+
         env:
         - name: "REVIEWS_HOST"
           valueFrom:
@@ -272,5 +264,5 @@ spec:
     app: api-gateway
   ports:
   - name: http
-    port: 8443
-    targetPort: 8443
+    port: 5000
+    targetPort: 5000
