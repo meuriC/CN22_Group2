@@ -8,7 +8,7 @@ echo "--Connecting to  Kubernetes Cluster--"
 }
 echo "--Moving to Deployment folder--"
 {
-	cd /deployment
+	cd deployment
 }
 echo "--Deploying Services--"
 {
