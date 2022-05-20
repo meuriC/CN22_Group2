@@ -5,7 +5,8 @@ grpc-interceptor ~= 0.11.0
 grpcio-tools ~= 1.30
 pymongo ~= 3.11.2
 dnspython ~= 2.1.0
-flask>=2.0.3
-python-dotenv>=0.19.2
-authlib>=1.0
-requests>=2.27.1
+flask >= 2.0.3
+python-dotenv >= 0.19.2
+authlib >= 1.0
+requests >= 2.27.1
+
