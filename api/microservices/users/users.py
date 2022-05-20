@@ -1,16 +1,14 @@
-
-from concurrent import futures
-
 import grpc
 import time
-from grpc_interceptor import ExceptionToStatusInterceptor
-from grpc_interceptor.exceptions import NotFound
 
+from concurrent import futures
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-# Connect to MongoDB
+from grpc_interceptor import ExceptionToStatusInterceptor
+from grpc_interceptor.exceptions import NotFound
 
+# Connect to MongoDB
 db = MongoClient("mongodb+srv://CN_Grupo11:jcAUsQouhCddO0xW@users.lastb.mongodb.net/test")
 db = db['database']
 db = db['users']

@@ -1,14 +1,12 @@
-from concurrent import futures
 import os
+import grpc
+import pymongo
+
+from concurrent import futures
+from pymongo import MongoClient
 
 from grpc_interceptor import ExceptionToStatusInterceptor
 from grpc_interceptor.exceptions import NotFound
-
-from pymongo import MongoClient
-from bson.objectid import ObjectId
-
-import grpc
-import pymongo
 
 from games_pb2 import *
 import games_pb2_grpc

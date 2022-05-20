@@ -13,9 +13,6 @@ from games_pb2_grpc import GamesStub
 from steam_pb2 import *
 import steam_pb2_grpc
 
-from pymongo import MongoClient
-from bson.objectid import ObjectId
-
 users_host = os.getenv("USERS_HOST", "localhost")
 users_channel = grpc.insecure_channel(f"{users_host}:50052")
 users_client = UsersStub(users_channel)

@@ -1,14 +1,12 @@
-from concurrent import futures
-
-from grpc_interceptor import ExceptionToStatusInterceptor
-from grpc_interceptor.exceptions import NotFound
-
-from pymongo import MongoClient
-from bson.objectid import ObjectId
-
 import time
 import grpc
-import pymongo  
+import pymongo 
+
+from concurrent import futures
+from pymongo import MongoClient
+
+from grpc_interceptor import ExceptionToStatusInterceptor
+from grpc_interceptor.exceptions import NotFound 
 
 # Connect to MongoDB
 # Provide the mongodb atlas url to connect python to mongodb using pymongo
