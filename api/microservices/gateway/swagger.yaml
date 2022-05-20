@@ -25,6 +25,9 @@ paths:
       summary: Get recommended games
       description: Get the top 10 games that were more recommended by the users
       operationId: api-steam.getRecommendedGames
+      security:
+        - oAuthCheck:
+          - open
       produces:
         - application/json
       responses:
@@ -405,6 +408,51 @@ paths:
               $ref: '#/definitions/ReviewsItem'
         "400":
           description: couldn´t find any helpful reviews
+  /user/login:
+    get:
+      tags:
+      - Users Service
+      summary: Logs user into the system
+      operationId: api-users.loginUser
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+          schema:
+            type: string
+        "400":
+          description: Invalid username/password supplied
+  /user/logout:
+    get:
+      tags:
+      - Users Service
+      summary: Logs out current logged in user session
+      operationId: api-users.logoutUser
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: successful operation
+securityDefinitions:
+  oAuthCheck:
+    type: oauth2
+    x-tokenInfoFunc: api-users.verify_token
+    authorizationUrl: https://dev-p3dnwrxe.us.auth0.com/authorize?audience=https://cn22group2/
+    flow: implicit
+    scopes:
+      open: All permissions
+
 definitions:
   UserItem:
     type: object
