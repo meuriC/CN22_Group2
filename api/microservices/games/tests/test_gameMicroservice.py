@@ -17,3 +17,10 @@ def test_getGameByName ():
     request = GameByNameRequest(name= gameName)
     response = client.GameByName(request)
     assert response.name == gameName, " test gameByName failed"
+
+'''
+def test_getRecommendedGames():
+    request = GetMostRecommendedGamesRequest(max_results=5)
+    response = client.GetRecommendedGames(request)
+    assert len(response) == 5, " test getRecommendedGames failed"
+'''
