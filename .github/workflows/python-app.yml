@@ -30,7 +30,7 @@ jobs:
         pip install -r api/microservices/games/requirements.txt
     - name: Start game micorservice
       run: |
-        python3 api/microservices/games/games.py
+        python3 api/microservices/games/games.py &
     - name: Test with pytest
       run: |
         pytest
