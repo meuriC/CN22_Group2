@@ -17,6 +17,14 @@ tags:
 schemes:
   - http
   - https
+securityDefinitions:
+  oAuthCheck:
+    type: oauth2
+    x-tokenInfoFunc: api-users.verify_token
+    authorizationUrl: https://dev-p3dnwrxe.us.auth0.com/authorize?audience=https://cn22group2/
+    flow: implicit
+    scopes:
+      open: All permissions 
 paths:
   /steam/recommendedGames:
     get:
@@ -443,15 +451,7 @@ paths:
       parameters: []
       responses:
         "200":
-          description: successful operation
-securityDefinitions:
-  oAuthCheck:
-    type: oauth2
-    x-tokenInfoFunc: api-users.verify_token
-    authorizationUrl: https://dev-p3dnwrxe.us.auth0.com/authorize?audience=https://cn22group2/
-    flow: implicit
-    scopes:
-      open: All permissions
+          description: successful operation   
 
 definitions:
   UserItem:
