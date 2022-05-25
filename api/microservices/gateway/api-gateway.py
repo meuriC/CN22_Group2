@@ -40,7 +40,7 @@ auth0 = oauth.register(
     authorize_url='https://dev-p3dnwrxe.us.auth0.com/authorize',
     response_type='code',
     client_kwargs={
-        'scope': 'open',
+        'scope': 'admin user'
     },
 )
 

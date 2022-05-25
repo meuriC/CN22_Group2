@@ -24,7 +24,8 @@ securityDefinitions:
     authorizationUrl: https://dev-p3dnwrxe.us.auth0.com/authorize?audience=https://cn22group2/
     flow: implicit
     scopes:
-      open: All permissions 
+      admin: Only for app Admins
+      user: Only for authenticated users
 paths:
   /steam/recommendedGames:
     get:
@@ -33,9 +34,6 @@ paths:
       summary: Get recommended games
       description: Get the top 10 games that were more recommended by the users
       operationId: api-steam.getRecommendedGames
-      security:
-        - oAuthCheck:
-          - open
       produces:
         - application/json
       responses:
@@ -56,6 +54,9 @@ paths:
       summary: Get most active users
       description: Get the top 10 most active users
       operationId: api-steam.getActiveUsers
+      security:
+        - oAuthCheck:
+          - user
       produces:
         - application/json
       responses:
@@ -74,6 +75,9 @@ paths:
       summary: Creates or updates new User
       description: Creates a new user
       operationId: api-users.createUser
+      security:
+        - oAuthCheck:
+            - admin
       consumes:
         - application/json
       produces:
@@ -101,6 +105,9 @@ paths:
       summary: Get information about a specific user
       description: This call returns information about a specified user_id
       operationId: api-users.getUser
+      security:
+        - oAuthCheck:
+            - user
       parameters:
         - name: user_id
           in: path
@@ -121,6 +128,9 @@ paths:
       summary: Delete account
       description: Deletes the account of the user
       operationId: api-users.deleteUserAccount
+      security:
+        - oAuthCheck:
+            - admin
       parameters:
         - name: user_id
           in: path
@@ -140,6 +150,9 @@ paths:
         summary: Creates a new Review
         description: Creates a new review
         operationId: api-users.createReview
+        security:
+        - oAuthCheck:
+            - user
         consumes:
         - application/json
         produces:
@@ -197,6 +210,9 @@ paths:
       summary: Updates an existing review
       description: Updates a review existing in the dataset
       operationId: api-reviews.updateReview
+      security:
+        - oAuthCheck:
+            - user
       consumes:
       - application/json
       produces:
@@ -225,6 +241,9 @@ paths:
       summary: Delete a review by it´s id
       description: Deletes a review from the dataset
       operationId: api-reviews.deleteReview
+      security:
+        - oAuthCheck:
+            - admin
       parameters:
       - name: id
         in: path
@@ -244,6 +263,9 @@ paths:
       summary: Set Review as helpful
       description: Sets a specific review as helpful
       operationId: api-reviews.setReviewHelpful
+      security:
+        - oAuthCheck:
+            - user
       consumes:
       - application/json
       produces:
@@ -267,6 +289,9 @@ paths:
       summary: Get game reviews by language
       description: With this call you can get all reviews in a game in a specific language
       operationId: api-reviews.getGameReviewsByLanguage
+      security:
+        - oAuthCheck:
+            - user
       produces:
       - application/json
       parameters:
@@ -296,6 +321,9 @@ paths:
       summary: Get all reviews from a specific user
       description: With this call you can get all the reviews that a specific user wrote
       operationId: api-reviews.userReviews
+      security:
+        - oAuthCheck:
+            - user
       parameters:
       - name: user_id
         in: path
@@ -319,6 +347,9 @@ paths:
       summary: Get all the helpful reviews
       description: With this call you can get all reviews which were marked as helpful at least once (helpful >= 1)
       operationId: api-reviews.getHelpfulReviews
+      security:
+        - oAuthCheck:
+            - user
       parameters: []
       responses:
         "200":
@@ -358,6 +389,9 @@ paths:
       summary: Delete a game by it´s name
       description: Deletes a game from the dataset
       operationId: api-games.deleteGameByName
+      security:
+        - oAuthCheck:
+            - admin
       parameters:
       - name: name
         in: path
@@ -377,6 +411,9 @@ paths:
       summary: Creates a new game on the list
       description: Creates a new game
       operationId: api-games.createGame
+      security:
+        - oAuthCheck:
+            - admin
       consumes:
       - application/json
       produces:
@@ -416,42 +453,42 @@ paths:
               $ref: '#/definitions/ReviewsItem'
         "400":
           description: couldn´t find any helpful reviews
-  /user/login:
-    get:
-      tags:
-      - Users Service
-      summary: Logs user into the system
-      operationId: api-users.loginUser
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              type: integer
-              format: int32
-              description: calls per hour allowed by the user
-            X-Expires-After:
-              type: string
-              format: date-time
-              description: date in UTC when token expires
-          schema:
-            type: string
-        "400":
-          description: Invalid username/password supplied
-  /user/logout:
-    get:
-      tags:
-      - Users Service
-      summary: Logs out current logged in user session
-      operationId: api-users.logoutUser
-      produces:
-      - application/json
-      parameters: []
-      responses:
-        "200":
-          description: successful operation   
+#  /user/login:
+#    get:
+#      tags:
+#      - Users Service
+#      summary: Logs user into the system
+#      operationId: api-users.loginUser
+#      produces:
+#      - application/json
+#      responses:
+#        "200":
+#          description: successful operation
+#          headers:
+#            X-Rate-Limit:
+#              type: integer
+#              format: int32
+#              description: calls per hour allowed by the user
+#            X-Expires-After:
+#              type: string
+#              format: date-time
+#              description: date in UTC when token expires
+#          schema:
+#            type: string
+#        "400":
+#         description: Invalid username/password supplied
+#  /user/logout:
+#    get:
+#      tags:
+#      - Users Service
+#      summary: Logs out current logged in user session
+#      operationId: api-users.logoutUser
+#      produces:
+#      - application/json
+#      parameters: []
+#      responses:
+#        "200":
+#          description: successful operation   
 
 definitions:
   UserItem:
