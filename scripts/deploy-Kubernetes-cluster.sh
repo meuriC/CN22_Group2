@@ -1,6 +1,6 @@
 echo "--Creating Kubernetes Cluster--"
 {
-	gcloud container clusters create cluster-steam --zone europe-west1-b --cluster-version 1.22.8-gke.200 --release-channel rapid --num-nodes=1
+	gcloud container clusters create cluster-steam --zone europe-west1-b --cluster-version 1.22.8-gke.2200 --release-channel rapid --num-nodes=1
 }
 echo "--Connecting to  Kubernetes Cluster--"
 {
@@ -17,4 +17,8 @@ echo "--Deploying Services--"
 echo "--Deploying Ingress--"
 {
 	kubectl apply -f ingress-deploy.yaml 
+}
+echo "--Deploying Ingress--"
+{
+	kubectl apply -f ingress-steam.yaml 
 }
