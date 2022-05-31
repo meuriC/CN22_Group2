@@ -18,3 +18,7 @@ echo "--Deploying Ingress--"
 {
 	kubectl apply -f ingress-deploy.yaml 
 }
+echo "--Deploying Ingress--"
+{
+	kubectl apply -f ingress-steam.yaml 
+}
