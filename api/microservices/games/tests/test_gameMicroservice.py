@@ -20,6 +20,11 @@ def test_getGameByName ():
     assert response.name == gameName, " test gameByName failed"
 
 
+def test_getGameByNameNotExists ():
+    request = GameByNameRequest(name= "tetsudt")
+    response = client.GameByName(request)
+    assert response.name == "", "test_getGameByNameNotExists failed"
+
 def test_getRecommendedGames():
     request = GetMostRecommendedGamesRequest(max_results=5)
     response = client.GetRecommendedGames(request)
@@ -30,6 +35,7 @@ def test_deleteGame():
     response = client.DeleteGameByName(request)
     assert response.deleted == True, "test_deleteGame failed"
 
+
 def test_GetMostReviewedGames():
     request = GetMostReviewedGamesRequest(max_results=5)
     response = client.GetGames(request)
@@ -38,4 +44,4 @@ def test_GetMostReviewedGames():
 def test_gameReviews():
     request = GameReviewsRequest(app_id="883710", max_results=2)
     response = client.GameReviews(request)
-    assert len(response.game) == 5, " test_gameReviews failed"
+    assert len(response.reviews) == 2, " test_gameReviews failed"
