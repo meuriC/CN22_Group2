@@ -12,3 +12,6 @@ docker push cn20222/reviews-microservice:1.0
 
 docker tag gateway:latest cn20222/gateway-microservice:1.0
 docker push cn20222/gateway-microservice:1.0
+
+docker tag py-prom:latest cn20222/prometheus-metrics:1.0
+docker push cn20222/prometheus-metrics:1.0

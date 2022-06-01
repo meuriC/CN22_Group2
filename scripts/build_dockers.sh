@@ -38,6 +38,11 @@ printf "\t Building Gateway "
 } &> /dev/null 
 printf "... done\n"
 
+printf "\t Building Metrics " 
+{ sudo docker build . -f metrics/Dockerfile -t py-prom
+} &> /dev/null 
+printf "... done\n"
+
 printf "\t Building Containers with compose\n" 
 sudo docker-compose up
 
