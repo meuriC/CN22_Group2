@@ -1,6 +1,7 @@
 import sys
 from urllib import response
-sys.path.append('../')
+#sys.path.append('../')
+sys.path.append('api/microservices/users/')
 
 from users_pb2 import * 
 from users_pb2_grpc import UsersStub
