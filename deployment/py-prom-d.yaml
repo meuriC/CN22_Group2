@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-prom-d
+  labels:
+    app: py-prom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: py-prom
+  template:
+    metadata:
+      labels:
+        app: py-prom
+    spec:
+      containers:
+      - name: py-prom
+        image: cn20222/prometheus-metrics:1.0
+        ports:
+        - containerPort: 8000
