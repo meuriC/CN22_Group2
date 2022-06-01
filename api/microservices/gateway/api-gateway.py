@@ -10,7 +10,7 @@ from flask import redirect
 # create the application instance
 options = {
     "swagger_ui_config": {
-        "oauth2RedirectUrl": "https://localhost:5000/ui/oauth2-redirect.html",
+        "oauth2RedirectUrl": "http://localhost:5000/ui/oauth2-redirect.html",
     }
 }
 app = connexion.App(__name__, specification_dir="./", options=options)
@@ -20,9 +20,10 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     "/ui",
     "swagger.yaml",
     config={
-        'spec': swagger_yml, 'oauth2RedirectUrl': "https://localhost:5000/ui/oauth2-redirect.html"},
+        'spec': swagger_yml, 'oauth2RedirectUrl': "http://localhost:5000/ui/oauth2-redirect.html"},
     oauth_config={
-        'clientId': "sUnKWfmlaywQm64EtEZpioz5uRK5GAzc"}
+        'clientId': "sUnKWfmlaywQm64EtEZpioz5uRK5GAzc",
+        "usePkceWithAuthorizationCodeGrant": True}
 )
 app.app.register_blueprint(swaggerui_blueprint)
 
@@ -37,8 +38,9 @@ auth0 = oauth.register(
     api_base_url='https://dev-p3dnwrxe.us.auth0.com',
     access_token_url='https://dev-p3dnwrxe.us.auth0.com/oauth/token',
     authorize_url='https://dev-p3dnwrxe.us.auth0.com/authorize',
+    response_type='code',
     client_kwargs={
-        'scope': 'open',
+        'scope': 'admin user'
     },
 )
 
@@ -48,7 +50,7 @@ app.add_api("swagger.yaml")
 
 @app.app.route('/login')
 def call():
-    return auth0.authorize_redirect(redirect_uri="https://localhost:5000/ui/callback",  audience='https://cn22group2/')
+    return auth0.authorize_redirect(redirect_uri="http://localhost:5000/ui/callback",  audience='https://cn22group2/')
 
 
 @app.app.route('/callback')
