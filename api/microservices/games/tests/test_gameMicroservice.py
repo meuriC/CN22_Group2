@@ -14,11 +14,16 @@ def test_createGame():
     response = client.CreateGame(request)
     assert response.name == gameName, " test createGame failed"
 
+def test_createGameWithoutData():
+    request = CreateGameRequest()
+    response = client.CreateGame(request)
+    assert response.name == "", "test_createGameWithoutData failed"
+
+
 def test_getGameByName ():
     request = GameByNameRequest(name= gameName)
     response = client.GameByName(request)
     assert response.name == gameName, " test gameByName failed"
-
 
 def test_getGameByNameNotExists ():
     request = GameByNameRequest(name= "tetsudt")
@@ -45,3 +50,9 @@ def test_gameReviews():
     request = GameReviewsRequest(app_id="883710", max_results=2)
     response = client.GameReviews(request)
     assert len(response.reviews) == 2, " test_gameReviews failed"
+
+def test_getGameByID ():
+    request = GameByIdRequest(id="883710")
+    response = client.GameByID(request)
+    assert response.id == "883710", "test_getGameByID failed"
+    
