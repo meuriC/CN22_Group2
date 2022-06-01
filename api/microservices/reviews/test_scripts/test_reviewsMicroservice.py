@@ -1,5 +1,6 @@
 import sys
-sys.path.append('../')
+#sys.path.append('../')
+sys.path.append('api/microservices/reviews/')
 
 from reviews_pb2 import *
 from reviews_pb2_grpc  import ReviewsStub
