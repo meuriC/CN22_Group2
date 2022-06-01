@@ -1,5 +1,5 @@
 git clone --recursive https://github.com/GoogleCloudPlatform/click-to-deploy.git
-gcloud container clusters get-credentials cluster-recommendations --zone europe-west4-a
+gcloud container clusters get-credentials cluster-2 --zone us-central1-c
 kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
 cd click-to-deploy/k8s/prometheus
 
