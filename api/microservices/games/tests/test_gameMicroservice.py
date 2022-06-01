@@ -1,5 +1,6 @@
 import sys
-sys.path.append('../')
+#sys.path.append('../')
+sys.path.append('api/microservices/games/')
 
 from games_pb2 import *
 from games_pb2_grpc import GamesStub
