@@ -36,7 +36,7 @@ def test_getgameReviews():
 
 
 def test_putHelpfulReview():
-    request = UpdateHelpfulOnReviewByIdRequest(review_id="50461907", votes_helpful=1)
+    request = UpdateHelpfulOnReviewByIdRequest(review_id="50461687", votes_helpful=1)
     response = client.PutHelpfulReview(request)
     assert response.votes_helpful== 1, "test_PutHelpfulReview failed"
 
@@ -46,7 +46,7 @@ def test_deleteReviewNonExists():
     assert response.status== False, "test_deleteReviewNonExists failed"
 
 def test_deleteReview():
-    request = ReviewByIdRequest(review_id="50461951")
+    request = ReviewByIdRequest(review_id="50461687")
     response = client.DeleteReview(request)
     assert response.status== True, "test_DeleteReview failed"
 
