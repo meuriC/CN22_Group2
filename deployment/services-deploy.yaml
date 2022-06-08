@@ -22,7 +22,7 @@ metadata:
 spec:
   strategy:
     type: Recreate
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: "reviews"
@@ -61,7 +61,7 @@ metadata:
 spec:
   strategy:
     type: Recreate
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: "games"
@@ -101,7 +101,7 @@ metadata:
 spec:
   strategy:
     type: Recreate
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: "users"
@@ -141,7 +141,7 @@ metadata:
 spec:
   strategy:
     type: Recreate
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: "steam"
@@ -201,7 +201,7 @@ metadata:
 spec:
   strategy:
     type: Recreate
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: api-gateway
