@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 14,
+  "id": 15,
   "links": [],
   "panels": [
     {
@@ -34,7 +34,7 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 0
       },
@@ -66,16 +66,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_memory_MemAvailable_bytes{instance=\"gke-cluster-2-default-pool-5c2eb5bc-24tb\"}/1000000000",
+          "expr": "node_memory_MemAvailable_bytes/1000000000",
           "interval": "",
-          "legendFormat": "Memory Available",
+          "legendFormat": "Memory Available for the 3 instances",
           "refId": "A"
         },
         {
-          "expr": "node_memory_MemTotal_bytes{instance=\"gke-cluster-2-default-pool-5c2eb5bc-24tb\"}/1000000000",
+          "expr": "node_memory_MemTotal_bytes/1000000000",
           "hide": false,
           "interval": "",
-          "legendFormat": "Total Memory",
+          "legendFormat": "Total Memory for the 3 instances",
           "refId": "B"
         }
       ],
@@ -153,10 +153,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 0
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 8
       },
       "id": 8,
       "options": {
@@ -174,9 +174,9 @@
       "pluginVersion": "7.4.5",
       "targets": [
         {
-          "expr": "node_memory_MemAvailable_bytes{instance=\"gke-cluster-2-default-pool-5c2eb5bc-24tb\"}/1000000000",
+          "expr": "node_memory_MemAvailable_bytes/1000000000",
           "interval": "",
-          "legendFormat": "Memory Available",
+          "legendFormat": "Memory Available for the 3 instances",
           "refId": "A"
         }
       ],
@@ -201,7 +201,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 14
       },
       "hiddenSeries": false,
       "id": 2,
@@ -233,7 +233,7 @@
         {
           "expr": "100 - (avg(irate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100)",
           "interval": "",
-          "legendFormat": "Cluster-2",
+          "legendFormat": "cluster-steam",
           "refId": "A"
         }
       ],
@@ -308,7 +308,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 14
       },
       "id": 4,
       "options": {
@@ -350,5 +350,5 @@
   "timezone": "",
   "title": "CN-Group2",
   "uid": "F0Dn4Gjnz",
-  "version": 6
+  "version": 2
 }
