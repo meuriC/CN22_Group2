@@ -680,36 +680,31 @@ webhooks:
     resources:
     - ingresses
   sideEffects: None
-  actions:
-  - action: "This might take a while!"
-    type: "SLEEP"
-    trigger_time: "ON_EVERY_EXECUTION"
-    sleep_in_sec: 200
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+  #name: steam-ingress
   #annotations:
     #kubernetes.io/ingress.global-static-ip-name: steam-reviews-ip
-spec:
-  ingressClassName: nginx
-  defaultBackend:
-    service:
-      name: api-gateway
-      port:
-        number: 80
-  rules:
-  - host: steamreviews.sytes.net
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: api-gateway
-            port:
-              number: 5000
+#spec:
+  #ingressClassName: nginx
+  #defaultBackend:
+    #service:
+      #name: api-gateway
+      #port:
+        #number: 80
+  #rules:
+  #- host: steamreviews.sytes.net
+  #- http:
+      #paths:
+      #- path: /
+        #pathType: Prefix
+        #backend:
+          #service:
+            #name: api-gateway
+            #port:
+              #number: 5000
 #---
 #apiVersion: v1
 #kind: Service
