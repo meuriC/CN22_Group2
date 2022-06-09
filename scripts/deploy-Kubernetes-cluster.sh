@@ -21,7 +21,8 @@ sleep 1.5m
 echo -e "\n--Deploying Ingress--" 
 kubectl apply -f ingress-steam.yaml 
 
-echo -e "\nOn another tab go to the marketplace search for 'prometheus & grafana' -> configure -> deploy -> AFTER completion -> Press enter"
+echo -e "\nLink --> https://console.cloud.google.com/marketplace/product/google/prometheus?project=cloud-computing-345718"
+echo -e "\nOn another tab go to the marketplace search for 'prometheus & grafana' or use the link above -> configure -> deploy -> AFTER completion -> Press enter"
 read -p "Press enter to continue"
 
 echo -e "\n--Deploying Prometheus and Grafana"
