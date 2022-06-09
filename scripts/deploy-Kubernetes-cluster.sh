@@ -5,8 +5,6 @@ sleep 10s
 
 echo "--Connecting to Kubernetes Cluster--" 
 gcloud container clusters get-credentials cluster-steam --zone europe-west1-b
-
-echo "--Moving to Deployment folder--" 
 cd ../deployment
 
 echo "--Deploying Services--" 
