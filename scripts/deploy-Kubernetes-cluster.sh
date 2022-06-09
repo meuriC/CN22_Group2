@@ -27,4 +27,5 @@ echo "This might take a while. Wait a few minutes..."
 sleep 1.5m
 
 echo "--Deploying Prometheus and Grafana"
+cd ../scripts
 bash prometheus_grafana.sh
