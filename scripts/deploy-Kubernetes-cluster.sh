@@ -17,7 +17,14 @@ sleep 10s
 echo "--Deploying Ingress--" 
 kubectl apply -f ingress-deploy.yaml 
 
-sleep 3m
+echo "This might take a while. Wait a few minutes..."
+sleep 1.5m
 
 echo "--Deploying Ingress--" 
 kubectl apply -f ingress-steam.yaml 
+
+echo "This might take a while. Wait a few minutes..."
+sleep 1.5m
+
+echo "--Deploying Prometheus and Grafana"
+bash prometheus_grafana.sh
