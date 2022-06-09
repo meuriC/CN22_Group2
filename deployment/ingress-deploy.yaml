@@ -680,13 +680,11 @@ webhooks:
     resources:
     - ingresses
   sideEffects: None
-
----
-actions:
-- action: "This might take a while"
-  type: "SLEEP"
-  trigger_time: "ON_EVERY_EXECUTION"
-  sleep_in_sec: 120
+  actions:
+  - action: "This might take a while!"
+    type: "SLEEP"
+    trigger_time: "ON_EVERY_EXECUTION"
+    sleep_in_sec: 200
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
