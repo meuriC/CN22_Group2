@@ -17,5 +17,7 @@ sleep 10s
 echo "--Deploying Ingress--" 
 kubectl apply -f ingress-deploy.yaml 
 
-#echo "--Deploying Ingress--" 
-#kubectl apply -f ingress-steam.yaml 
+sleep 3m
+
+echo "--Deploying Ingress--" 
+kubectl apply -f ingress-steam.yaml 
