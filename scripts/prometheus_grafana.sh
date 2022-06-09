@@ -1,13 +1,15 @@
 cd ../..
 
-gcloud services enable containerregistry.googleapis.com
 gcloud auth configure-docker
 gcloud container clusters get-credentials cluster-steam --zone europe-west1-b
 
 git clone --recursive https://github.com/GoogleCloudPlatform/click-to-deploy.git
 kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
-cd click-to-deploy/k8s/prometheus
 
+echo "This might take a while. Wait a few minutes..."
+sleep 1.5m
+
+cd click-to-deploy/k8s/prometheus
 export APP_INSTANCE_NAME=prometheus-1
 export NAMESPACE=grafana
 
@@ -56,11 +58,12 @@ awk 'FNR==1 {print "---"}{print}' manifest/* | envsubst '$APP_INSTANCE_NAME $NAM
 kubectl apply -f "${APP_INSTANCE_NAME}_manifest.yaml" --namespace "${NAMESPACE}"
 echo "https://console.cloud.google.com/kubernetes/application/${ZONE}/${CLUSTER}/${NAMESPACE}/${APP_INSTANCE_NAME}"
 
-kubectl patch svc "$APP_INSTANCE_NAME-grafana" --namespace "$NAMESPACE" -p '{"spec": {"type": "LoadBalancer"}}' #IP externo
+kubectl patch svc "$APP_INSTANCE_NAME-grafana" --namespace "$NAMESPACE" -p '{"spec": {"type": "LoadBalancer"}}' 
+
 #SERVICE_IP=$(kubectl get svc $APP_INSTANCE_NAME-grafana --namespace $NAMESPACE --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
 #echo "http://${SERVICE_IP}/"
 
-#kubectl --insecure-skip-tls-verify port-forward --namespace ${NAMESPACE} ${APP_INSTANCE_NAME}-grafana 3000 #IP local
+#kubectl --insecure-skip-tls-verify port-forward --namespace ${NAMESPACE} ${APP_INSTANCE_NAME}-grafana 3000
 
 #-------CHECK CREDENTIALS-------
 GRAFANA_USERNAME="$(kubectl get secret $APP_INSTANCE_NAME-grafana --namespace $NAMESPACE --output=jsonpath='{.data.admin-user}' | base64 --decode)"
