@@ -1,13 +1,7 @@
-cd ../deployment/metrics
-kubectl apply -f prometheus-1-alertmanager.yaml
-kubectl apply -f prometheus-1-alertmanager-operated.yaml
-kubectl apply -f prometheus-1-kube-state-metrics.yaml
-kubectl apply -f prometheus-1-prometheus.yaml
-kubectl apply -f prometheus-1-grafana.yaml
-
-cd ../../..
+cd ../..
 git clone --recursive https://github.com/GoogleCloudPlatform/click-to-deploy.git
 gcloud container clusters get-credentials cluster-steam --zone europe-west1-b
+gcloud auth configure-docker
 kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
 
 cd click-to-deploy/k8s/prometheus
