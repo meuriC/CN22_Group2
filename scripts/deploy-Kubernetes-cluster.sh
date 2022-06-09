@@ -1,4 +1,4 @@
-git clone https://github.com/meuriC/CN22_Group2.git
+#git clone https://github.com/meuriC/CN22_Group2.git
 
 echo "--Creating Kubernetes Cluster--" 
 gcloud container clusters create cluster-steam --zone europe-west1-b --cluster-version 1.21.12-gke.1700 --release-channel rapid --num-nodes=3
