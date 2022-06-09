@@ -1,17 +1,11 @@
 cd ../..
-
-gcloud auth configure-docker
-gcloud container clusters get-credentials cluster-steam --zone europe-west1-b
-
 git clone --recursive https://github.com/GoogleCloudPlatform/click-to-deploy.git
+gcloud container clusters get-credentials cluster-steam --zone europe-west1-b
 kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
-
-echo "This might take a while. Wait a few minutes..."
-sleep 1.5m
 
 cd click-to-deploy/k8s/prometheus
 export APP_INSTANCE_NAME=prometheus-1
-export NAMESPACE=grafana
+export NAMESPACE=default
 
 TAG=2.11
 export IMAGE_PROMETHEUS="marketplace.gcr.io/google/prometheus:${TAG}"
