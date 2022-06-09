@@ -28,3 +28,10 @@ read -p "Press enter to continue"
 echo -e "\n--Deploying Prometheus and Grafana"
 cd ../scripts
 bash prometheus_grafana.sh
+
+sleep 10s
+gcloud compute addresses create steam-reviews-ip --global
+gcloud compute addresses describe steam-reviews-ip --global
+kubectl get ingress
+
+gcloud dns --project=cloud-computing-345718 managed-zones create steam-reviews-zone --description="" --dns-name="steamreviews.sytes.net." --visibility="public" --dnssec-state="true"
