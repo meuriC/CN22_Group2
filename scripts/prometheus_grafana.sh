@@ -1,9 +1,9 @@
 cd ../deployment/metrics
 kubectl apply -f prometheus-1-alertmanager.yaml
-kubectl apply -f prometheus-1-prometheus.yaml
-kubectl apply -f prometheus-1-kube-state-metrics.yaml
-kubectl apply -f prometheus-1-grafana.yaml
 kubectl apply -f prometheus-1-alertmanager-operated.yaml
+kubectl apply -f prometheus-1-kube-state-metrics.yaml
+kubectl apply -f prometheus-1-prometheus.yaml
+kubectl apply -f prometheus-1-grafana.yaml
 
 cd ../../..
 git clone --recursive https://github.com/GoogleCloudPlatform/click-to-deploy.git
@@ -12,7 +12,7 @@ kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketpl
 
 cd click-to-deploy/k8s/prometheus
 export APP_INSTANCE_NAME=prometheus-1
-export NAMESPACE=grafana
+export NAMESPACE=default
 
 TAG=2.11
 export IMAGE_PROMETHEUS="marketplace.gcr.io/google/prometheus:${TAG}"
