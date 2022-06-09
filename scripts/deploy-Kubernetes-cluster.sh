@@ -22,7 +22,7 @@ echo "--Deploying Ingress--"
 kubectl apply -f ingress-steam.yaml 
 
 echo "This might take a while. Wait a few minutes..."
-sleep 1m
+sleep 5m
 echo "DONE"
 
 #echo "--Deploying Prometheus and Grafana"
