@@ -8,11 +8,11 @@ spec:
   ingressClassName: nginx
   defaultBackend:
     service:
-      name: api-gateway
+      name: api-gateway-backend
       port:
-        number: 80
+        number: 5000
   rules:
-  - host: steamreviews.sytes.net
+  #- host: steamreviews.sytes.net
   - http:
       paths:
       - path: /
@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-gateway
+  name: api-gateway-backend
 spec:
   type: NodePort
   selector:
