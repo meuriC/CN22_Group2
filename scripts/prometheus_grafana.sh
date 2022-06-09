@@ -1,3 +1,5 @@
+cd ../..
+
 git clone --recursive https://github.com/GoogleCloudPlatform/click-to-deploy.git
 gcloud container clusters get-credentials cluster-steam --zone europe-west1-b
 kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
