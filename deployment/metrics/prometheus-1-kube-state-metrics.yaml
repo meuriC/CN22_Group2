@@ -1,77 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    cloud.google.com/neg: '{"ingress":true}'
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"kube-state-metrics","app.kubernetes.io/name":"prometheus-1","k8s-app":"kube-state-metrics"},"name":"prometheus-1-kube-state-metrics","namespace":"grafana","ownerReferences":[{"apiVersion":"app.k8s.io/v1beta1","blockOwnerDeletion":true,"kind":"Application","name":"prometheus-1","uid":"e5538ccd-e2bf-42ff-9ba5-d8a2d01aad3c"}]},"spec":{"ports":[{"name":"http-metrics","port":8080,"protocol":"TCP","targetPort":"http-metrics"},{"name":"telemetry","port":8081,"protocol":"TCP","targetPort":"telemetry"}],"selector":{"k8s-app":"kube-state-metrics"}}}
-  creationTimestamp: "2022-06-09T14:47:28Z"
   labels:
     app.kubernetes.io/component: kube-state-metrics
     app.kubernetes.io/name: prometheus-1
     k8s-app: kube-state-metrics
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          .: {}
-          f:kubectl.kubernetes.io/last-applied-configuration: {}
-        f:labels:
-          .: {}
-          f:app.kubernetes.io/component: {}
-          f:app.kubernetes.io/name: {}
-          f:k8s-app: {}
-        f:ownerReferences:
-          .: {}
-          k:{"uid":"e5538ccd-e2bf-42ff-9ba5-d8a2d01aad3c"}:
-            .: {}
-            f:apiVersion: {}
-            f:blockOwnerDeletion: {}
-            f:kind: {}
-            f:name: {}
-            f:uid: {}
-      f:spec:
-        f:ports:
-          .: {}
-          k:{"port":8080,"protocol":"TCP"}:
-            .: {}
-            f:name: {}
-            f:port: {}
-            f:protocol: {}
-            f:targetPort: {}
-          k:{"port":8081,"protocol":"TCP"}:
-            .: {}
-            f:name: {}
-            f:port: {}
-            f:protocol: {}
-            f:targetPort: {}
-        f:selector:
-          .: {}
-          f:k8s-app: {}
-        f:sessionAffinity: {}
-        f:type: {}
-    manager: kubectl-client-side-apply
-    operation: Update
-    time: "2022-06-09T14:47:28Z"
   name: prometheus-1-kube-state-metrics
   namespace: grafana
-  ownerReferences:
-  - apiVersion: app.k8s.io/v1beta1
-    blockOwnerDeletion: true
-    kind: Application
-    name: prometheus-1
-    uid: e5538ccd-e2bf-42ff-9ba5-d8a2d01aad3c
-  resourceVersion: "5705"
-  uid: 15436921-00df-4af3-92db-02db558955c0
+---
+apiVersion: app.k8s.io/v1beta1
+blockOwnerDeletion: true
+kind: Application
+name: prometheus-1
 spec:
-  clusterIP: 10.124.9.110
-  clusterIPs:
-  - 10.124.9.110
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
+  clusterIP: None
   ports:
   - name: http-metrics
     port: 8080
@@ -81,9 +23,5 @@ spec:
     port: 8081
     protocol: TCP
     targetPort: telemetry
-  selector:
-    k8s-app: kube-state-metrics
-  sessionAffinity: None
-  type: ClusterIP
-status:
-  loadBalancer: {}
+    selector: 
+      k8s-app: kube-state-metrics

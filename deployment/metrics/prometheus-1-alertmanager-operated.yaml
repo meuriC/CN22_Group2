@@ -1,76 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    cloud.google.com/neg: '{"ingress":true}'
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"alertmanager","app.kubernetes.io/name":"prometheus-1"},"name":"prometheus-1-alertmanager-operated","namespace":"grafana","ownerReferences":[{"apiVersion":"app.k8s.io/v1beta1","blockOwnerDeletion":true,"kind":"Application","name":"prometheus-1","uid":"e5538ccd-e2bf-42ff-9ba5-d8a2d01aad3c"}]},"spec":{"clusterIP":"None","ports":[{"name":"mesh","port":6783,"protocol":"TCP","targetPort":6783},{"name":"http","port":9093,"protocol":"TCP","targetPort":9093}],"selector":{"k8s-app":"alertmanager"},"type":"ClusterIP"}}
-  creationTimestamp: "2022-06-09T14:47:28Z"
   labels:
     app.kubernetes.io/component: alertmanager
     app.kubernetes.io/name: prometheus-1
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          .: {}
-          f:kubectl.kubernetes.io/last-applied-configuration: {}
-        f:labels:
-          .: {}
-          f:app.kubernetes.io/component: {}
-          f:app.kubernetes.io/name: {}
-        f:ownerReferences:
-          .: {}
-          k:{"uid":"e5538ccd-e2bf-42ff-9ba5-d8a2d01aad3c"}:
-            .: {}
-            f:apiVersion: {}
-            f:blockOwnerDeletion: {}
-            f:kind: {}
-            f:name: {}
-            f:uid: {}
-      f:spec:
-        f:clusterIP: {}
-        f:ports:
-          .: {}
-          k:{"port":6783,"protocol":"TCP"}:
-            .: {}
-            f:name: {}
-            f:port: {}
-            f:protocol: {}
-            f:targetPort: {}
-          k:{"port":9093,"protocol":"TCP"}:
-            .: {}
-            f:name: {}
-            f:port: {}
-            f:protocol: {}
-            f:targetPort: {}
-        f:selector:
-          .: {}
-          f:k8s-app: {}
-        f:sessionAffinity: {}
-        f:type: {}
-    manager: kubectl-client-side-apply
-    operation: Update
-    time: "2022-06-09T14:47:28Z"
+    k8s-app: alertmanager
   name: prometheus-1-alertmanager-operated
   namespace: grafana
-  ownerReferences:
-  - apiVersion: app.k8s.io/v1beta1
-    blockOwnerDeletion: true
-    kind: Application
-    name: prometheus-1
-    uid: e5538ccd-e2bf-42ff-9ba5-d8a2d01aad3c
-  resourceVersion: "5690"
-  uid: cd9ab754-0af6-4b7d-8db3-00847629ba5c
+---
+apiVersion: app.k8s.io/v1beta1
+blockOwnerDeletion: true
+kind: Application
+name: prometheus-1
 spec:
   clusterIP: None
-  clusterIPs:
-  - None
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
   - name: mesh
     port: 6783
@@ -80,9 +23,9 @@ spec:
     port: 9093
     protocol: TCP
     targetPort: 9093
-  selector:
-    k8s-app: alertmanager
-  sessionAffinity: None
+    selector: 
+      k8s-app: alertmanager
   type: ClusterIP
-status:
-  loadBalancer: {}
+
+
+
