@@ -11,7 +11,7 @@ from flask import redirect
 options = {
     "swagger_ui_config": {
         #"oauth2RedirectUrl": "http://localhost:5000/ui/oauth2-redirect.html",
-        "oauth2RedirectUrl": "http://steamreviews.sytes.net/ui/oauth2-redirect.html",
+        "oauth2RedirectUrl": "http://steamreviews.sytes.net./ui/oauth2-redirect.html",
     }
 }
 app = connexion.App(__name__, specification_dir="./", options=options)
@@ -22,7 +22,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     "swagger.yaml",
     config={
         #'spec': swagger_yml, 'oauth2RedirectUrl': "http://localhost:5000/ui/oauth2-redirect.html"},
-        'spec': swagger_yml, 'oauth2RedirectUrl': "http://steamreviews.sytes.net/ui/oauth2-redirect.html"},
+        'spec': swagger_yml, 'oauth2RedirectUrl': "http://steamreviews.sytes.net./ui/oauth2-redirect.html"},
     oauth_config={
         'clientId': "sUnKWfmlaywQm64EtEZpioz5uRK5GAzc",
         "usePkceWithAuthorizationCodeGrant": True}
@@ -53,7 +53,7 @@ app.add_api("swagger.yaml")
 @app.app.route('/login')
 def call():
     #return auth0.authorize_redirect(redirect_uri="http://localhost:5000/ui/callback",  audience='https://cn22group2/')
-    return auth0.authorize_redirect(redirect_uri="http://steamreviews.sytes.net/ui/callback",  audience='https://cn22group2/')
+    return auth0.authorize_redirect(redirect_uri="http://steamreviews.sytes.net./ui/callback",  audience='https://cn22group2/')
 
 
 @app.app.route('/callback')

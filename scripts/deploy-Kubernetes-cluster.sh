@@ -2,7 +2,13 @@ echo -e "\n--Creating Kubernetes Cluster--"
 gcloud container clusters create cluster-steam --zone europe-west1-b --cluster-version 1.21.12-gke.1700 --release-channel rapid --num-nodes=3
 
 sleep 10s
+echo -e "\n--Create a global static IP address--"
+gcloud compute addresses create steam-reviews-ip --global
 
+echo -e "\n--Find the static IP address you created--"
+gcloud compute addresses describe steam-reviews-ip --global
+
+sleep 10s
 echo -e "\n--Connecting to Kubernetes Cluster--" 
 gcloud container clusters get-credentials cluster-steam --zone europe-west1-b
 cd ../deployment
@@ -11,7 +17,6 @@ echo -e "\n--Deploying Services--"
 kubectl apply -f services-deploy.yaml
 
 sleep 10s
-
 echo -e "\n--Deploying Ingress--" 
 kubectl apply -f ingress-deploy.yaml 
 
@@ -29,15 +34,10 @@ echo -e "\n--Deploying Prometheus and Grafana"
 cd ../scripts
 bash prometheus_grafana.sh
 
-sleep 10s
-echo -e "\n--Create a global static IP address--"
-gcloud compute addresses create steam-reviews-ip --global
-
-echo -e "\n--Find the static IP address you created--"
-gcloud compute addresses describe steam-reviews-ip --global
-
 echo -e "\n--Configuring domain name records--"
 gcloud dns --project=cloud-computing-345718 managed-zones create steam-reviews-zone --description="" --dns-name="steamreviews.sytes.net." --visibility="public" --dnssec-state="off"
 
 echo -e "\n--See the reserve IP address associated with the load balancer--"
 kubectl get ingress
+
+echo -e "\nTo access our API click on this link --> http://steamreviews.sytes.net./ui/"
