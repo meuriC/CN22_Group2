@@ -12,6 +12,7 @@ sleep 10s
 echo -e "\n--Connecting to Kubernetes Cluster--" 
 gcloud container clusters get-credentials cluster-steam --zone europe-west1-b
 cd ../deployment
+helm install "steamreviews-externaldns" --values gcp-external-dns.values.yaml bitnami/external-dns
 
 echo -e "\n--Deploying Services--" 
 kubectl apply -f services-deploy.yaml
