@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: steam-ingress
   annotations:
-    #kubernetes.io/ingress.global-static-ip-name: steam-reviews-ip
+    kubernetes.io/ingress.global-static-ip-name: steam-reviews-ip
     external-dns.alpha.kubernetes.io/hostname: steamreviews.sytes.net
 spec:
   ingressClassName: nginx
