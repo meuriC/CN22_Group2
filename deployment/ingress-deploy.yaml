@@ -359,8 +359,6 @@ metadata:
     app.kubernetes.io/version: 1.1.2
     helm.sh/chart: ingress-nginx-4.0.18
   name: ingress-nginx-controller
-  annotations:
-    external-dns.alpha.kubernetes.io/hostname: steamreviews.sytes.net
   namespace: ingress-nginx
 spec:
   externalTrafficPolicy: Local
