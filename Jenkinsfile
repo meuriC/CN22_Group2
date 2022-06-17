@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo scripts/build_dockers.sh'
+                sh 'scripts/build_dockers.sh'
                 
             }
         }
