@@ -9,8 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'python -m pip install --upgrade pip'
-                sh 'pip install -r api/microservices/games/requirements.txt'
+                sh 'bash scripts/build_dockers.sh'
                 
             }
         }
