@@ -3,11 +3,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-                docker {
-                    image 'python:2-alpine' 
-                }
-            }
+            agent any
             steps {
                 sh 'docker network create microservices'
                 printf '\t Creating microservices containers' 
