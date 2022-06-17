@@ -4,11 +4,15 @@ pipeline {
     stages {
         stage('Clean and Build') {
             agent any
+            environment{
+                CONTAINERS = '$(docker ps -a -q)'
+                IMAGES = '$(docker images -aq)'
+            }
             steps {
                 echo 'Clean all docker images'
-                sh "docker stop $(docker ps -a -q)"
-                sh "docker rm $(docker ps -a -q)"
-                sh "docker rmi -f $(docker images -aq)"
+                sh "docker stop ${CONTAINERS}"
+                sh "docker rm ${CONTAINERS})"
+                sh "docker rmi -f ${IMAGES}"
                 echo 'Removing microservices network'
                 sh 'docker network rm microservices'
                 echo 'CLEAN COMPLETE'
