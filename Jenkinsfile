@@ -6,9 +6,9 @@ pipeline {
             agent any
             steps {
                 echo 'Clean all docker images'
-                sh 'docker stop $(docker ps -a -q)'
-                sh 'docker rm $(docker ps -a -q)'
-                sh 'docker rmi -f $(docker images -aq)'
+                sh "docker stop $(docker ps -a -q)"
+                sh "docker rm $(docker ps -a -q)"
+                sh "docker rmi -f $(docker images -aq)"
                 echo 'Removing microservices network'
                 sh 'docker network rm microservices'
                 echo 'CLEAN COMPLETE'
