@@ -5,7 +5,7 @@ FROM python
 
 RUN mkdir /service
 COPY api/microservices/protobufs/ /service/protobufs/
-COPY games/ /service/games/
+COPY api/microservices/games/ /service/games/
 
 
 WORKDIR /service/games
