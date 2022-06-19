@@ -1,8 +1,8 @@
 FROM python
 
 RUN mkdir /service
-COPY protobufs/ /service/protobufs/
-COPY gateway/ /service/gateway/
+COPY api/microservices/protobufs/ /service/protobufs/
+COPY api/microservices/gateway/ /service/gateway/
 
 WORKDIR /service/gateway
 
