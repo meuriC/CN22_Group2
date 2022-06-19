@@ -10,9 +10,6 @@ pipeline {
             }
             steps {
                 echo 'Clean all docker images'
-                sh "docker stop (${CONTAINERS})"
-                sh "docker rm ${CONTAINERS})"
-                sh "docker rmi -f ${IMAGES}"
                 echo 'Removing microservices network'
                 sh 'docker network rm microservices'
                 echo 'CLEAN COMPLETE'
