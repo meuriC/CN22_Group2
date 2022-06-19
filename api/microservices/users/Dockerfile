@@ -4,8 +4,8 @@
 FROM python
 
 RUN mkdir /service
-COPY protobufs/ /service/protobufs/
-COPY users/ /service/users/
+COPY api/microservices/protobufs/ /service/protobufs/
+COPY api/microservices/users/ /service/users/
 # COPY ca.pem /service/reviews/
 
 WORKDIR /service/users
