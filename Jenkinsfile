@@ -10,6 +10,7 @@ pipeline {
             }
             steps {
                 echo 'Clean all docker images'
+                sh 'pwd' 
                 echo 'Removing microservices network'
                 sh 'docker network rm microservices'
                 echo 'CLEAN COMPLETE'
