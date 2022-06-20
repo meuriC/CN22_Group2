@@ -1,8 +1,8 @@
 FROM python
 
 RUN mkdir /service
-COPY api/microservices/protobufs/ /service/protobufs/
-COPY api/microservices/reviews/ /service/reviews/
+COPY protobufs/ /service/protobufs/
+COPY reviews/ /service/reviews/
 
 WORKDIR /service/reviews
 RUN pip install -r requirements.txt

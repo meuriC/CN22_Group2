@@ -1,8 +1,8 @@
 FROM python
 
 RUN mkdir /service
-COPY api/microservices/protobufs/ /service/protobufs/
-COPY api/microservices/steam/ /service/steam/
+COPY protobufs/ /service/protobufs/
+COPY steam/ /service/steam/
 
 WORKDIR /service/steam
 RUN pip install -r requirements.txt

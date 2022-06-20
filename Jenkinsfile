@@ -2,28 +2,29 @@ pipeline {
     agent any
 
     stages {
-        stage('Clean and Build') {
+        stage('Build') {
             agent any
             environment{
                 CONTAINERS = '$(docker ps -a -q)'
                 IMAGES = '$(docker images -aq)'
             }
             steps {
-                echo 'Clean all docker images'
+                sh 'cd api/microservices'
                 sh 'pwd' 
                 echo 'Removing microservices network'
                 sh 'docker network rm microservices'
-                echo 'CLEAN COMPLETE'
+                echo 'BUILD STARTED'
+                echo 'Creating docker network microservices'
                 sh 'docker network create microservices'
-                echo '\t Creating microservices containers' 
-                sh 'docker build . -f api/microservices/games/Dockerfile -t games'
-                sh 'docker build . -f api/microservices/reviews/Dockerfile -t reviews'
-                sh 'docker build . -f api/microservices/users/Dockerfile -t users'
-                sh 'docker build . -f api/microservices/steam/Dockerfile -t steam'
-                sh 'docker build . -f api/microservices/gateway/Dockerfile -t gateway'
-                echo '... done\n'
-                echo '\t Building Containers with compose\n'
+                echo 'Creating microservices containers' 
+                sh 'docker build . -f games/Dockerfile -t games'
+                sh 'docker build . -f reviews/Dockerfile -t reviews'
+                sh 'docker build . -f users/Dockerfile -t users'
+                sh 'docker build . -f steam/Dockerfile -t steam'
+                sh 'docker build . -f gateway/Dockerfile -t gateway'
+                echo 'Building Containers with compose'
                 sh 'docker-compose up'
+                echo 'BUILD COMPLETED'
                 
             }
         }
