@@ -680,26 +680,3 @@ webhooks:
     resources:
     - ingresses
   sideEffects: None
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: steam-ingress
-spec:
-  ingressClassName: nginx
-  defaultBackend:
-    service:
-      name: api-gateway
-      port:
-        number: 80
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: api-gateway
-            port:
-              number: 5000
