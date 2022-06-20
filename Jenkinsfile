@@ -12,7 +12,7 @@ pipeline {
                 sh 'cd api/microservices'
                 sh 'pwd' 
                 echo 'Removing microservices network'
-                sh 'docker network rm microservices'
+                //sh 'docker network rm microservices'
                 echo 'BUILD STARTED'
                 echo 'Creating docker network microservices'
                 sh 'docker network create microservices'
