@@ -8,6 +8,7 @@ pipeline {
                 dir('api/microservices'){
                     echo 'BUILD STARTED'
                     //sh 'pwd' 
+                    /*
                     echo 'Removing microservices network'
                     sh 'docker network rm microservices'
                     echo 'Creating docker network microservices'
@@ -18,6 +19,7 @@ pipeline {
                     sh 'docker build . -f users/Dockerfile -t users'
                     sh 'docker build . -f steam/Dockerfile -t steam'
                     sh 'docker build . -f gateway/Dockerfile -t gateway'
+                    */
                     echo 'BUILD COMPLETED'
 
                 } 
