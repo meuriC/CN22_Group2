@@ -26,6 +26,11 @@ pipeline {
             }
         }
         stage("Test") {
+           agent {
+                docker {
+                    image 'qnib/pytest'
+                }
+          }
           steps {
             echo 'Running Containers'
             /*
@@ -35,10 +40,10 @@ pipeline {
               docker run -p 127.0.0.1:50051:50051/tcp --network microservices --name games games &
               docker run -p 127.0.0.1:50050:50050/tcp --network microservices --name steam steam &
               docker run -p 127.0.0.1:5000:5000/tcp --network microservices --name gateway gateway &
-              pytest
+              pytest --cov=.
             '''
             */
-           sh 'pytest'
+           sh 'pytest --cov=.'
           }
         }
     }
