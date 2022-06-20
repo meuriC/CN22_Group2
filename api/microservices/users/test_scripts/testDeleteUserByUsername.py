@@ -8,12 +8,12 @@ from users_pb2_grpc import UsersStub
 channel = grpc.insecure_channel("localhost:50052")
 client = UsersStub(channel)
 
-username_request = UsernameRequest(user_name = "CNGroup2")
+username_request = UsernameRequest(user_name = "usn76561198182228313")
 val = client.DeleteUserByUsername(username_request)
 
 if val:
     print("----------DeleteUserByUsername----------")
-    print("Deleting CNGroup2")
+    print("Deleting usn76561198182228313")
     print(val)
 else :
     print("Empty")

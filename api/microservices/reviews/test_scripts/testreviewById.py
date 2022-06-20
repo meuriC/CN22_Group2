@@ -7,7 +7,7 @@ import grpc
 
 channel = grpc.insecure_channel("localhost:50053")
 client = ReviewsStub(channel)
-request = ReviewByIdRequest(review_id="test")  #50463082
+request = ReviewByIdRequest(review_id="50463082")  #50463082
 
 val = client.GetReview(request)
 print(val)

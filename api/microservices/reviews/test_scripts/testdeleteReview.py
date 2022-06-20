@@ -7,7 +7,7 @@ import grpc
 
 channel = grpc.insecure_channel("localhost:50053")
 client = ReviewsStub(channel)
-request = ReviewByIdRequest(review_id="test2")
+request = ReviewByIdRequest(review_id="50463159")
 
 val = client.DeleteReview(request)
 print(val)

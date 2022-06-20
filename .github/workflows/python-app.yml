@@ -27,10 +27,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Start game micorservice
+        pip install -r api/microservices/games/requirements.txt
+    - name: Start  micorservices
       run: |
-        python3 games.py
+        python3 api/microservices/games/games.py &
+        python3 api/microservices/users/users.py &
+        python3 api/microservices/reviews/reviews.py &
+        python3 api/microservices/steam/steam.py &
     - name: Test with pytest
       run: |
         pytest
