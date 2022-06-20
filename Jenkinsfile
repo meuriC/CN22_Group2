@@ -15,7 +15,7 @@ pipeline {
                 //sh 'docker network rm microservices'
                 echo 'BUILD STARTED'
                 echo 'Creating docker network microservices'
-                sh 'docker network create microservices'
+                //sh 'docker network create microservices'
                 echo 'Creating microservices containers' 
                 sh 'docker build . -f games/Dockerfile -t games'
                 sh 'docker build . -f reviews/Dockerfile -t reviews'
