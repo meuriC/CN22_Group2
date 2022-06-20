@@ -19,6 +19,7 @@ pipeline {
                     sh 'docker build . -f steam/Dockerfile -t steam'
                     sh 'docker build . -f gateway/Dockerfile -t gateway'
                     echo 'Building Containers with compose'
+                    sh 'ls'
                     sh 'docker-compose up'
                     echo 'BUILD COMPLETED'
 
