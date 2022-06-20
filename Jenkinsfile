@@ -26,6 +26,7 @@ pipeline {
         stage("Test") {
           steps {
             echo 'Running Containers'
+            /*
             sh '''
               docker run -p 127.0.0.1:50052:50052/tcp --network microservices --name users users &
               docker run -p 127.0.0.1:50053:50053/tcp --network microservices --name reviews reviews &
@@ -34,6 +35,8 @@ pipeline {
               docker run -p 127.0.0.1:5000:5000/tcp --network microservices --name gateway gateway &
               pytest
             '''
+            */
+           sh 'pytest'
           }
         }
     }
