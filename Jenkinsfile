@@ -10,7 +10,7 @@ pipeline {
                     echo 'BUILD STARTED'
                     //sh 'pwd' 
                     echo 'Removing microservices network'
-                    sh 'docker network rm microservices'
+                    //sh 'docker network rm microservices'
                     echo 'Creating docker network microservices'
                     sh 'docker network create microservices'
                     echo 'Creating microservices containers' 
