@@ -47,7 +47,7 @@ pipeline {
           }
           steps {
             echo 'Running Tests'
-            sh 'pytest --cov=.'
+            //sh 'pytest --cov=.'
           }
         }
         stage("Delivery") {
