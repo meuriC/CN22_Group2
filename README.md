@@ -11,10 +11,10 @@
 <p>For the project, we selected a subset of a dataset of around 21 million user reviews in multiple languages of around 300 different games on Steam (video game digital distribution service). This dataset has 1,07 GB worth of user reviews, last updated on 25 January of 2021. Worth noting that the original dataset was downloaded from <a href="https://www.kaggle.com/najzeko/steam-reviews-2021">Kaggle</a> in a CSV format.</p>
 
 ## Roles
-#Role | Role                                | Número  | Nome            
+#Role | Role                                | Number  | Name            
  :--: |:----------------------------------- | :------ |:---------------
-1     | System Architect / CEO              | fc |     
-2     | Networking and Security Specialist  | fc |   
-3     | DevOps Officer                      | fc |  
-4     | MicroServices Programmer            | fc | 
-5     | Data Scientist                      | fc | 
+1     | System and API Architect (CEO)      | fc57433 | Renato Ribeiro    
+2     | Networking Specialist               | fc58974 | Miguel Silva
+3     | DevOps Officer                      | fc42559 | Meuri Canhaga
+4     | Security Specialist                 | fc46417 | Pedro Santos
+5     | Data Scientist                      | fc53495 | Diogo Lança
